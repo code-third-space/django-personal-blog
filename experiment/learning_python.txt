@@ -1,3 +1,0 @@
-In Python you can easily manipulate strings.
-In Python you can create and use functions.
-In Python you can work with files and directories.

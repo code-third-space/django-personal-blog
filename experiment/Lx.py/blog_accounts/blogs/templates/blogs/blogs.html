@@ -1,0 +1,24 @@
+{% extends 'blogs/base.html' %}
+
+{% block page_header %}
+  <h1>Blogs</h1>
+{% endblock page_header %}
+
+{% block content %}
+  <p>All Blogs</p>
+  <ul class="list-group border-bottom pb-2 mb-4">
+    {% for blog in blogs %}
+      <li class="list-group-item border-0">
+        {% if blog.id %}
+          <a href="{% url 'blogs:blog' blog.id %}">
+            {{ blog.name }}</a>
+        {% else %}
+          {{ blog.name }}
+        {% endif %}
+      </li>
+    {% empty %}
+      <li class="list-group-item border-0">No blogs have been created yet.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'blogs:new_blog' %}">Start a new blog</a>
+{% endblock content %}

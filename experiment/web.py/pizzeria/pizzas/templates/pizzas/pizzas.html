@@ -1,0 +1,9 @@
+{% extends 'pizzas/base.html' %}
+{% block content %}
+Pizzas
+{% for pizza in pizzas %}
+{{ pizza.name }}
+{% empty %}
+We don't currently have any pizzas available.
+{% endfor %}
+{% endblock content %}

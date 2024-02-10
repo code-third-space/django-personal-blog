@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'grappelli',
     'jobs',
     'meetings',
-    'django_python3_ldap',
+    # 'django_python3_ldap',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -164,30 +164,30 @@ LOGGING = {
 
 
 ###Django-Python3-LDAP
-LDAP_AUTH_URL = "ldap://localhost:389"
+# LDAP_AUTH_URL = "ldap://localhost:389"
 
-LDAP_AUTH_USE_TLS = False
+# LDAP_AUTH_USE_TLS = False
 
-LDAP_AUTH_SEARCH_BASE = "dc=ihopeit,dc=com"
+# LDAP_AUTH_SEARCH_BASE = "dc=ihopeit,dc=com"
 
-LDAP_AUTH_OBJECT_CLASS = "inetOrgPerson"
+# LDAP_AUTH_OBJECT_CLASS = "inetOrgPerson"
 
-LDAP_AUTH_USER_FIELDS = {
-    "username": "cn",
-    "first_name": "givenName",
-    "last_name": "sn",
-    "email": "mail",
-}
+# LDAP_AUTH_USER_FIELDS = {
+#     "username": "cn",
+#     "first_name": "givenName",
+#     "last_name": "sn",
+#     "email": "mail",
+# }
 
-LDAP_AUTH_USER_LOOKUP_FIELDS = ("username",)
+# LDAP_AUTH_USER_LOOKUP_FIELDS = ("username",)
 
-LDAP_AUTH_CLEAN_USER_DATA = "django_python3_ldap.utils.clean_user_data"
+# LDAP_AUTH_CLEAN_USER_DATA = "django_python3_ldap.utils.clean_user_data"
 
-LDAP_AUTH_CONNECTION_USERNAME = None
+# LDAP_AUTH_CONNECTION_USERNAME = None
 
-LDAP_AUTH_CONNECTION_PASSWORD = None
+# LDAP_AUTH_CONNECTION_PASSWORD = None
 
-AUTHENTICATION_BACKENDS = {"django_python3_ldap.auth.LDAPBackend","django.contrib.auth.backends.ModelBackend",}
+# AUTHENTICATION_BACKENDS = {"django_python3_ldap.auth.LDAPBackend","django.contrib.auth.backends.ModelBackend",}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

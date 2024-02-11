@@ -1,6 +1,12 @@
 <h1 style="margin:auto;width: 20%;">浆果科技开放职位</h1>
 
-<p> </p>
+<p> 
+
+</p>
 
 {% block content %}
 {% endblock %}
+<form action="{% url 'admin:logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">注销</button>
+</form>

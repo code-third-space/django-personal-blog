@@ -100,6 +100,11 @@ class Candidate(models.Model):
         verbose_name = u"应聘者"
         verbose_name_plural = u"应聘者"
 
+        permissions = [
+            ('export', "Can export candidate list"),
+            ('notify', "notify interviewer for candidate review"),
+        ] 
+
     def __unicode__(self):
         return self.username
     

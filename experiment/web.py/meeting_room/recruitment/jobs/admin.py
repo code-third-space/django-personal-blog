@@ -1,5 +1,9 @@
-from django.contrib import admin
-from jobs.models import Job  
+from typing import Any
+from django.contrib import admin, messages
+from jobs.models import Job, Resume
+from meetings.models import Candidate
+from datetime import datetime
+
 # Register your models here.
 
 class JobAdmin(admin.ModelAdmin):
@@ -11,4 +15,42 @@ class JobAdmin(admin.ModelAdmin):
         super().save_model(request,obj,form,change)    #obj: 是当前正在保存的模型实例。
                                                        #form: 是用于保存模型数据的表单。 
                                                        #change: 是一个标志，表示当前是创建新记录还是更新现有记录。
+
+def enter_interview_process(modeladmin, request, queryset):
+    candidate_names = ""
+    for resume in queryset:
+        candidate = Candidate()
+        #把resume对象中的所有属性拷贝到 candidate 对象中；
+        candidate.__dict__.update(resume.__dict__)
+        candidate.created_date = datetime.now()
+        candidate.modified_date = datetime.now()
+        candidate_names = candidate.username + ',' + candidate_names
+        candidate.creator = request.user.username
+        candidate.save()
+    messages.add_message(request, messages.INFO, '候选人： %s已经成功进入面试流程' % (candidate_names) )
+enter_interview_process.short_description = u'进入面试流程'
+
+
+class ResumeAdmin(admin.ModelAdmin):
+    actions = [enter_interview_process]
+
+    list_display = ('username', 'applicant', 'city', 'apply_position', 'bachelor_school','master_school', 'major',
+                    'created_date')
+
+    readonly_fields = ('applicant', 'created_date', 'modified_date',)
+
+    fieldsets = (
+        (None, {'fields': (
+            'applicant', ('username', 'city', 'phone'),
+            ('email', 'apply_position', 'born_address', 'gender',),
+            ('bachelor_school', 'master_school'), ('major', 'degree',), ('created_date', 'modified_date'),
+            'candidate_introduction', 'work_experience', 'project_experience',
+        )}),
+    )
+
+    def save_model(self, request, obj, form, change):
+        obj.applicant = request.user
+        super().save_model(request, obj, form, change)
+
 admin.site.register(Job,JobAdmin)
+admin.site.register(Resume,ResumeAdmin)

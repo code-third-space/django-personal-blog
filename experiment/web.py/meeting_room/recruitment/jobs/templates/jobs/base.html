@@ -1,12 +1,47 @@
-<h1 style="margin:auto;width: 20%;">浆果科技开放职位</h1>
+{# Load the tag library #}
+{% load bootstrap4 %}
 
-<p> 
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
 
-</p>
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
 
+
+
+<h1 style="margin:auto;width: 30%;">浆果科技开放职位</h1>
+
+<p> </p>
+<hr>
+
+{% block header %}
+<div style="display: flex; align-items: center;">
+<a href="/" style="text-decoration: none; color:green; margin-right: 10px;">首页</a>
+<a href="/" style="text-decoration: none; color: gold; margin-right: 10px;">职位列表</a>
+{% if user.is_authenticated %}
+    <form action="/accounts/logout/" method="post", style="margin-left: auto;">
+        {% csrf_token %}
+        <button type="submit" style="text-decoration: none; color: blue; border: none;
+        background-color: transparent; cursor: pointer; padding: 5px 10px; font-size: 16px;">退出</button>
+    </form>
+{% else %}
+    <a href="/accounts/login" style="text-decoration: none; color: gold;">登录</a>
+{% endif %}
+</div>
+
+{% if user.is_authenticated %}
+    <p>终于等到你 {{ user.username }}, 期待加入我们， 用技术去探索一个新世界</p>
+{% else %}
+    <p>欢迎你， 期待加入我们，登录后可以提交简历。</p>
+{% endif %}
+
+{% endblock %}
+
+<hr>
 {% block content %}
 {% endblock %}
-<form action="{% url 'admin:logout' %}" method="post">
+<!-- <form action="{% url 'admin:logout' %}" method="post">
     {% csrf_token %}
     <button type="submit">注销</button>
-</form>
+</form> -->

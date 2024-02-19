@@ -29,12 +29,17 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+LOGIN_REDIRECT_URL = '/'
+SIMPLE_BACKEND_REDIRECT_URL = 'accounts/login'
+
 # Application definition
 
 INSTALLED_APPS = [
     'grappelli',
+    'bootstrap4',
     'jobs',
     'meetings',
+    'registration',
     # 'accounts',
     # 'django_python3_ldap',
 
@@ -196,3 +201,4 @@ LOGGING = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # LOGIN_REDIRECT_URL = 'accounts:login'
 # LOGINOUT_REDIRECT_URL = 'accounts:login'
+DINGTALK_WEB_HOOK = "https://oapi.dingtalk.com/robot/send?access_token=0f9e5896fa84f6ba38211bcd3e82760ce64c80b193c8992e1558b8e59adf3463"

@@ -17,7 +17,7 @@
     提交简历
 </H2>
 
-<form method="post" class="form" style="width:600px;margin: left 50px;" >
+<form method="post" class="form" enctype="multipart/form-data" style="width:600px;margin: left 50px;" >
     {% csrf_token %}
     {% bootstrap_form form %}
 

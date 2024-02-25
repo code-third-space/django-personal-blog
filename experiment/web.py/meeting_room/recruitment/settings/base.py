@@ -27,6 +27,9 @@ SECRET_KEY = 'django-insecure-8!ljr^j%1#=19*)405lw$f6mk$l)!sdo6*&24556349u1)-9ed
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# INTERNAL_IPS = [
+#     '127.0.0.1',
+# ]
 
 
 LOGIN_REDIRECT_URL = '/'
@@ -35,13 +38,19 @@ SIMPLE_BACKEND_REDIRECT_URL = 'accounts/login'
 # Application definition
 
 INSTALLED_APPS = [
+    # 'simpleui',
     'grappelli',
     'bootstrap4',
-    'jobs',
+    # 'jobs',
     'meetings',
     'registration',
+    'rest_framework',
+    'running',
+    # 'debug_toolbar',
+    # 'django_celery_beat',
     # 'accounts',
     # 'django_python3_ldap',
+    'jobs.apps.JobConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,12 +58,56 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'meet_project.apps.UniversalManageApp',
 ]
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
+# CACHES = {
+#     'default': {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION":  "redis://127.0.0.1:6379/1",
+#         "TIMEOUT": 10,
+#         "OPTIONS": {
+#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+#             # "PASSWORD": "1",
+#             "SOCKET_CONNECT_TIMEOUT": 5,
+#             "SOCKET_TIMEOUT": 5,
+#         }
+#     }
+# }
+
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_TIMEZONE = 'Asia/Shanghai'
+# CELERYD_MAX_TASKS_PER_CHILD = 10
+# CELERYD_LOG_FILE = os.path.join(BASE_DIR, "logs", "celery_work.log")
+# CELERYBEAT_LOG_FILE = os.path.join(BASE_DIR, "logs", "celery_beat.log")
+
+
+
 MIDDLEWARE = [
+    'meetings.performance.proformance_logger_middleware',
+    
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
+    
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -89,9 +142,18 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+
+    'running': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'running',
+        'USER': 'recruitment',
+        'PASSWORD': 'recruitment',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
-
+DATABASE_ROUTERS = ['settings.router.DatabaseRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -114,8 +176,21 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
+from django.utils.translation import gettext_lazy as _
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGES = [
+    ("zh-hans",_('Chinese')),
+    ("en",_("English")),
+]
+
+LANGUAGE_CODE = 'zh-hans'
+
+USE_I18N = True
+USE_L10N = True
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, "locale"),
+)
 
 TIME_ZONE = 'UTC'
 
@@ -152,6 +227,12 @@ LOGGING = {
             'formatter': 'simple',
             'filename': os.path.join(os.path.dirname(BASE_DIR), 'recruitment.admin.log'),
         },
+
+        'performance': {
+            'class': 'logging.FileHandler',
+            'formatter': 'simple',
+            'filename': os.path.join(os.path.dirname(BASE_DIR), 'recruitment.admin.log'),
+        },
     },
     'root': {
         'handlers': ['console', 'file'],
@@ -162,11 +243,18 @@ LOGGING = {
             "handlers": ["console", "file"],
             "level": 'DEBUG',
         },
+
+        'meetings.performance': {
+            "handlers": ["console", "performance"],
+            'level': "INFO",
+            'propagate': False,
+        },
     },
 }
 
 
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 
 ###Django-Python3-LDAP

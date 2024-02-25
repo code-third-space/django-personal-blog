@@ -1,6 +1,8 @@
 {# Load the tag library #}
 {% load bootstrap4 %}
 
+{% load i18n %}
+
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
@@ -10,31 +12,50 @@
 
 
 
-<h1 style="margin:auto;width: 30%;">浆果科技开放职位</h1>
+<h1 style="margin:auto;width: 40%;">{% translate "浆果科技开放职位" %}</h1>
 
 <p> </p>
 <hr>
 
 {% block header %}
 <div style="display: flex; align-items: center;">
-<a href="/" style="text-decoration: none; color:green; margin-right: 10px;">首页</a>
-<a href="/" style="text-decoration: none; color: gold; margin-right: 10px;">职位列表</a>
+<a href="/" style="text-decoration: none; color:green; margin-right: 10px;">{%translate "首页 "%}</a>
+<a href="/" style="text-decoration: none; color: gold; margin-right: 10px;">{%translate "职位列表" %}</a>
 {% if user.is_authenticated %}
     <form action="/accounts/logout/" method="post", style="margin-left: auto;">
         {% csrf_token %}
         <button type="submit" style="text-decoration: none; color: blue; border: none;
-        background-color: transparent; cursor: pointer; padding: 5px 10px; font-size: 16px;">退出</button>
+        background-color: transparent; cursor: pointer; padding: 5px 10px; font-size: 16px;">{% translate "退出" %}</button>
     </form>
 {% else %}
-    <a href="/accounts/login" style="text-decoration: none; color: gold;">登录</a>
+    <a href="/accounts/login" style="text-decoration: none; color: gold;">{% translate "登录" %}</a>
 {% endif %}
 </div>
 
 {% if user.is_authenticated %}
-    <p>终于等到你 {{ user.username }}, 期待加入我们， 用技术去探索一个新世界</p>
+    <p>{% blocktranslate with user_name=user.username %}
+        终于等到你 {{ user_name }}, 期待加入我们， 用技术去探索一个新世界
+        {% endblocktranslate %}</p>
 {% else %}
-    <p>欢迎你， 期待加入我们，登录后可以提交简历。</p>
+    <p> translate "欢迎你， 期待加入我们，登录后可以提交简历。"</p>
 {% endif %}
+
+<form action="{% url 'set_language' %}" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{language.name_local}} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    {% translate "language:" %} {{ LANGUAGE_CODE }}
+    <input type="submit" value={% translate "Switch" %}>
+</form>
 
 {% endblock %}
 

@@ -5,7 +5,7 @@ from django.utils.safestring import mark_safe
 
 from meetings.models import Candidate
 from meetings import candidate_fieldset as cf
-from meetings.dingtalk import send
+from .tasks import send_dingtalk_message
 from jobs.models import Resume
 
 # Register your models here.
@@ -26,8 +26,9 @@ def notify_interviewer(modeladmin, request, queryset):
      interviewers = ""
      for obj in queryset:
          candidates = obj.username + ";" + candidates
-         interviewers = obj.first_interviewer_user.username + ";" + interviewers
-     send("候选人 %s 进入面试环节，亲爱的面试官，请做好面试准备: %s" % (candidates, interviewers))
+         if obj.first_interviewer_user and obj.first_interviewer_user.username:
+            interviewers = obj.first_interviewer_user.username + ";" + interviewers
+     send_dingtalk_message.delay("候选人 %s 进入面试环节，亲爱的面试官，请做好面试准备: %s" % (candidates, interviewers))
      messages.add_message(request, messages.INFO, '已经成功通知面试')
 
 notify_interviewer.short_description = u"通知一面面试官"

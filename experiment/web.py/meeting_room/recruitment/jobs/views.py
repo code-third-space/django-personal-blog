@@ -7,6 +7,10 @@ from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 # Create your views here.
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 def register(request):
     context = {
         
@@ -27,6 +31,7 @@ def detail(request,job_id):
     try:
         job = Job.objects.get(pk=job_id)
         job.city_name = Cities[job.job_city][1]
+        logger.info('job info fetched from database jobid:%s' % job_id)
     except Job.DoesNotExist:
         raise Http404("Job does not exist")
     return render(request, 'jobs/job.html',{'job':job})
@@ -44,7 +49,7 @@ class ResumeCreateView(LoginRequiredMixin, CreateView):
     model = Resume
     fields = [
         'username', 'city', 'phone', 
-        'email', 'apply_position', 'gender', 
+        'email', 'apply_position', 'gender', 'picture', 'attachment',
         'bachelor_school', 'master_school', 'major', 'degree',
         'candidate_introduction', 'work_experience', 'project_experience',
     ]

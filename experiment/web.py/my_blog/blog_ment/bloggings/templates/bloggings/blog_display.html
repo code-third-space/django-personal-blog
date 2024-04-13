@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+{% extends 'bloggings/base.html' %}
+
+{% block content %}
+<div style="margin: auto; width: 50%;">
+ {% if blog_list %}
+    <ul>
+        {% for blog in blog_list %}
+        <li>
+            <a href="/blog_detail/{{blog.id}}/" style="color: blue;">
+                {{blog.blog_title}}
+            </a>
+            {{blog.city_name}}
+            {% if blog.picture %}
+                <img src="{{ blog.picture.url }}" width="160" height="100">
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No blog are available</p>
+{% endif %}
+</div>
+{% endblock%}

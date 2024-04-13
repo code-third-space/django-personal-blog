@@ -13,7 +13,5 @@ class UniversalManageApp(AppConfig):
         models = apps.get_app_config('running').get_models()
         for model in models:
             admin_class = type('AdminClass', (ListAdminMixin, admin.ModelAdmin),{})
-            try:
+            if not admin.site.is_registered(model):
                 admin.site.register(model, admin_class)
-            except admin.site.AlreadyRegistered:
-                pass

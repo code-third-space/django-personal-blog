@@ -22923,3 +22923,508 @@ django.db.utils.OperationalError: (1054, "Unknown column 'city.country_id' in 'f
 2024-02-24 02:51:10,964 meetings.performance 13 INFO     0.003543853759765625 /admin/jsi18n/ {}
 2024-02-24 02:51:13,541 meetings.performance 13 INFO     0.011195898056030273 /admin/meetings/ {}
 2024-02-24 02:51:15,183 meetings.performance 13 INFO     0.019437074661254883 /admin/ {}
+2024-02-25 09:54:37,526 jobs.apps    14 INFO     JobConfig ready
+2024-02-25 09:54:37,526 jobs.apps    14 INFO     JobConfig ready
+2024-02-25 09:54:37,834 jobs.apps    14 INFO     JobConfig ready
+2024-02-25 09:54:37,834 jobs.apps    14 INFO     JobConfig ready
+2024-02-25 09:54:37,887 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-02-25 09:54:51,062 meetings.performance 13 INFO     0.03599810600280762 / {}
+2024-02-25 09:54:58,589 meetings.performance 13 INFO     0.02708292007446289 /admin/ {}
+2024-02-25 09:55:01,964 meetings.performance 13 INFO     0.07583069801330566 /admin/meetings/candidate/ {}
+2024-02-25 09:55:01,988 meetings.performance 13 INFO     0.011709928512573242 /admin/jsi18n/ {}
+2024-02-25 09:55:03,848 meetings.performance 13 INFO     0.011069297790527344 /admin/meetings/ {}
+2024-02-25 09:55:05,535 meetings.performance 13 INFO     0.017390012741088867 /admin/ {}
+2024-02-25 09:55:06,672 meetings.performance 13 INFO     0.019732952117919922 /admin/jobs/job/ {}
+2024-02-25 09:55:06,703 meetings.performance 13 INFO     0.016826868057250977 /admin/jsi18n/ {}
+2024-02-25 09:55:10,650 meetings.performance 13 INFO     0.03561592102050781 /admin/jobs/job/2/change/ {}
+2024-02-25 09:55:10,665 meetings.performance 13 INFO     0.0032460689544677734 /admin/jsi18n/ {}
+2024-02-25 09:55:17,147 meetings.performance 13 INFO     0.04016399383544922 /admin/ {}
+2024-02-25 09:55:22,627 meetings.performance 13 INFO     0.28011393547058105 /admin/running/city/ {}
+2024-02-25 09:55:22,639 meetings.performance 13 INFO     0.0033648014068603516 /admin/jsi18n/ {}
+2024-02-25 09:55:24,545 meetings.performance 13 INFO     0.019878864288330078 /admin/ {}
+2024-02-25 09:55:25,680 meetings.performance 13 INFO     0.02538609504699707 /admin/jobs/resume/ {}
+2024-02-25 09:55:25,699 meetings.performance 13 INFO     0.005957841873168945 /admin/jsi18n/ {}
+2024-02-25 09:55:25,708 meetings.performance 13 INFO     0.0084075927734375 /media/images/IMG20240219091714.jpg {}
+2024-02-25 09:55:26,958 meetings.performance 13 INFO     0.016889095306396484 /admin/ {}
+2024-02-25 09:55:27,753 meetings.performance 13 INFO     0.01870107650756836 /admin/jobs/job/ {}
+2024-02-25 09:55:27,773 meetings.performance 13 INFO     0.005525827407836914 /admin/jsi18n/ {}
+2024-02-25 09:55:33,276 meetings.performance 13 INFO     0.011769771575927734 /admin/jobs/ {}
+2024-02-25 09:55:34,365 meetings.performance 13 INFO     0.020399093627929688 /admin/ {}
+2024-02-25 09:55:36,113 meetings.performance 13 INFO     0.022651195526123047 /admin/jobs/resume/ {}
+2024-02-25 09:55:36,129 meetings.performance 13 INFO     0.004419803619384766 /admin/jsi18n/ {}
+2024-02-25 09:55:37,758 meetings.performance 13 INFO     0.016724109649658203 /admin/ {}
+2024-02-25 09:55:38,597 meetings.performance 13 INFO     0.021073102951049805 /admin/jobs/job/ {}
+2024-02-25 09:55:38,613 meetings.performance 13 INFO     0.004500389099121094 /admin/jsi18n/ {}
+2024-02-25 09:55:41,050 meetings.performance 13 INFO     0.016420841217041016 /admin/ {}
+2024-02-25 09:55:43,173 meetings.performance 13 INFO     0.052757978439331055 /admin/meetings/candidate/ {}
+2024-02-25 09:55:43,190 meetings.performance 13 INFO     0.0039000511169433594 /admin/jsi18n/ {}
+2024-02-29 07:20:02,225 jobs.apps    14 INFO     JobConfig ready
+2024-02-29 07:20:02,225 jobs.apps    14 INFO     JobConfig ready
+2024-02-29 07:20:02,569 jobs.apps    14 INFO     JobConfig ready
+2024-02-29 07:20:02,569 jobs.apps    14 INFO     JobConfig ready
+2024-02-29 07:20:02,628 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-02-29 07:22:13,746 meetings.performance 13 INFO     0.051841020584106445 / {}
+2024-02-29 07:22:14,822 meetings.performance 13 INFO     0.024560928344726562 /favicon.ico {}
+2024-02-29 07:22:14,823 django.request 241 WARNING  Not Found: /favicon.ico
+2024-02-29 07:22:17,174 jobs.views   34 INFO     job info fetched from database jobid:2
+2024-02-29 07:22:17,174 jobs.views   34 INFO     job info fetched from database jobid:2
+2024-02-29 07:22:17,189 meetings.performance 13 INFO     0.03586888313293457 /job/2/ {}
+2024-02-29 07:22:22,696 meetings.performance 13 INFO     0.03755021095275879 / {}
+2024-02-29 07:22:23,875 jobs.views   34 INFO     job info fetched from database jobid:1
+2024-02-29 07:22:23,875 jobs.views   34 INFO     job info fetched from database jobid:1
+2024-02-29 07:22:23,878 meetings.performance 13 INFO     0.005928993225097656 /job/1/ {}
+2024-02-29 07:22:39,302 meetings.performance 13 INFO     0.003612041473388672 /admin/ {}
+2024-02-29 07:22:39,352 meetings.performance 13 INFO     0.04224514961242676 /admin/login/ {'next': '/admin/'}
+2024-02-29 07:22:41,917 meetings.performance 13 INFO     0.34752321243286133 /admin/login/ {'next': '/admin/'}
+2024-02-29 07:22:41,928 meetings.performance 13 INFO     0.008347034454345703 /admin/ {}
+2024-02-29 07:22:43,816 meetings.performance 13 INFO     0.06295490264892578 /admin/meetings/candidate/ {}
+2024-02-29 07:22:43,836 meetings.performance 13 INFO     0.006574869155883789 /admin/jsi18n/ {}
+2024-03-01 05:21:23,853 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 05:21:23,853 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 05:21:24,156 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 05:21:24,156 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 05:21:24,179 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 05:28:41,733 django.utils.autoreload 266 INFO     /Users/jzg/storage/experiment/web.py/meeting_room/recruitment/running/admin.py changed, reloading.
+2024-03-01 05:28:42,207 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 05:28:42,207 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 05:28:42,246 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 05:28:50,911 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 05:28:50,911 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 05:28:51,140 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 05:28:51,140 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 05:28:51,162 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 05:33:11,647 django.utils.autoreload 266 INFO     /Users/jzg/storage/experiment/web.py/meeting_room/recruitment/meet_project/apps.py changed, reloading.
+2024-03-01 05:33:12,120 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 05:33:12,120 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 05:33:12,159 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 05:33:28,554 django.request 241 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/client/default.py", line 260, in get
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 61 connecting to 127.0.0.1:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/middleware/cache.py", line 158, in process_request
+    cache_key = get_cache_key(request, self.key_prefix, "GET", cache=self.cache)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/utils/cache.py", line 391, in get_cache_key
+    headerlist = cache.get(cache_key)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/debug_toolbar/panels/cache.py", line 42, in wrapper
+    return panel._record_call(cache, name, original_method, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/debug_toolbar/panels/cache.py", line 149, in _record_call
+    value = original_method(*args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/cache.py", line 36, in _decorator
+    raise e.__cause__
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/client/default.py", line 258, in get
+    value = client.get(key)
+            ^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/redis/commands/core.py", line 1829, in get
+    return self.execute_command("GET", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/homebrew/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to 127.0.0.1:6379. Connection refused.
+2024-03-01 05:33:28,610 meetings.performance 13 INFO     0.2944529056549072 / {}
+2024-03-01 05:33:29,747 django.request 241 ERROR    Internal Server Error: /
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/client/default.py", line 260, in get
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 61 connecting to 127.0.0.1:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/middleware/cache.py", line 158, in process_request
+    cache_key = get_cache_key(request, self.key_prefix, "GET", cache=self.cache)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/utils/cache.py", line 391, in get_cache_key
+    headerlist = cache.get(cache_key)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/debug_toolbar/panels/cache.py", line 42, in wrapper
+    return panel._record_call(cache, name, original_method, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/debug_toolbar/panels/cache.py", line 149, in _record_call
+    value = original_method(*args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/cache.py", line 36, in _decorator
+    raise e.__cause__
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/client/default.py", line 258, in get
+    value = client.get(key)
+            ^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/redis/commands/core.py", line 1829, in get
+    return self.execute_command("GET", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/homebrew/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to 127.0.0.1:6379. Connection refused.
+2024-03-01 05:33:29,764 meetings.performance 13 INFO     0.03214406967163086 / {}
+2024-03-01 05:33:29,871 django.request 241 ERROR    Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/cache.py", line 99, in _get
+    return self.client.get(key, default=default, version=version, client=client)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/client/default.py", line 260, in get
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 61 connecting to 127.0.0.1:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/middleware/cache.py", line 158, in process_request
+    cache_key = get_cache_key(request, self.key_prefix, "GET", cache=self.cache)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/utils/cache.py", line 391, in get_cache_key
+    headerlist = cache.get(cache_key)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/debug_toolbar/panels/cache.py", line 42, in wrapper
+    return panel._record_call(cache, name, original_method, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/debug_toolbar/panels/cache.py", line 149, in _record_call
+    value = original_method(*args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/cache.py", line 92, in get
+    value = self._get(key, default, version, client)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/cache.py", line 36, in _decorator
+    raise e.__cause__
+  File "/opt/homebrew/lib/python3.11/site-packages/django_redis/client/default.py", line 258, in get
+    value = client.get(key)
+            ^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/redis/commands/core.py", line 1829, in get
+    return self.execute_command("GET", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/redis/client.py", line 533, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/redis/connection.py", line 1086, in get_connection
+    connection.connect()
+  File "/opt/homebrew/lib/python3.11/site-packages/redis/connection.py", line 270, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to 127.0.0.1:6379. Connection refused.
+2024-03-01 05:33:29,888 meetings.performance 13 INFO     0.029764890670776367 /favicon.ico {}
+2024-03-01 07:20:42,472 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 07:20:42,472 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 07:20:42,713 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 07:20:42,713 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 07:20:42,735 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 07:20:51,534 meetings.performance 13 INFO     0.1407639980316162 / {}
+2024-03-01 07:20:51,617 meetings.performance 13 INFO     0.04136490821838379 /favicon.ico {}
+2024-03-01 07:20:51,617 django.request 241 WARNING  Not Found: /favicon.ico
+2024-03-01 07:20:53,867 jobs.views   34 INFO     job info fetched from database jobid:2
+2024-03-01 07:20:53,867 jobs.views   34 INFO     job info fetched from database jobid:2
+2024-03-01 07:20:53,905 meetings.performance 13 INFO     0.04213690757751465 /job/2/ {}
+2024-03-01 07:20:56,750 jobs.views   34 INFO     job info fetched from database jobid:1
+2024-03-01 07:20:56,750 jobs.views   34 INFO     job info fetched from database jobid:1
+2024-03-01 07:20:56,795 meetings.performance 13 INFO     0.049957990646362305 /job/1/ {}
+2024-03-01 08:06:07,652 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:06:07,652 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:06:23,540 meetings.performance 13 INFO     0.06354522705078125 /admin/ {}
+2024-03-01 08:06:27,673 meetings.performance 13 INFO     0.03434586524963379 / {}
+2024-03-01 08:06:30,948 meetings.performance 13 INFO     0.04521799087524414 /admin/ {}
+2024-03-01 08:06:34,949 meetings.performance 13 INFO     0.07126021385192871 /admin/registration/registrationprofile/ {}
+2024-03-01 08:06:34,994 meetings.performance 13 INFO     0.031122922897338867 /admin/jsi18n/ {}
+2024-03-01 08:06:36,765 meetings.performance 13 INFO     0.05118083953857422 /admin/registration/ {}
+2024-03-01 08:06:38,320 meetings.performance 13 INFO     0.0588221549987793 /admin/ {}
+2024-03-01 08:06:39,712 meetings.performance 13 INFO     0.08409810066223145 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:06:47,076 meetings.performance 13 INFO     0.07787919044494629 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:06:51,974 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:06:51,974 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:06:55,880 meetings.performance 13 INFO     0.056999921798706055 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:06:57,738 meetings.performance 13 INFO     0.031332969665527344 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:06:58,500 meetings.performance 13 INFO     0.05783700942993164 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:07:00,903 meetings.performance 13 INFO     0.07533788681030273 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:07:04,092 meetings.performance 13 INFO     0.045845985412597656 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:07:04,139 meetings.performance 13 INFO     0.04431009292602539 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:07:10,204 meetings.performance 13 INFO     0.05779004096984863 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:07:14,610 meetings.performance 13 INFO     0.06638574600219727 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:07:20,386 meetings.performance 13 INFO     0.05666399002075195 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:07:27,829 meetings.performance 13 INFO     0.06728410720825195 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:07:27,862 meetings.performance 13 INFO     0.030770301818847656 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:07:32,858 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:07:32,858 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:15:37,608 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:15:37,608 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:15:43,002 meetings.performance 13 INFO     0.06708025932312012 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:15:48,133 meetings.performance 13 INFO     0.0732109546661377 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:15:49,622 meetings.performance 13 INFO     0.06527304649353027 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:15:49,657 meetings.performance 13 INFO     0.03206920623779297 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:15:54,914 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:15:54,914 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:28:50,299 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:28:50,299 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:28:57,247 meetings.performance 13 INFO     0.0728607177734375 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:28:57,279 meetings.performance 13 INFO     0.022040128707885742 /admin/jsi18n/ {}
+2024-03-01 08:29:03,393 meetings.performance 13 INFO     0.07624983787536621 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:29:05,803 meetings.performance 13 INFO     0.05327320098876953 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:29:05,836 meetings.performance 13 INFO     0.03126406669616699 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:29:12,072 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:29:12,072 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:35:03,618 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:35:03,618 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:35:14,353 meetings.performance 13 INFO     0.07115483283996582 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:35:19,475 meetings.performance 13 INFO     0.07577013969421387 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:35:21,201 meetings.performance 13 INFO     0.06945991516113281 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:35:21,239 meetings.performance 13 INFO     0.03607797622680664 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:35:26,038 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:35:26,038 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:40:17,567 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:40:17,567 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:40:22,505 meetings.performance 13 INFO     0.08942198753356934 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:40:22,538 meetings.performance 13 INFO     0.021991968154907227 /admin/jsi18n/ {}
+2024-03-01 08:40:28,057 meetings.performance 13 INFO     0.07458090782165527 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:40:31,847 meetings.performance 13 INFO     0.048941850662231445 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:40:31,879 meetings.performance 13 INFO     0.030460357666015625 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:40:37,452 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:40:37,452 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:40:37,580 flower.command 168 INFO     Visit me at http://0.0.0.0:5555
+2024-03-01 08:40:37,584 flower.command 176 INFO     Broker: redis://localhost:6379/0
+2024-03-01 08:40:37,586 flower.command 177 INFO     Registered tasks: 
+['celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap',
+ 'meet_project.celery.debug_task',
+ 'meet_project.celery.test',
+ 'meet_project.tasks.add',
+ 'meetings.tasks.send_dingtalk_message']
+2024-03-01 08:40:37,590 kombu.mixins 228 INFO     Connected to redis://localhost:6379/0
+2024-03-01 08:49:23,267 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:49:23,267 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:50:39,225 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:50:39,225 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:50:47,146 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:50:47,146 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:58:15,273 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:58:15,273 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:58:31,032 meetings.performance 13 INFO     0.07045292854309082 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:58:31,067 meetings.performance 13 INFO     0.020163774490356445 /admin/jsi18n/ {}
+2024-03-01 08:58:35,339 meetings.performance 13 INFO     0.07622385025024414 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:58:37,126 meetings.performance 13 INFO     0.06556391716003418 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:58:37,161 meetings.performance 13 INFO     0.03295588493347168 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 08:58:42,688 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 08:58:42,688 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:08:40,782 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:08:40,782 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:08:49,310 meetings.performance 13 INFO     0.0830540657043457 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 09:08:49,341 meetings.performance 13 INFO     0.01993703842163086 /admin/jsi18n/ {}
+2024-03-01 09:08:53,883 meetings.performance 13 INFO     0.07285094261169434 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 09:08:55,225 meetings.performance 13 INFO     0.06540107727050781 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 09:08:55,260 meetings.performance 13 INFO     0.0333101749420166 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 09:09:00,100 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:09:00,100 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:13:16,392 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:13:16,392 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:13:20,972 meetings.performance 13 INFO     0.07996511459350586 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 09:13:26,821 meetings.performance 13 INFO     0.07726526260375977 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 09:13:27,967 meetings.performance 13 INFO     0.04046797752380371 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 09:13:27,996 meetings.performance 13 INFO     0.027158021926879883 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 09:13:32,929 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:13:32,929 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:19:47,237 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:19:47,237 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:19:51,479 meetings.performance 13 INFO     0.0755009651184082 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 09:19:51,513 meetings.performance 13 INFO     0.022922039031982422 /admin/jsi18n/ {}
+2024-03-01 09:19:56,771 meetings.performance 13 INFO     0.07885074615478516 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 09:20:00,575 meetings.performance 13 INFO     0.06587696075439453 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 09:20:00,612 meetings.performance 13 INFO     0.03454470634460449 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 09:20:05,564 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:20:05,564 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:22:01,404 django.utils.autoreload 266 INFO     /Users/jzg/storage/experiment/web.py/meeting_room/recruitment/meet_project/__init__.py changed, reloading.
+2024-03-01 09:22:01,768 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 09:30:37,479 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 09:33:31,722 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 09:34:55,136 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 09:35:31,751 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 09:35:44,205 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:35:44,205 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:35:44,435 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:35:44,435 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:35:44,458 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 09:35:53,063 django.utils.autoreload 266 INFO     /Users/jzg/storage/experiment/web.py/meeting_room/recruitment/meet_project/__init__.py changed, reloading.
+2024-03-01 09:35:53,328 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 09:36:09,402 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 09:43:57,406 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 09:44:26,606 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:44:26,606 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:44:26,839 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:44:26,839 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:44:26,861 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 09:44:40,710 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 09:44:40,710 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 11:39:02,322 meetings.performance 13 INFO     0.23833394050598145 / {}
+2024-03-01 11:39:06,385 meetings.performance 13 INFO     0.08658885955810547 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 11:39:06,426 meetings.performance 13 INFO     0.017902135848999023 /admin/jsi18n/ {}
+2024-03-01 11:39:10,738 meetings.performance 13 INFO     0.06158113479614258 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 11:39:11,963 meetings.performance 13 INFO     0.05165600776672363 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 11:39:11,993 meetings.performance 13 INFO     0.027708768844604492 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 11:39:18,605 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 11:39:18,605 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 11:40:18,349 meetings.performance 13 INFO     0.0523068904876709 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 11:40:22,554 meetings.performance 13 INFO     0.07200884819030762 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 11:40:23,768 meetings.performance 13 INFO     0.05321025848388672 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 11:40:23,801 meetings.performance 13 INFO     0.030976057052612305 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 11:40:27,726 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 11:40:27,726 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 12:47:16,748 meetings.performance 13 INFO     0.0799863338470459 /admin/django_celery_beat/periodictask/ {}
+2024-03-01 12:47:16,779 meetings.performance 13 INFO     0.018261194229125977 /admin/jsi18n/ {}
+2024-03-01 12:47:47,965 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 12:47:47,965 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 12:47:48,201 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 12:47:48,201 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 12:47:48,223 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-01 12:47:56,042 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 12:47:56,042 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 12:48:04,485 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 12:48:04,485 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 12:48:13,477 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 12:48:13,477 jobs.apps    14 INFO     JobConfig ready
+2024-03-01 12:48:13,589 flower.command 168 INFO     Visit me at http://0.0.0.0:5555
+2024-03-01 12:48:13,593 flower.command 176 INFO     Broker: redis://localhost:6379/0
+2024-03-01 12:48:13,595 flower.command 177 INFO     Registered tasks: 
+['celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap',
+ 'meet_project.celery.debug_task',
+ 'meet_project.celery.test',
+ 'meet_project.tasks.add',
+ 'meetings.tasks.send_dingtalk_message']
+2024-03-01 12:48:13,598 kombu.mixins 228 INFO     Connected to redis://localhost:6379/0
+2024-03-01 15:54:27,919 flower.events 191 ERROR    Failed to capture events: 'Connection closed by server.', trying again in 1 seconds.
+2024-03-01 15:54:34,964 flower.events 191 ERROR    Failed to capture events: 'Error 61 connecting to localhost:6379. Connection refused.', trying again in 2 seconds.
+2024-03-01 15:54:43,001 flower.events 191 ERROR    Failed to capture events: 'Error 61 connecting to localhost:6379. Connection refused.', trying again in 4 seconds.
+2024-03-01 15:54:53,041 flower.events 191 ERROR    Failed to capture events: 'Error 61 connecting to localhost:6379. Connection refused.', trying again in 8 seconds.
+2024-03-01 15:55:07,079 flower.events 191 ERROR    Failed to capture events: 'Error 61 connecting to localhost:6379. Connection refused.', trying again in 16 seconds.
+2024-03-03 02:46:25,832 jobs.apps    14 INFO     JobConfig ready
+2024-03-03 02:46:25,832 jobs.apps    14 INFO     JobConfig ready
+2024-03-03 02:46:26,115 jobs.apps    14 INFO     JobConfig ready
+2024-03-03 02:46:26,115 jobs.apps    14 INFO     JobConfig ready
+2024-03-03 02:46:26,138 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-03 02:46:34,228 meetings.performance 13 INFO     0.29305076599121094 / {}
+2024-03-03 02:46:39,216 meetings.performance 13 INFO     0.030205249786376953 /admin/bloggings/me_blog/ {}
+2024-03-03 02:46:39,252 meetings.performance 13 INFO     0.03259110450744629 /admin/login/ {'next': '/admin/bloggings/me_blog/'}
+2024-03-03 02:46:41,190 meetings.performance 13 INFO     0.18268179893493652 /admin/login/ {'next': '/admin/bloggings/me_blog/'}
+2024-03-03 02:46:41,212 meetings.performance 13 INFO     0.01868271827697754 /admin/bloggings/me_blog/ {}
+2024-03-03 02:46:41,212 django.request 241 WARNING  Not Found: /admin/bloggings/me_blog/
+2024-03-03 02:46:43,760 meetings.performance 13 INFO     0.03717780113220215 /admin/login/ {'next': '/admin/bloggings/me_blog/'}
+2024-03-03 02:46:43,807 meetings.performance 13 INFO     0.04380488395690918 /admin/ {}
+2024-03-03 02:46:44,250 meetings.performance 13 INFO     0.046408891677856445 /admin/bloggings/me_blog/add/ {}
+2024-03-03 02:46:44,250 django.request 241 WARNING  Not Found: /admin/bloggings/me_blog/add/
+2024-03-03 02:46:45,393 meetings.performance 13 INFO     0.05648207664489746 /admin/ {}
+2024-03-03 02:46:58,232 meetings.performance 13 INFO     0.15643811225891113 /admin/meetings/candidate/ {}
+2024-03-03 02:46:58,274 meetings.performance 13 INFO     0.024904966354370117 /admin/jsi18n/ {}
+2024-03-03 02:47:21,269 meetings.performance 13 INFO     0.03875899314880371 /resume/3/ {}
+2024-03-03 05:00:04,341 jobs.views   34 INFO     job info fetched from database jobid:2
+2024-03-03 05:00:04,341 jobs.views   34 INFO     job info fetched from database jobid:2
+2024-03-03 05:00:04,397 meetings.performance 13 INFO     0.0803670883178711 /job/2/ {}
+2024-03-03 05:00:06,761 meetings.performance 13 INFO     0.10026192665100098 /resume/add/ {'apply_position': 'Windows客户端开发', 'city': '上海'}
+2024-03-03 07:23:37,678 meetings.performance 13 INFO     0.06852293014526367 /admin/ {}
+2024-03-03 07:23:39,821 meetings.performance 13 INFO     0.05548596382141113 /admin/jobs/job/ {}
+2024-03-03 07:23:39,863 meetings.performance 13 INFO     0.023262977600097656 /admin/jsi18n/ {}
+2024-03-03 07:23:42,494 meetings.performance 13 INFO     0.06183910369873047 /admin/jobs/job/add/ {}
+2024-03-03 07:35:50,811 meetings.performance 13 INFO     0.0764780044555664 /admin/jobs/job/ {}
+2024-03-03 07:35:57,225 meetings.performance 13 INFO     0.0529787540435791 /admin/jobs/ {}
+2024-03-03 07:35:58,390 meetings.performance 13 INFO     0.05203890800476074 /admin/ {}
+2024-03-03 07:36:02,966 meetings.performance 13 INFO     0.11468386650085449 /admin/meetings/candidate/ {}
+2024-03-03 07:36:02,997 meetings.performance 13 INFO     0.022073030471801758 /admin/jsi18n/ {}
+2024-03-03 07:36:06,323 meetings.performance 13 INFO     0.09937095642089844 /admin/meetings/candidate/3/change/ {}
+2024-03-03 07:36:08,864 meetings.performance 13 INFO     0.05658769607543945 /admin/ {}
+2024-03-04 12:22:50,064 meetings.performance 13 INFO     0.06093120574951172 /resume/3/ {}
+2024-03-05 14:05:12,643 meetings.performance 13 INFO     0.06876516342163086 /favicon.ico {}
+2024-03-05 14:05:12,644 django.request 241 WARNING  Not Found: /favicon.ico
+2024-03-05 14:05:13,085 meetings.performance 13 INFO     0.05006814002990723 /admin/ {}
+2024-03-06 07:37:10,760 meetings.performance 13 INFO     0.047876834869384766 /favicon.ico {}
+2024-03-06 07:37:10,760 django.request 241 WARNING  Not Found: /favicon.ico
+2024-03-06 07:37:11,660 meetings.performance 13 INFO     0.048232078552246094 /admin/ {}
+2024-03-06 13:07:17,984 meetings.performance 13 INFO     0.03659701347351074 /favicon.ico {}
+2024-03-06 13:07:17,984 django.request 241 WARNING  Not Found: /favicon.ico
+2024-03-06 13:07:18,764 meetings.performance 13 INFO     0.04813194274902344 /admin/ {}
+2024-03-09 03:15:05,972 jobs.apps    14 INFO     JobConfig ready
+2024-03-09 03:15:05,972 jobs.apps    14 INFO     JobConfig ready
+2024-03-09 03:15:06,300 jobs.apps    14 INFO     JobConfig ready
+2024-03-09 03:15:06,300 jobs.apps    14 INFO     JobConfig ready
+2024-03-09 03:15:06,323 django.utils.autoreload 668 INFO     Watching for file changes with StatReloader
+2024-03-09 03:15:13,119 meetings.performance 13 INFO     0.35480713844299316 / {}
+2024-03-09 03:15:18,462 meetings.performance 13 INFO     0.02985405921936035 / {}
+2024-03-09 03:17:15,635 meetings.performance 13 INFO     0.04450798034667969 / {}
+2024-03-09 03:17:16,390 meetings.performance 13 INFO     0.030884981155395508 / {}
+2024-03-09 03:17:16,670 meetings.performance 13 INFO     0.030165910720825195 / {}
+2024-03-09 03:17:16,852 meetings.performance 13 INFO     0.027257204055786133 / {}
+2024-03-09 03:17:17,053 meetings.performance 13 INFO     0.029008865356445312 / {}
+2024-03-09 03:17:17,389 meetings.performance 13 INFO     0.030358076095581055 / {}
+2024-03-09 03:17:20,057 meetings.performance 13 INFO     0.03137683868408203 / {}
+2024-03-09 03:17:20,722 meetings.performance 13 INFO     0.030025959014892578 / {}
+2024-03-09 03:17:21,221 meetings.performance 13 INFO     0.028510093688964844 / {}
+2024-03-09 03:17:21,519 meetings.performance 13 INFO     0.02886176109313965 / {}
+2024-03-09 03:17:22,188 meetings.performance 13 INFO     0.029588937759399414 / {}
+2024-03-09 03:17:22,890 meetings.performance 13 INFO     0.015951871871948242 / {}
+2024-03-09 03:17:23,370 meetings.performance 13 INFO     0.0287930965423584 / {}
+2024-03-09 03:17:23,642 meetings.performance 13 INFO     0.03228282928466797 / {}
+2024-03-09 03:17:23,843 meetings.performance 13 INFO     0.029907941818237305 / {}
+2024-03-09 03:17:24,011 meetings.performance 13 INFO     0.02428412437438965 / {}
+2024-03-09 03:17:24,374 meetings.performance 13 INFO     0.02867913246154785 / {}
+2024-03-09 03:17:24,604 meetings.performance 13 INFO     0.028922080993652344 / {}

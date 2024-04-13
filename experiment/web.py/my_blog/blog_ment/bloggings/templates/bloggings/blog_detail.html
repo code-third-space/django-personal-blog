@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+{% extends 'bloggings/base.html' %}
+
+{% block content %}
+<div style="margin: auto; width: 80%;">
+
+{% if blog %}
+    <div class="blog_title">
+        <h2>博客标题:{{ blog.blog_title }}</h2>
+            <p align="left">发布：{{blog.created_date}}</p>
+            <p align="right">作者:{{blog.creator}}</p>
+            <p align="right">城市: {{blog.city_name}}</p>
+            <p align="right"><img src="{{blog.picture.url}}" width="100" height="80"></p>
+    </div>
+    <hr>
+    <div class="blog_detail" style="width: 100%;">
+    <h2>正文:</h2>
+    <p style="font-size:16px;width: 100%; white-space: pre-wrap;">
+        {{ blog.blog_detail }}</p>
+    </div>
+{% else %}
+    <p>文章不存在</p>
+{%endif%}
+</div>
+{% endblock%}

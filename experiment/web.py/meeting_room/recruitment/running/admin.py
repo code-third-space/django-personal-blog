@@ -24,19 +24,19 @@ class ReadOnlyAdmin(admin.ModelAdmin):
         return False
 
 
-# @admin.register(Country)
-# class CountryAdmin(ReadOnlyAdmin):
-#     search_fields = ('chn_name', 'eng_name')
+@admin.register(Country)
+class CountryAdmin(ReadOnlyAdmin):
+    search_fields = ('chn_name', 'eng_name')
 
-# @admin.register(Province)
-# class ProvinceAdmin(ReadOnlyAdmin):
-#     search_fields = ('conutry_id', 'chn_name', 'eng_name',)
+@admin.register(Province)
+class ProvinceAdmin(ReadOnlyAdmin):
+    search_fields = ('conutry_id', 'chn_name', 'eng_name',)
 
-# class CityAdmin(ReadOnlyAdmin):
-#     list_display = ('province_id',)
-#     autocomplete_fields = ('province_id',)
+class CityAdmin(ReadOnlyAdmin):
+    list_display = ('province_id',)
+    autocomplete_fields = ('province_id',)
 
-# admin.site.register(City, CityAdmin)
+admin.site.register(City, CityAdmin)
     
 # class AdminClass(admin.ModelAdmin):
 #     def __init__(self, model, admin_site):

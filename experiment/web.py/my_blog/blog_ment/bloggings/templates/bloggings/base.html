@@ -1,0 +1,45 @@
+{# Load the tag library #}
+{% load bootstrap4 %}
+
+{% load i18n %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<h1 style="margin: auto; width:25%">{% blocktranslate %}个人博客系统{% endblocktranslate %}</h1>
+    <div style="text-align: right;">
+        <form id="login-form" action="{% url 'auth_login' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">登录</button>
+        </form>
+
+        <form id="logout-form" action="{% url 'bloggings:logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">退出</button>
+        </form>
+    </div>
+<hr>
+
+{% block header %}
+
+{% if user.is_authenticated %}
+    <p style="margin: auto;text-align: center;size: 6;">
+        {% blocktranslate with user_name=user.username %}
+            欢迎来到个人博客系统{{user_name}}
+        {% endblocktranslate %}
+        
+    </p>
+{% else %}
+    <p style="margin:auto;text-align: center;font-size: 1.8em;">
+        {% blocktranslate %} 欢迎你 {% endblocktranslate %}
+    </p>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+{% endblock %}

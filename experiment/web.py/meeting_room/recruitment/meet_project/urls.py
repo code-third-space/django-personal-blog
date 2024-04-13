@@ -58,14 +58,14 @@ urlpatterns = [
 ]
 
 
-# from django.conf.urls import include
-# from django.conf import settings
+from django.conf.urls import include
+from django.conf import settings
 
-# if settings.DEBUG:
-#     import debug_toolbar
-#     urlpatterns = [
-#         path('__debug__/', include(debug_toolbar.urls)),
-#     ] + urlpatterns
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
 
 
 from django.conf.urls.static import static

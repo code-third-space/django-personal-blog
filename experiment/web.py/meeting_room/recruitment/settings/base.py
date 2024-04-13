@@ -27,9 +27,9 @@ SECRET_KEY = 'django-insecure-8!ljr^j%1#=19*)405lw$f6mk$l)!sdo6*&24556349u1)-9ed
 DEBUG = True
 
 ALLOWED_HOSTS = []
-# INTERNAL_IPS = [
-#     '127.0.0.1',
-# ]
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 
 LOGIN_REDIRECT_URL = '/'
@@ -46,8 +46,8 @@ INSTALLED_APPS = [
     'registration',
     'rest_framework',
     'running',
-    # 'debug_toolbar',
-    # 'django_celery_beat',
+    'debug_toolbar',
+    'django_celery_beat',
     # 'accounts',
     # 'django_python3_ldap',
     'jobs.apps.JobConfig',
@@ -69,44 +69,44 @@ REST_FRAMEWORK = {
     ]
 }
 
-# CACHES = {
-#     'default': {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION":  "redis://127.0.0.1:6379/1",
-#         "TIMEOUT": 10,
-#         "OPTIONS": {
-#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-#             # "PASSWORD": "1",
-#             "SOCKET_CONNECT_TIMEOUT": 5,
-#             "SOCKET_TIMEOUT": 5,
-#         }
-#     }
-# }
+CACHES = {
+    'default': {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION":  "redis://127.0.0.1:6379/1",
+        "TIMEOUT": 1,
+        "OPTIONS": {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            # "PASSWORD": "1",
+            "SOCKET_CONNECT_TIMEOUT": 5,
+            "SOCKET_TIMEOUT": 5,
+        }
+    }
+}
 
-# CELERY_BROKER_URL = 'redis://localhost:6379/0'
-# CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
-# CELERY_ACCEPT_CONTENT = ['application/json']
-# CELERY_RESULT_SERIALIZER = 'json'
-# CELERY_TASK_SERIALIZER = 'json'
-# CELERY_TIMEZONE = 'Asia/Shanghai'
-# CELERYD_MAX_TASKS_PER_CHILD = 10
-# CELERYD_LOG_FILE = os.path.join(BASE_DIR, "logs", "celery_work.log")
-# CELERYBEAT_LOG_FILE = os.path.join(BASE_DIR, "logs", "celery_beat.log")
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Shanghai'
+CELERYD_MAX_TASKS_PER_CHILD = 10
+CELERYD_LOG_FILE = os.path.join(BASE_DIR, "logs", "celery_work.log")
+CELERYBEAT_LOG_FILE = os.path.join(BASE_DIR, "logs", "celery_beat.log")
 
 
 
 MIDDLEWARE = [
     'meetings.performance.proformance_logger_middleware',
     
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
 
-    # 'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

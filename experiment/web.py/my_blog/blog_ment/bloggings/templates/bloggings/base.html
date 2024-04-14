@@ -10,7 +10,7 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
-<h1 style="margin: auto; width:25%">{% blocktranslate %}个人博客系统{% endblocktranslate %}</h1>
+<h1 style="margin: auto; width:25%">{% blocktranslate %}个人实验系统{% endblocktranslate %}</h1>
     <div style="text-align: right;">
         <form id="login-form" action="{% url 'auth_login' %}" method="post">
             {% csrf_token %}
@@ -29,7 +29,7 @@
 {% if user.is_authenticated %}
     <p style="margin: auto;text-align: center;size: 6;">
         {% blocktranslate with user_name=user.username %}
-            欢迎来到个人博客系统{{user_name}}
+            欢迎来到个人实验系统{{user_name}}
         {% endblocktranslate %}
         
     </p>

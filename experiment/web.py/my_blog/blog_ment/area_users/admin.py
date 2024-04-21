@@ -7,7 +7,7 @@ from django.utils.html import format_html
 class Area_UserForm(forms.ModelForm):
     class Meta:
         model = Area_User
-        fields = ['userid', 'username', 'city', 'phone', 'email', 'gener', 'user_remark', 'picture', 'back_ground']
+        fields = '__all__'
 
 class Area_Admin(admin.ModelAdmin):
     form = Area_UserForm
@@ -22,10 +22,12 @@ class Area_Admin(admin.ModelAdmin):
 
     list_display = ('userid','username', 'city','email','gener','image_tag')
 
+    readonly_fields = ('userid',)
+
     fieldsets = (
         (None, {'fields': (
-           ('username', 'city','phone'),('email','gener','user_remark'),
-           ('picture','back_ground')
+        ('userid',),('username', 'city','phone'),('email','gener','user_remark'),
+        ('picture','back_ground')
         )}),
     )
 

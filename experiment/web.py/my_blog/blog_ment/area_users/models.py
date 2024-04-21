@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Area_User(models.Model):
-    userid = models.IntegerField(unique=True, blank=True, null=True, verbose_name=_("用户ID"))
+    userid = models.AutoField(primary_key=True, verbose_name=_("用户ID"))
     creator = models.ForeignKey(User, verbose_name=_("创作者"), null=True, on_delete=models.PROTECT)
     username = models.CharField(max_length=135, verbose_name=_("用户名"))
     city = models.CharField(max_length=135, verbose_name=_("所在城市"))
@@ -18,5 +18,13 @@ class Area_User(models.Model):
     back_ground = models.ImageField(upload_to='background/', blank=True, verbose_name=_("背景"))
 
     class Meta:
+        db_table = u'blog_user'
         verbose_name = _("用户")
         verbose_name_plural = _("用户管理")
+
+
+    def __unicode__(self):
+        return self.username
+    
+    def __str__(self):
+        return self.username

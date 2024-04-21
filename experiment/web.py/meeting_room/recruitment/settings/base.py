@@ -150,7 +150,7 @@ DATABASES = {
         'USER': 'recruitment',
         'PASSWORD': 'recruitment',
         'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'PORT': '3307',
     }
 }
 DATABASE_ROUTERS = ['settings.router.DatabaseRouter']

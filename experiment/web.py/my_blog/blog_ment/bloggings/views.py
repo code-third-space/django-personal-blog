@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 # Create your views here.
 
@@ -31,19 +33,17 @@ def detail(request, blog_id):
         raise Http404("blog does not exist")
     return render(request, "bloggings/blog_detail.html", {'blog':blog})
 
-from django.contrib.auth import logout
-from django.shortcuts import redirect
-
 def custom_logout(request):
-    logout(request)
-    return redirect('bloggings:name')
+    logout(request)   #调用django的logout（）函数来注销用户
+    return redirect('bloggings:name')  #重定向到命名url bloggings：name
 
-class BlogDetailView(DetailView):
-    model = Me_blog
-    template_name = 'blog_detail.html'
+class BlogDetailView(DetailView):  #detailview是django提供的一个通用视图类，用于显示模型的详细信息
+    model = Me_blog  #指定这个视图要用的模型
+    template_name = 'blog_detail.html'  #指定渲染模板的名称
 
-class BlogCreateView(LoginRequiredMixin,CreateView):
-    template_name = 'blog_detail.html'
+class BlogCreateView(LoginRequiredMixin,CreateView):  #createview 和detailview相同，都是通用视图，用于创建新的模型实例
+    #loginrequiredmixin是一个mixin
+    template_name = 'blog_detail.html'  
     success_url = '/blog_display/'
     model = Me_blog
     fields = [

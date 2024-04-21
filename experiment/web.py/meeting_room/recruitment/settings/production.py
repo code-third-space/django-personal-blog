@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-8!ljr^j%1#=19*)405lw$f6mk$l)!sdo6*&24556349u1)-9ed
 DEBUG=False
 
 INSTALLED_APPS += (
-    'debug-toolbar',
+    # 'debug_toolbar',
 )
 
 INTERNAL_IPS = [

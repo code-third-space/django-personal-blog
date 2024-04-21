@@ -1,10 +1,16 @@
 from django.contrib import admin
+from django import forms
 from .models import Area_User
 from django.utils.html import format_html
 
 # Register your models here.
+class Area_UserForm(forms.ModelForm):
+    class Meta:
+        model = Area_User
+        fields = ['userid', 'username', 'city', 'phone', 'email', 'gener', 'user_remark', 'picture', 'back_ground']
 
 class Area_Admin(admin.ModelAdmin):
+    form = Area_UserForm
 
     def image_tag(self, obj):
         if obj.picture:
@@ -18,7 +24,7 @@ class Area_Admin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {'fields': (
-           'userid',('username', 'city','phone'),('email','gener','user_remark'),
+           ('username', 'city','phone'),('email','gener','user_remark'),
            ('picture','back_ground')
         )}),
     )

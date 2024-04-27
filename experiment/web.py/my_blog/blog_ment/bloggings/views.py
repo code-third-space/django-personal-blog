@@ -15,11 +15,18 @@ from django.shortcuts import redirect
 def blog_display(request):
     blog_list = Me_blog.objects.order_by("blog_type")
 
+    type_a_blogs = [ blog for blog in blog_list if blog.blog_type == 0 ]
+    type_b_blogs = [ blog for blog in blog_list if blog.blog_type == 2 ]
+
     for blog in blog_list:
         blog.city_name = Cities[blog.blog_city][1]
         blog.blog_type = BlogTypes[blog.blog_type][1]
     print("Number of blogs:", len(blog_list))    
-    context = {"blog_list": blog_list}
+    context = {
+        "blog_list": blog_list,
+        "type_a_blogs": type_a_blogs,
+        "type_b_blogs": type_b_blogs,
+        }
 
     return render(request, 'bloggings/blog_display.html',context)
 

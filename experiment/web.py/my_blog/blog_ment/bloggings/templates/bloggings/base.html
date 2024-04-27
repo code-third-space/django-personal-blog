@@ -10,18 +10,19 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
-<h1 style="margin: auto; width:25%">{% blocktranslate %}个人实验系统{% endblocktranslate %}</h1>
-    <div style="text-align: right;">
-        <form id="login-form" action="{% url 'auth_login' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">登录</button>
-        </form>
+<div style="text-align: right;">
+    <form id="login-form" action="{% url 'auth_login' %}" method="post" style="display: inline-block;">
+        {% csrf_token %}
+        <button type="submit">登录</button>
+    </form>
 
-        <form id="logout-form" action="{% url 'bloggings:logout' %}" method="post">
+    <form id="logout-form" action="{% url 'bloggings:logout' %}" method="post" style="display: inline-block;">
         {% csrf_token %}
         <button type="submit">退出</button>
-        </form>
-    </div>
+    </form>
+</div>
+<h1 style="margin: auto; width:25%; text-align: center;">{% blocktranslate %}个人实验系统{% endblocktranslate %}</h1>
+
 <hr>
 
 {% block header %}

@@ -1,9 +1,38 @@
 from django.contrib import admin
 from django import forms
+from django.http import HttpResponse
 from .models import Area_User
 from django.utils.html import format_html
 
+import csv
+from datetime import datetime
+
 # Register your models here.
+exportable_fields = ('userid', 'username', 'city', 'email', 'gener', 'phone', 'user_remark')
+
+def export_model_as_csv(ModelAdmin, request, queryset):
+    response = HttpResponse(content_type='text/csv')
+    field_list = exportable_fields
+    response['Content-Disposition'] = 'attachment; filename=blog_project-blogusers-list-%s.csv' % (
+        datetime.now().strftime('%Y-%m-%d:%H-%M-%S')
+    )
+
+    writer = csv.writer(response)
+    header_row = [queryset.model._meta.get_field(f).verbose_name.title() for f in field_list]
+    writer.writerow(header_row)
+
+    for obj in queryset:
+        csv_line_value = []
+        for field in field_list:
+            fields_object = queryset.model._meta.get_field(field)
+            field_value = fields_object.value_from_object(obj)
+            csv_line_value.append(field_value)
+        writer.writerow(csv_line_value)
+
+    return response 
+export_model_as_csv.short_description = u'导出为CSV文件'
+export_model_as_csv.allowed_permissions = ('export',)
+
 class Area_UserForm(forms.ModelForm):
     class Meta:
         model = Area_User
@@ -11,6 +40,7 @@ class Area_UserForm(forms.ModelForm):
 
 class Area_Admin(admin.ModelAdmin):
     form = Area_UserForm
+    actions = [export_model_as_csv,]
 
     def image_tag(self, obj):
         if obj.picture:
@@ -22,7 +52,17 @@ class Area_Admin(admin.ModelAdmin):
 
     list_display = ('userid','username', 'city','email','gener','image_tag')
 
+    search_fields = ('username', 'user_ramark',)
+    list_filter = ('city',)
+    ordering = ('userid',)
     readonly_fields = ('userid',)
+    list_per_page = 3
+    save_on_top = True
+    def has_export_permission(self, request):
+        if request.user.is_superuser:
+            return True
+        else:
+            return False  
 
     fieldsets = (
         (None, {'fields': (

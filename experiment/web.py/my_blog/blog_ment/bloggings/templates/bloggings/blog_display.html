@@ -4,6 +4,7 @@
 
 {% block content %}
 <div style="margin: auto; width: 50%;">
+    <h2>总览</h2>
  {% if blog_list %}
     <ul>
         {% for blog in blog_list %}
@@ -12,14 +13,55 @@
                 {{blog.blog_title}}
             </a>
             {{blog.city_name}}
-            {% if blog.picture %}
-                <img src="{{ blog.picture.url }}" width="160" height="100">
-            {% endif %}
+            {{ blog.blog_type_name }}
         </li>
         {% endfor %}
     </ul>
 {% else %}
     <p>No blog are available</p>
 {% endif %}
+</div>
+
+<div class="container">
+    <h2>分类区</h2>
+    <div class="row">
+        <div class="col-md-6">
+        <h3>技术 Blogs</h3>
+        <div class="row">
+        {% if type_a_blogs %}
+            {% for blog in type_a_blogs %}
+                <div class="col-md-6">
+                    <a href="/blog_detail/{{blog.id}}" style="color:blue;">
+                        {{blog.blog_title}}
+                    </a>
+                    {{blog.city_name}}
+                    {% if blog.picture %}
+                        <img src="{{ blog.picture.url }}" width="160" height="100">
+                    {% endif %}
+                </div>
+                {% endfor %}
+        {% endif %}
+        </div>
+        </div>
+
+        <div class="col-md-6">
+        <h3>财经 Blogs</h3>
+        <div class="row">
+        {% if type_b_blogs %}
+                {% for blog in type_b_blogs %}
+                    <div class="col-md-6">
+                        <a href="/blog_detail/{{blog.id}}" style="color: blue;">
+                            {{blog.blog_title}}
+                        </a>
+                        {{blog.city_name}}
+                        {% if blog.picture %}
+                            <img src="{{blog.picture.url}}" width="160" height="100">
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock%}

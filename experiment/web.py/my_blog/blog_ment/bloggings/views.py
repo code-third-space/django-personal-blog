@@ -9,6 +9,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from bloggings.utils import my_function
 
 # Create your views here.
 
@@ -27,6 +28,7 @@ def blog_display(request):
         "type_a_blogs": type_a_blogs,
         "type_b_blogs": type_b_blogs,
         }
+    my_function()
 
     return render(request, 'bloggings/blog_display.html',context)
 

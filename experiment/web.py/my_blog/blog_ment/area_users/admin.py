@@ -1,8 +1,9 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django import forms
 from django.http import HttpResponse
 from .models import Area_User
 from django.utils.html import format_html
+from .dingtalk import send
 
 import csv
 from datetime import datetime
@@ -38,9 +39,21 @@ class Area_UserForm(forms.ModelForm):
         model = Area_User
         fields = '__all__'
 
+
+def notify_bloguser(ModelAdmin, request, queryset):
+    blogusers = ""
+    interviewers = ""
+    for obj in queryset:
+        blogusers = obj.username+";"+blogusers
+        if obj.username:
+            interviewers = obj.username+";"+interviewers
+    send("用户 %s 注册通过 %s" % (blogusers, interviewers))
+
+notify_bloguser.short_description = u"注册通知"
+
 class Area_Admin(admin.ModelAdmin):
     form = Area_UserForm
-    actions = [export_model_as_csv,]
+    actions = [export_model_as_csv, notify_bloguser]
 
     def image_tag(self, obj):
         if obj.picture:

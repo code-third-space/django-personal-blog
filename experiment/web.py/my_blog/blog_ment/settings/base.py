@@ -128,6 +128,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
+DINGTALK_WEB_HOOK = "https://oapi.dingtalk.com/robot/send?access_token=0f9e5896fa84f6ba38211bcd3e82760ce64c80b193c8992e1558b8e59adf3463"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

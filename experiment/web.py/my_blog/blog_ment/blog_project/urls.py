@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('', include("bloggings.urls")),
+    path('area_users/detail/', include("area_users.urls")),
 ]
 
 from django.conf import settings

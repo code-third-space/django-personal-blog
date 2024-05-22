@@ -52,7 +52,7 @@ class BlogDetailView(DetailView):  #detailview是django提供的一个通用视�
 
 class BlogCreateView(LoginRequiredMixin,CreateView):  #createview 和detailview相同，都是通用视图，用于创建新的模型实例
     #loginrequiredmixin是一个mixin
-    template_name = 'blog_detail.html'  
+    template_name = 'blog_form.html'  
     success_url = '/blog_display/'
     model = Me_blog
     fields = [
@@ -72,3 +72,4 @@ class BlogCreateView(LoginRequiredMixin,CreateView):  #createview 和detailview�
         self.object.creator = self.request.user
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+    

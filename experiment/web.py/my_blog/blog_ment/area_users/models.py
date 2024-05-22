@@ -22,6 +22,10 @@ class Area_User(models.Model):
         verbose_name = _("用户")
         verbose_name_plural = _("用户管理")
 
+        permissions = [
+            ('notify', "notify interviewer for blogusers"),
+        ]
+
 
     def __unicode__(self):
         return self.username

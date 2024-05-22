@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+{% extends 'bloggings/base.html' %}
+
+{% block content %}
+<div style="margin: auto; width: 80%;">
+    {% if current_user %}
+    <div class="user_name">
+        <h2>你好啊：{{current_user.username}}</h2>
+        <p>城市:{{current_user.city}}</p>
+        <p>电话:{{ current_user.phone }}</p>
+        <input type="button" style="width: 120px;background-color: lightblue;"
+        value="创作博客" onclick="location.href='blog_add/'">
+
+    </div>
+{% else %}
+<p>用户不存在</p>
+{% endif %}
+</div>
+
+{% endblock %}

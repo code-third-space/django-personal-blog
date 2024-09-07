@@ -187,3 +187,5 @@ LOGGING = {
         },
     },
 }
+
+CSRF_TRUSTED_ORIGINS = ['http://47.109.32.142','http://www.pepopen.cn',]

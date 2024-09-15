@@ -18,12 +18,45 @@ from django.contrib import admin
 from django.urls import path, include
 from django.utils.translation import gettext as _
 
+from bloggings.models import Me_blog
+from django.contrib.auth.models import User
+from rest_framework import routers, serializers, viewsets
+
+# Serializers define the API representation.
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ['url', 'username', 'email', 'is_staff']
+
+# ViewSets define the view behavior.
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class Me_blogSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Me_blog
+        fields = '__all__'
+
+class Me_blogViewSet(viewsets.ModelViewSet):
+    queryset = Me_blog.objects.all()    
+    serializer_class = Me_blogSerializer
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
+router.register(r"bloggings", Me_blogViewSet)
+
+
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('', include("bloggings.urls")),
     path('area_users/detail/', include("area_users.urls")),
+
+    path('api', include(router.urls)),
+    path('api-auth/', include("rest_framework.urls", namespace='rest_framework')),
 ]
 
 from django.conf import settings

@@ -13,12 +13,12 @@
 <div style="text-align: right;">
     <form id="login-form" action="{% url 'auth_login' %}" method="post" style="display: inline-block;">
         {% csrf_token %}
-        <button type="submit">登录</button>
+        <button class="btn btn-primary" type="submit">登录</button>
     </form>
 
     <form id="logout-form" action="{% url 'bloggings:logout' %}" method="post" style="display: inline-block;">
         {% csrf_token %}
-        <button type="submit">退出</button>
+        <button class="btn btn-warning" type="submit">退出</button>
     </form>
 </div>
 <h1 class="text-primary" style="margin: auto; width:25%; text-align: center;">{% blocktranslate %}个人实验系统{% endblocktranslate %}</h1>

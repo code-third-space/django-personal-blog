@@ -21,14 +21,14 @@
         <button type="submit">退出</button>
     </form>
 </div>
-<h1 style="margin: auto; width:25%; text-align: center;">{% blocktranslate %}个人实验系统{% endblocktranslate %}</h1>
+<h1 class="text-primary" style="margin: auto; width:25%; text-align: center;">{% blocktranslate %}个人实验系统{% endblocktranslate %}</h1>
 
 <hr>
 
 {% block header %}
 
 {% if user.is_authenticated %}
-    <p style="margin: auto;text-align: center;size: 6;">
+    <p  class="text-info" style="margin: auto;text-align: center;font-size: 6;">
         {% blocktranslate with user_name=user.username %}
             欢迎来到个人实验系统{{user_name}}
         {% endblocktranslate %}

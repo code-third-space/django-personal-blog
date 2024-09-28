@@ -3,9 +3,11 @@
 {% extends 'bloggings/base.html' %}
 
 {% block content %}
-<div class="container-xl mt-3" style="margin: auto; width: 50%;">
+<div class="container-fluid mt-3" style="margin: auto;">
     <h2 class="alert alert-primary text-center">总览</h2>
-    <table class="table table-striped table-hover">
+    <div class="row">
+        <div class="col-md-6">
+        <table class="table table-striped table-hover">
         <thead>
             <tr class="table-primary">
                 <td>标题</td>
@@ -17,13 +19,15 @@
         {% if blog_list %}
             {% for blog in blog_list %}
             <tr>
-                <td>
+                <td class="text-left"
+                    onmouseover="showImage('image-{{ blog.id }}')"
+                    onmouseout="hideImage('image-{{ blog.id }}')">
                     <a href="/blog_detail/{{blog.id}}/" style="color: blue;">
                         {{blog.blog_title}}
                     </a>
                 </td>
-                <td class="text-warning">{{ blog.city_name }}</td>
-                <td class="text-success">{{ blog.blog_type}}</td>
+                <td class="text-warning text-center">{{ blog.city_name }}</td>
+                <td class="text-success text-right">{{ blog.blog_type}}</td>
             </tr>
             {% endfor %}
         {% else %}
@@ -32,15 +36,54 @@
             </tr>
         {% endif %}
         </tbody>
-    </table>
+        </table>   
+        </div>
+        <div class="col-md-6">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-primary">
+                    <td>图像</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if blog_list %}
+                {% for blog in blog_list %}
+                    <tr style="height: 0; display: table-row;">
+                    <td style="padding: 0; border: none;">
+                    {% if blog.picture %}
+                    <img id="image-{{ blog.id }}" src="{{ blog.picture.url }}" alt="图片展示" 
+                    style="max-width: 960px; height: 290px; display: none;">
+                    {% endif %}
+                    </td>
+                    </tr>
+                {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    <script>
+        function showImage(imageId) {
+            var img = document.getElementById(imageId);
+            if (img) {
+                img.style.display = 'block';
+            }
+        }
+        
+        function hideImage(imageId) {
+            var img = document.getElementById(imageId);
+            if (img) {
+                img.style.display = 'none';
+            }
+        }
+    </script>
+    </div>
 </div>
 
-<div class="container-xl">
+<div class="container-fluid">
     <h2 class="alert alert-primary text-center">分类区</h2>
     <div class="row">
         <div class="col-md-6">
         <h3 class="bg-info text-center">技术 Blogs</h3>
-        <div class="row">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="table-primary">
@@ -59,7 +102,8 @@
                     </a>
                     </td>
                     <td class="text-success bg-warning">{{blog.city_name}}</td>
-                    <td>  {% if blog.picture %}
+                    <td>  
+                    {% if blog.picture %}
                         <img src="{{ blog.picture.url }}" width="240px" height="150px">
                      {% endif %}
                     </td>
@@ -69,11 +113,9 @@
                 </tbody>
             </table>
         </div>
-        </div>
 
         <div class="col-md-6">
         <h3 class="bg-info text-center">财经 Blogs</h3>
-        <div class="row">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr class="table-primary">
@@ -98,9 +140,8 @@
                         {% endfor %}
                     {% endif %}
                 </tbody>
-                </table>
-            </div>
+            </table>
         </div>
     </div>
 </div>
-{% endblock%}
+{% endblock %}

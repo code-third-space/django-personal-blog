@@ -22,7 +22,7 @@
                 <td class="text-left"
                     onmouseover="showImage('image-{{ blog.id }}')"
                     onmouseout="hideImage('image-{{ blog.id }}')">
-                    <a href="/blog_detail/{{blog.id}}/" style="color: blue;">
+                    <a href="/blog_detail/{{blog.id}}/" class="text-decoration-none">
                         {{blog.blog_title}}
                     </a>
                 </td>
@@ -97,7 +97,7 @@
                     {% for blog in type_a_blogs %}
                 <tr>
                     <td class="text-info">
-                    <a href="/blog_detail/{{blog.id}}" style="color:blue;">
+                    <a href="/blog_detail/{{blog.id}}" class="text-decoration-none">
                         {{blog.blog_title}}
                     </a>
                     </td>
@@ -128,7 +128,7 @@
                     {% if type_b_blogs %}
                         {% for blog in type_b_blogs %}
                     <tr>
-                        <td><a href="/blog_detail/{{blog.id}}" style="color: blue;">
+                        <td><a href="/blog_detail/{{blog.id}}" class="text-decoration-none">
                             {{blog.blog_title}}
                         </a>
                         </td>

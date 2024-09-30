@@ -7,6 +7,7 @@ urlpatterns = [
     path("blog_display/", views.blog_display, name='blog_display'),
     path("blog_detail/<int:blog_id>/", views.detail, name='blog_detail'),
     path("blog_add/", views.BlogCreateView.as_view(), name='blog_add'),
+    path("blog_first/", views.first, name='blog_first'),
     path('accounts/logout/', custom_logout, name='logout'),
-    path('', views.blog_display, name='name'),
+    path('', views.blog_display, name='home'),
 ]

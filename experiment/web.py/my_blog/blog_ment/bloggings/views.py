@@ -42,6 +42,16 @@ def detail(request, blog_id):
         raise Http404("blog does not exist")
     return render(request, "bloggings/blog_detail.html", {'blog':blog})
 
+def first(request):
+    first_bloglist = Me_blog.objects.order_by("blog_type")
+    for blog_item in first_bloglist:
+        blog_item.city_name = Cities[blog_item.blog_city][1]
+        blog_item.blog_type = BlogTypes[blog_item.blog_type][1]
+    context = {
+            "first_bloglist":first_bloglist,
+        }
+    return render(request, "bloggings/blog_first.html", context)
+
 def custom_logout(request):
     logout(request)   #调用django的logout（）函数来注销用户
     return redirect('bloggings:name')  #重定向到命名url bloggings：name

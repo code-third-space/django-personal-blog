@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% extends 'bloggings/base.html' %}
+
+{% block content %}
+
+<div class="container-fluid" mt-3>
+    <table class="table table-striped table-hoverl">
+        <thead>
+            <tr class="text-primary">
+                <td>标题</td>
+                <td>城市</td>
+                <td>类别</td>
+                <td>国家</td>
+                <td>日期</td>
+                <td>图像</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% if first_bloglist %}
+            {% for blog in first_bloglist %}
+            <tr>
+                <td>
+                    <a href="/blog_detail/{{blog.id}}/" class="text-decoration-none">
+                        {{blog.blog_title}}
+                    </a>
+                </td>
+                <td class="text-info text-center">{{blog.city_name}}</td>
+                <td class="text-info text-center">{{blog.blog_type}}</td>
+                <td class="text-info text-center">{{blog.blog_countries}}</td>
+                <td class="text-info text-center">{{blog.created_date}}</td>
+                <td>
+                    <img src="{{blog.picture.url}}" width="100px" height="80px">
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <p>没有知道博客</p>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

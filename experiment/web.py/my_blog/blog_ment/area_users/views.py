@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from area_users.models import Area_User
-from bloggings.models import Me_blog
+from bloggings.models import Me_blog, Cities, BlogTypes, Countries
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -22,6 +22,10 @@ def user_detail(request):
 @login_required
 def user_myself(request):
     user_blogs = Me_blog.objects.filter(creator=request.user)
+    for blog in user_blogs:
+        blog.city_name = Cities[blog.blog_city][1]
+        blog.blog_type = BlogTypes[blog.blog_type][1]
+        blog.blog_countries = Countries[blog.blog_countries][1]
     context = {
         'user_blogs':user_blogs,
     }

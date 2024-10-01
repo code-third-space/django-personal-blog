@@ -30,11 +30,13 @@
         <div class="col-md-2"></div>
         <div class="col-md-8 text-center">
             <h2 class="text-primary" style="margin: auto; width:25%;">
+            <a href="{% url 'bloggings:home' %}" class="text-decoration-none">
                 {% blocktranslate %}个人实验系统{% endblocktranslate %}
+            </a>
             </h2>
         </div>
         <div class="col-md-2 text-right">
-            <form id="first-form" action="{% url 'bloggings:blog_first' %}" method="post" style="display: inline-block;" class="text-right">
+            <form id="first-form" action="{% url 'bloggings:blog_all' %}" method="post" style="display: inline-block;" class="text-right">
                 {%csrf_token %}
                 <button class="btn btn-info" type="submit">全部</button>
             </form>

@@ -10,6 +10,7 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from bloggings.utils import my_function
+from django.core.paginator import Paginator, EmptyPage
 
 # Create your views here.
 
@@ -42,15 +43,20 @@ def detail(request, blog_id):
         raise Http404("blog does not exist")
     return render(request, "bloggings/blog_detail.html", {'blog':blog})
 
-def first(request):
-    first_bloglist = Me_blog.objects.order_by("blog_type")
-    for blog_item in first_bloglist:
+def blog_all(request):
+    blog_all_list = Me_blog.objects.order_by("blog_type")
+    for blog_item in blog_all_list:
         blog_item.city_name = Cities[blog_item.blog_city][1]
         blog_item.blog_type = BlogTypes[blog_item.blog_type][1]
+        blog_item.blog_countries = Countries[blog_item.blog_countries][1]
+    #创建分页器, 每页6篇博客
+    paginator = Paginator(blog_all_list,6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-            "first_bloglist":first_bloglist,
+        "blog_all_list": page_obj,
         }
-    return render(request, "bloggings/blog_first.html", context)
+    return render(request, "bloggings/blog_all.html", context)
 
 def custom_logout(request):
     logout(request)   #调用django的logout（）函数来注销用户

@@ -52,7 +52,7 @@
                     <td style="padding: 0; border: none;">
                     {% if blog.picture %}
                     <img id="image-{{ blog.id }}" src="{{ blog.picture.url }}" alt="图片展示" 
-                    style="max-width: 960px; height: 290px; display: none;">
+                    style="max-width: 960px; height: 390px; display: none;">
                     {% endif %}
                     </td>
                     </tr>
@@ -104,7 +104,7 @@
                     <td class="text-success bg-transparent">{{blog.city_name}}</td>
                     <td>  
                     {% if blog.picture %}
-                        <img src="{{ blog.picture.url }}" width="240px" height="150px">
+                        <img src="{{ blog.picture.url }}" width="100px" height="80px">
                      {% endif %}
                     </td>
                 </tr>
@@ -134,7 +134,7 @@
                         </td>
                         <td class="text-success bg-transparent">{{blog.city_name}}</td>
                         <td>{% if blog.picture %}
-                            <img src="{{blog.picture.url}}" width="240px" height="150px">
+                            <img src="{{blog.picture.url}}" width="100px" height="80px">
                         </td>{% endif %}
                     </tr>
                         {% endfor %}

@@ -23,6 +23,7 @@ def blog_display(request):
     for blog in blog_list:
         blog.city_name = Cities[blog.blog_city][1]
         blog.blog_type = BlogTypes[blog.blog_type][1]
+        blog.blog_countries = Countries[blog.blog_countries][1]
     print("Number of blogs:", len(blog_list))    
     context = {
         "blog_list": blog_list,

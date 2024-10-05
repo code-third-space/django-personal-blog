@@ -89,7 +89,7 @@
                     <tr class="table-primary">
                         <td>标题</td>
                         <td>位置</td>
-                        <td class="text-center">图像</td>
+                        <td class="text-center">国家</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,11 +102,7 @@
                     </a>
                     </td>
                     <td class="text-success bg-transparent">{{blog.city_name}}</td>
-                    <td>  
-                    {% if blog.picture %}
-                        <img src="{{ blog.picture.url }}" width="100px" height="80px">
-                     {% endif %}
-                    </td>
+                    <td>{{blog.blog_countries}}</td>
                 </tr>
                     {% endfor %}
                 {% endif %}
@@ -133,9 +129,7 @@
                         </a>
                         </td>
                         <td class="text-success bg-transparent">{{blog.city_name}}</td>
-                        <td>{% if blog.picture %}
-                            <img src="{{blog.picture.url}}" width="100px" height="80px">
-                        </td>{% endif %}
+                        <td>{{blog.blog_countries}}</td>
                     </tr>
                         {% endfor %}
                     {% endif %}

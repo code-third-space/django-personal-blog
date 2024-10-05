@@ -14,19 +14,31 @@ from django.core.paginator import Paginator, EmptyPage
 
 # Create your views here.
 
+
 def blog_display(request):
     blog_list = Me_blog.objects.order_by("blog_type")
 
-    type_a_blogs = [ blog for blog in blog_list if blog.blog_type == 0 ]
-    type_b_blogs = [ blog for blog in blog_list if blog.blog_type == 2 ]
+    categorized_blogs = {
+        'type_a_blogs':[],
+        'type_b_blogs':[],
+    }
 
     for blog in blog_list:
         blog.city_name = Cities[blog.blog_city][1]
-        blog.blog_type = BlogTypes[blog.blog_type][1]
-        blog.blog_countries = Countries[blog.blog_countries][1]
-    print("Number of blogs:", len(blog_list))    
+        blog.type_name = BlogTypes[blog.blog_type][1]
+        blog.countries_name = Countries[blog.blog_countries][1]
+
+        if blog.blog_type==0:
+            categorized_blogs['type_a_blogs'].append(blog)
+        elif blog.blog_type==2:
+            categorized_blogs["type_b_blogs"].append(blog)
+        
+    print("Number of blogs:", len(blog_list)) 
+    overview_blogs = blog_list[:8]
+    type_a_blogs = categorized_blogs["type_a_blogs"][:6]
+    type_b_blogs = categorized_blogs["type_b_blogs"][:6]
     context = {
-        "blog_list": blog_list,
+        "blog_list": overview_blogs,
         "type_a_blogs": type_a_blogs,
         "type_b_blogs": type_b_blogs,
         }

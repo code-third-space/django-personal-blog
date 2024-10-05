@@ -27,7 +27,7 @@
                     </a>
                 </td>
                 <td class="text-warning text-center">{{ blog.city_name }}</td>
-                <td class="text-success text-right">{{ blog.blog_type}}</td>
+                <td class="text-success text-right">{{ blog.type_name}}</td>
             </tr>
             {% endfor %}
         {% else %}
@@ -94,7 +94,7 @@
                 </thead>
                 <tbody>
                 {% if type_a_blogs %}
-                    {% for blog in type_a_blogs %}
+                    {% for blog in type_a_blogs  %}
                 <tr>
                     <td class="text-info">
                     <a href="/blog_detail/{{blog.id}}" class="text-decoration-none">
@@ -102,7 +102,7 @@
                     </a>
                     </td>
                     <td class="text-success bg-transparent">{{blog.city_name}}</td>
-                    <td>{{blog.blog_countries}}</td>
+                    <td>{{blog.countries_name}}</td>
                 </tr>
                     {% endfor %}
                 {% endif %}
@@ -129,7 +129,7 @@
                         </a>
                         </td>
                         <td class="text-success bg-transparent">{{blog.city_name}}</td>
-                        <td>{{blog.blog_countries}}</td>
+                        <td>{{blog.countries_name}}</td>
                     </tr>
                         {% endfor %}
                     {% endif %}

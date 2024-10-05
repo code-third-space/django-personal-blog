@@ -58,6 +58,96 @@ def blog_all(request):
         }
     return render(request, "bloggings/blog_all.html", context)
 
+def blog_tech(request):
+    blog_tech_list = Me_blog.objects.filter(blog_type=0).order_by("created_date")
+    for blog_item in blog_tech_list:
+        blog_item.city_name = Cities[blog_item.blog_city][1]
+        blog_item.blog_type = BlogTypes[blog_item.blog_type][1]
+        blog_item.blog_countries = Countries[blog_item.blog_countries][1]
+    
+    paginator = Paginator(blog_tech_list,6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "blog_tech_list":page_obj,
+    }
+    return render(request, "bloggings/blog_tech.html", context)
+
+def blog_current(request):
+    blog_current_list = Me_blog.objects.filter(blog_type=1).order_by("created_date")
+    for blog_item in blog_current_list:
+        blog_item.city_name = Cities[blog_item.blog_city][1]
+        blog_item.blog_type = BlogTypes[blog_item.blog_type][1]
+        blog_item.blog_countries = Countries[blog_item.blog_countries][1]
+    
+    paginator = Paginator(blog_current_list,6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "blog_current_list":page_obj,
+    }
+    return render(request, "bloggings/blog_current.html", context)
+
+def blog_finance(request):
+    blog_finance_list = Me_blog.objects.filter(blog_type=2).order_by("created_date")
+    for blog_item in blog_finance_list:
+        blog_item.city_name = Cities[blog_item.blog_city][1]
+        blog_item.blog_type = BlogTypes[blog_item.blog_type][1]
+        blog_item.blog_countries = Countries[blog_item.blog_countries][1]
+    
+    paginator = Paginator(blog_finance_list,6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "blog_finance_list":page_obj,
+    }
+    return render(request, "bloggings/blog_finance.html", context)
+
+def blog_read(request):
+    blog_read_list = Me_blog.objects.filter(blog_type=3).order_by("created_date")
+    for blog_item in blog_read_list:
+        blog_item.city_name = Cities[blog_item.blog_city][1]
+        blog_item.blog_type = BlogTypes[blog_item.blog_type][1]
+        blog_item.blog_countries = Countries[blog_item.blog_countries][1]
+
+    paginator = Paginator(blog_read_list,6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "blog_read_list":page_obj,
+    }
+    return render(request, "bloggings/blog_read.html", context)
+
+def blog_scenery(request):
+    blog_scenery_list = Me_blog.objects.filter(blog_type=4).order_by("created_date")
+    for blog_item in blog_scenery_list:
+        blog_item.city_name = Cities[blog_item.blog_city][1]
+        blog_item.blog_type = BlogTypes[blog_item.blog_type][1]
+        blog_item.blog_countries = Countries[blog_item.blog_countries][1]
+
+    paginator = Paginator(blog_scenery_list,6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "blog_scenery_list":page_obj,
+    }
+    return render(request, "bloggings/blog_scenery.html", context)
+
+def blog_products(request):
+    blog_products_list = Me_blog.objects.filter(blog_type=5).order_by("created_date")
+    for blog_item in blog_products_list:
+        blog_item.city_name = Cities[blog_item.blog_city][1]
+        blog_item.blog_type = BlogTypes[blog_item.blog_type][1]
+        blog_item.blog_countries = Countries[blog_item.blog_countries][1]
+    paginator = Paginator(blog_products_list,6) 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "blog_products_list":page_obj,
+    }
+    return render(request, "bloggings/blog_products.html", context)
+
+
 def custom_logout(request):
     logout(request)   #调用django的logout（）函数来注销用户
     return redirect('bloggings:name')  #重定向到命名url bloggings：name

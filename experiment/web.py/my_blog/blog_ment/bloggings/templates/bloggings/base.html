@@ -10,44 +10,100 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
-<div class="container-fluid">
+<style>
+    .dropdown-menu {
+        background-color: #696969;
+        width: auto;
+        padding: 0;
+        border: none;
+    }
+    .dropdown-menu .btn {
+    width: 100%; /* 按钮宽度填满菜单 */
+    color: white; /* 调整文字颜色 */
+    border-radius: 0; /* 去掉按钮圆角 */
+}
+</style>
+
+<!-- <div class="container-fluid">
     <div class="row">
-        <div class="col-md-10"></div>
-        <div class="col-md-2 text-right">
+        <div class="col-md-12 text-right">
         <form id="login-form" action="{% url 'auth_login' %}" method="post" style="display: inline-block;">
             {% csrf_token %}
             <button class="btn btn-primary" type="submit">登录</button>
-            </form>
+        </form>
         <form id="logout-form" action="{% url 'bloggings:logout' %}" method="post" style="display: inline-block;">
             {% csrf_token %}
             <button class="btn btn-warning" type="submit">退出</button>
-            </form>
+        </form>
         </div>
     </div>
+</div> -->
+<div class="container-fluid text-center">
+    <h2 class="text-primary" style="margin: auto; width:25%;">
+        <!-- <a href="{% url 'bloggings:home' %}" class="text-decoration-none">
+            {% blocktranslate %}个人实验系统{% endblocktranslate %}
+        </a> -->
+    </h2>
 </div>
-<div class="container-fluid">
-    <div class="row align-items-center">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 text-center">
-            <h2 class="text-primary" style="margin: auto; width:25%;">
-            <a href="{% url 'bloggings:home' %}" class="text-decoration-none">
-                {% blocktranslate %}个人实验系统{% endblocktranslate %}
-            </a>
-            </h2>
-        </div>
-        <div class="col-md-2 text-right">
-            <form id="first-form" action="{% url 'bloggings:blog_all' %}" method="post" style="display: inline-block;" class="text-right">
-                {%csrf_token %}
-                <button class="btn btn-info" type="submit">全部</button>
-            </form>
-            <form id="myself-form" action="{% url 'area_users:user_myself' %}" method="post" style="display: inline-block;" class="text-right">
-                {% csrf_token %}
-                <button class="btn btn-info" type="submit">自己</button>
-            </form>
-        </div>
+<nav class="navbar navbar-expand-sm bg-light bg-dark navbar-dark">
+    <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'bloggings:home' %}">个人实验系统</a>
+                <ul class="navbar-nav w-100 justify-content-around">
+                    <li class="nav-item">
+                       <a class="btn btn-dark" href="{% url 'bloggings:home' %}">主页</a> 
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-dark" href="{% url 'bloggings:blog_tech' %}">科技</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-dark" href="{% url 'bloggings:blog_current' %}">实事</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-dark" href="{% url 'bloggings:blog_finance' %}">财经</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-dark" href="{% url 'bloggings:blog_read' %}">阅读</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-dark" href="{% url 'bloggings:blog_scenery' %}">风景</a> 
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-dark" href="{% url 'bloggings:blog_products' %}">商品</a> 
+                    </li>
+                    <li class="nav-item">
+                        <form id="first-form" action="{% url 'bloggings:blog_all' %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button class="btn btn-dark" type="submit">全部</button>
+                        </form>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="btn btn-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                            我的
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <form id="login-form" action="{% url 'auth_login' %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="btn" type="submit">登录</button>
+                                </form> 
+                            </li>
+                            <li>
+                                <form id="logout-form" action="{% url 'bloggings:logout' %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="btn" type="submit">退出</button>
+                                </form>
+                            </li>
+                            <li>
+                                <form id="myself-form" action="{% url 'area_users:user_myself' %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <button class="btn" type="submit">自己</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
     </div>
-    </div>
-</div>
+</nav>
 <hr>
 
 {% block header %}

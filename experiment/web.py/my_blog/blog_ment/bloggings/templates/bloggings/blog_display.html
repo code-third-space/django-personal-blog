@@ -3,6 +3,54 @@
 {% extends 'bloggings/base.html' %}
 
 {% block content %}
+
+<style>
+    .carousel-control-prev-icon {
+        filter: invert(1);
+    }
+    
+    .carousel-control-next-icon {
+        filter:invert(1);
+    }
+
+    .carousel-item img {
+        width: 720px;
+        height: 450px;
+        object-fit: cover;
+    }
+</style>
+
+<div id="demo" class="carousel slide" date-ride="carousel">
+    <div class="carousel-indicators">
+        {% for blog in blog_list %}
+        <button type="button" data-target="#demo"
+                data-slide-to="{{ forloop.counter0 }}"
+                class="{% if forloop.first %}active{% endif %}">
+        </button>
+        {% endfor %}
+    </div>
+    <div class="carousel-inner">
+        {% if blog_list %}
+        {% for blog in blog_list %}
+        <div class="carousel-item {% if forloop.first%}active{% endif %}">
+            <img src="{{ blog.picture.url }}" alt="图片" class="d-block mx-auto img-fluid">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>{{blog.blog_title}}</h5>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>没有知道博客</p>
+        {% endif %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-target="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-target="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
 <div class="container-fluid mt-3" style="margin: auto;">
     <h2 class="alert alert-primary text-center">总览</h2>
     <div class="row">

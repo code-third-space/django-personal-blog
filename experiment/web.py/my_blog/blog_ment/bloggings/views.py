@@ -17,10 +17,23 @@ from django.core.paginator import Paginator, EmptyPage
 
 def blog_display(request):
     blog_list = Me_blog.objects.order_by("blog_type")
+    
+    catego_blogs = {
+        'tech_blogs':Me_blog.objects.filter(blog_type=0).order_by('-id').first(),
+        'current_blogs':Me_blog.objects.filter(blog_type=1).order_by('-id').first(),
+        'finance_blogs':Me_blog.objects.filter(blog_type=2).order_by('-id').first(),
+        'read_blogs':Me_blog.objects.filter(blog_type=3).order_by('-id').first(),
+        'scenery_blogs':Me_blog.objects.filter(blog_type=4).order_by('-id').first(),
+        'products_blogs':Me_blog.objects.filter(blog_type=5).order_by('-id').first(),
+    }
 
     categorized_blogs = {
         'type_a_blogs':[],
         'type_b_blogs':[],
+        'type_c_blogs':[],
+        'type_d_blogs':[],
+        'type_e_blogs':[],
+        'type_f_blogs':[],
     }
 
     for blog in blog_list:
@@ -32,16 +45,41 @@ def blog_display(request):
             categorized_blogs['type_a_blogs'].append(blog)
         elif blog.blog_type==2:
             categorized_blogs["type_b_blogs"].append(blog)
+        elif blog.blog_type==1:
+            categorized_blogs['type_c_blogs'].append(blog)
+        elif blog.blog_type==3:
+            categorized_blogs['type_d_blogs'].append(blog)
+        elif blog.blog_type==4:
+            categorized_blogs['type_e_blogs'].append(blog)
+        elif blog.blog_type==5:
+            categorized_blogs['type_f_blogs'].append(blog)
         
-    print("Number of blogs:", len(blog_list)) 
+    print("Number of blogs:", len(blog_list))
+
     overview_blogs = blog_list[:8]
     type_a_blogs = categorized_blogs["type_a_blogs"][:6]
     type_b_blogs = categorized_blogs["type_b_blogs"][:6]
+    type_c_blogs = categorized_blogs["type_c_blogs"][:6]
+    type_d_blogs = categorized_blogs["type_d_blogs"][:6]
+    type_e_blogs = categorized_blogs["type_e_blogs"][:6]
+    type_f_blogs = categorized_blogs["type_f_blogs"][:6]
+
     context = {
         "blog_list": overview_blogs,
         "type_a_blogs": type_a_blogs,
         "type_b_blogs": type_b_blogs,
+        "type_c_blogs": type_c_blogs,
+        "type_d_blogs": type_d_blogs,
+        "type_e_blogs": type_e_blogs,
+        "type_f_blogs": type_f_blogs,
+        "tech_blog":catego_blogs['tech_blogs'],
+        "current_blog":catego_blogs['current_blogs'],
+        "finance_blog":catego_blogs['finance_blogs'],
+        "read_blog":catego_blogs['read_blogs'],
+        "scenery_blog":catego_blogs['scenery_blogs'],
+        "products_blog":catego_blogs['products_blogs'],
         }
+    
     my_function()
 
     return render(request, 'bloggings/blog_display.html',context)

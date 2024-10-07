@@ -57,12 +57,12 @@ def blog_display(request):
     print("Number of blogs:", len(blog_list))
 
     overview_blogs = blog_list[:8]
-    type_a_blogs = categorized_blogs["type_a_blogs"][:6]
-    type_b_blogs = categorized_blogs["type_b_blogs"][:6]
-    type_c_blogs = categorized_blogs["type_c_blogs"][:6]
-    type_d_blogs = categorized_blogs["type_d_blogs"][:6]
-    type_e_blogs = categorized_blogs["type_e_blogs"][:6]
-    type_f_blogs = categorized_blogs["type_f_blogs"][:6]
+    type_a_blogs = categorized_blogs["type_a_blogs"][:7 ]
+    type_b_blogs = categorized_blogs["type_b_blogs"][:7]
+    type_c_blogs = categorized_blogs["type_c_blogs"][:7]
+    type_d_blogs = categorized_blogs["type_d_blogs"][:7]
+    type_e_blogs = categorized_blogs["type_e_blogs"][:7]
+    type_f_blogs = categorized_blogs["type_f_blogs"][:7]
 
     context = {
         "blog_list": overview_blogs,

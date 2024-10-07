@@ -3,8 +3,59 @@
 
 {% block content %}
 
+<style>
+    .category-box {
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 5px;
+        text-align: center;
+        transition: transform 0.3s;
+        background-color: #98fb98;
+        height: 360px;
+    }
+
+    .category-box:hover {
+        transform: scale(1.05);
+    }
+    
+    .category-title {
+        font-size: 100%;
+        height: auto;
+        border-radius: 5px;
+        color: #808000;
+    }
+
+    .category-image {
+        width: 100%;
+        height: 90%;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="container-fluid" style="width: 98%;">
+    <div class="row">
+        {% if blog_scenery_list %}
+        {% for blog in blog_scenery_list %}
+        <div class="col-md-4">
+            <div class="category-box">
+                <a href="/blog_detail/{{blog.id}}" class="text-decoration-none">
+                    <img src="{{ blog.picture.url }}" alt="风景图片" class="category-image">
+                </a>
+                <div class="category-title">{{ blog.blog_title }}</div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>没有知道博客</p>
+        {% endif %}
+    </div>
+</div>
+
 <div class="container-fluid mt-3">
-    <table class="table table-striped table-hoverl table-success">
+    <!-- <table class="table table-striped table-hoverl table-success">
         <thead>
             <tr class="text-success">
                 <td>标题</td>
@@ -37,7 +88,7 @@
             <p>没有知道博客</p>
             {% endif %}
         </tbody>
-    </table>
+    </table> -->
     <div class="container-md">
         <ul class="pagination justify-content-center">
             <li class="page-item {% if not page_obj.has_previous %}{% endif %}">

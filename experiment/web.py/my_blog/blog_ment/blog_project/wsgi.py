@@ -8,9 +8,15 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/
 """
 
 import os
+import sys
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'blog_project.settings')
+#将项目路径添加到 sys.path
+sys.path.append("/experiment/web.py/my_blog/blog_ment")
 
+#设置Django的设置模块
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'blog_project.settings.production')
+
+from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()

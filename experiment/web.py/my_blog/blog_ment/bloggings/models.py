@@ -31,13 +31,25 @@ Cities = [
     [7, "重庆"],
     [8, "贵州"],
     [9, "武汉"],
-    [10, "纽约"],
+    [10, "纽约"]    ,
     [11, "华盛顿"],
     [12, "洛杉矶"],
     [13, "加州"],
     [14, "德克萨斯州"],
     [15, "莫斯科"],
 ]
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.name
+    
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
 class Me_blog(models.Model):
     blog_title = models.CharField(max_length=56, blank=False, verbose_name=_("标题"))
@@ -47,9 +59,24 @@ class Me_blog(models.Model):
     creator = models.ForeignKey(User, verbose_name=_("创作者"), null=True, on_delete=models.PROTECT)
     created_date = models.DateTimeField(verbose_name=_("创建日期"), default=datetime.now)
     modified_date = models.DateTimeField(verbose_name=_("修改时间"), default=datetime.now)
-    blog_detail = models.TextField(max_length=4096, verbose_name=_("正文"))
+    blog_detail = models.TextField(max_length=10240, verbose_name=_("正文"))
     picture = models.ImageField(upload_to='picture', blank=True, verbose_name=_("图片"))
+    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE, verbose_name=_("分类"))
+    tags = models.ManyToManyField(Tag, blank=True, verbose_name=_("标签"))
 
     class Meta:
         verbose_name = _("博客")
         verbose_name_plural = _("博客展示")
+
+class Comment(models.Model):
+    blog = models.ForeignKey(Me_blog, related_name="comments", verbose_name=_("用户评论"), on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name=_("用户"), on_delete=models.CASCADE)
+    text = models.TextField(max_length=2048, verbose_name=_("评论内容"))
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_("创建时间"))
+
+    class Meta:
+        verbose_name = _("评论")
+        verbose_name_plural = _("评论展示")
+
+    def __str__(self):
+        return f"Comment by {self.name} on {self.blog}"

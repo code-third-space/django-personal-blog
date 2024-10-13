@@ -1,16 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404 
-from .models import Me_blog
-from .models import Cities,Countries,BlogTypes
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth import logout
-from django.shortcuts import redirect
 from bloggings.utils import my_function
 from django.core.paginator import Paginator, EmptyPage
+from .models import Me_blog, Comment
+from .models import Cities,Countries,BlogTypes
+from .forms import CommentForm
 
 # Create your views here.
 
@@ -86,13 +86,31 @@ def blog_display(request):
 
 
 def detail(request, blog_id):
-    try:
-        blog=Me_blog.objects.get(pk=blog_id)
-        blog.city_name = Cities[blog.blog_city][1]
+    blog= get_object_or_404(Me_blog, pk=blog_id)
+    blog.city_name = Cities[blog.blog_city][1]
 
-    except Me_blog.DoesNotExist:
-        raise Http404("blog does not exist")
-    return render(request, "bloggings/blog_detail.html", {'blog':blog})
+    
+    comments = blog.comments.all()
+
+    form = CommentForm()
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.blog = blog # 关联到当前博客
+            comment.user = request.user # 设置评论的用户
+            comment.save()
+            return redirect('detail', blog_id=blog.id) #重定向到该博客详情页
+
+    context = {
+        "blog": blog,
+        "comments": comments,
+        "form": form,
+        
+    }
+
+    return render(request, "bloggings/blog_detail.html", context)
 
 def blog_all(request):
     blog_all_list = Me_blog.objects.order_by("blog_type")

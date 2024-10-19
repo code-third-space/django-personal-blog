@@ -75,7 +75,7 @@
                                 </form> 
                             </li>
                             <li>
-                                <form id="logout-form" action="{% url 'bloggings:logout' %}" method="post">
+                                <form id="logout-form" action="{% url 'auth_logout' %}" method="post">
                                     {% csrf_token %}
                                     <button class="btn" type="submit">退出</button>
                                 </form>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic.edit import CreateView
@@ -84,7 +85,7 @@ def blog_display(request):
 
     return render(request, 'bloggings/blog_display.html',context)
 
-
+@login_required
 def detail(request, blog_id):
     blog= get_object_or_404(Me_blog, pk=blog_id)
     blog.city_name = Cities[blog.blog_city][1]
@@ -101,7 +102,7 @@ def detail(request, blog_id):
             comment.blog = blog # 关联到当前博客
             comment.user = request.user # 设置评论的用户
             comment.save()
-            return redirect('detail', blog_id=blog.id) #重定向到该博客详情页
+            return redirect('bloggings:blog_detail', blog_id=blog.id) #重定向到该博客详情页
 
     context = {
         "blog": blog,
@@ -111,6 +112,14 @@ def detail(request, blog_id):
     }
 
     return render(request, "bloggings/blog_detail.html", context)
+
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.user == request.user:
+        comment.delete()
+        
+    return redirect('bloggings:blog_detail', blog_id=comment.blog.id)
 
 def blog_all(request):
     blog_all_list = Me_blog.objects.order_by("blog_type")
@@ -139,6 +148,7 @@ def blog_tech(request):
     page_obj = paginator.get_page(page_number)
     context = {
         "blog_tech_list":page_obj,
+        "page_obj":page_obj,
     }
     return render(request, "bloggings/blog_tech.html", context)
 
@@ -154,6 +164,7 @@ def blog_current(request):
     page_obj = paginator.get_page(page_number)
     context = {
         "blog_current_list":page_obj,
+        "page_obj":page_obj,
     }
     return render(request, "bloggings/blog_current.html", context)
 
@@ -169,6 +180,7 @@ def blog_finance(request):
     page_obj = paginator.get_page(page_number)
     context = {
         "blog_finance_list":page_obj,
+        "page_obj":page_obj,
     }
     return render(request, "bloggings/blog_finance.html", context)
 
@@ -184,6 +196,7 @@ def blog_read(request):
     page_obj = paginator.get_page(page_number)
     context = {
         "blog_read_list":page_obj,
+        "page_obj":page_obj,
     }
     return render(request, "bloggings/blog_read.html", context)
 
@@ -199,6 +212,7 @@ def blog_scenery(request):
     page_obj = paginator.get_page(page_number)
     context = {
         "blog_scenery_list":page_obj,
+        "page_obj":page_obj,
     }
     return render(request, "bloggings/blog_scenery.html", context)
 
@@ -213,6 +227,7 @@ def blog_products(request):
     page_obj = paginator.get_page(page_number)
     context = {
         "blog_products_list":page_obj,
+        "page_obj":page_obj,
     }
     return render(request, "bloggings/blog_products.html", context)
 

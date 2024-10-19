@@ -31,7 +31,7 @@ Cities = [
     [7, "重庆"],
     [8, "贵州"],
     [9, "武汉"],
-    [10, "纽约"]    ,
+    [10, "纽约"],
     [11, "华盛顿"],
     [12, "洛杉矶"],
     [13, "加州"],
@@ -61,7 +61,7 @@ class Me_blog(models.Model):
     modified_date = models.DateTimeField(verbose_name=_("修改时间"), default=datetime.now)
     blog_detail = models.TextField(max_length=10240, verbose_name=_("正文"))
     picture = models.ImageField(upload_to='picture', blank=True, verbose_name=_("图片"))
-    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE, verbose_name=_("分类"))
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE, verbose_name=_("分类"))
     tags = models.ManyToManyField(Tag, blank=True, verbose_name=_("标签"))
 
     class Meta:
@@ -79,4 +79,4 @@ class Comment(models.Model):
         verbose_name_plural = _("评论展示")
 
     def __str__(self):
-        return f"Comment by {self.name} on {self.blog}"
+        return f"Comment by {self.user.username} on {self.blog}"

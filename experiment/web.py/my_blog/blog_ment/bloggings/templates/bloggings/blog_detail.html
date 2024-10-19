@@ -43,6 +43,12 @@
         {% for comment in comments %}
         <div>
             <strong>{{ comment.user.username }}:</strong>
+            {% if comment.user == request.user %}
+            <form action="{% url 'bloggings:delete_comment' comment.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">删除</button>
+            </form>
+            {% endif %}
             <p>{{ comment.text }}</p>
             <small>{{ comment.created_date }}</small>
         </div>
@@ -54,11 +60,15 @@
     <div>
     <!--评论表单-->
         <h3>评论下:</h3>
+        {% if user.is_authenticated %}
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <input class="btn btn-warning" type="submit" value="提交">
         </form>
+        {% else %}
+        <p>请<a href="{% url 'login' %}">登录</a>后发表评论 </p>
+        {% endif %}
     </div>
 </div>
 

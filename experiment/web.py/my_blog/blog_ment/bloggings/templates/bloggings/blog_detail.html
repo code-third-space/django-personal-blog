@@ -67,7 +67,7 @@
             <input class="btn btn-warning" type="submit" value="提交">
         </form>
         {% else %}
-        <p>请<a href="{% url 'login' %}">登录</a>后发表评论 </p>
+        <p>请<a href="{% url 'auth_login' %}">登录</a>后发表评论 </p>
         {% endif %}
     </div>
 </div>

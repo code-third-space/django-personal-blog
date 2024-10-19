@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.urls import reverse
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
@@ -85,7 +85,6 @@ def blog_display(request):
 
     return render(request, 'bloggings/blog_display.html',context)
 
-@login_required
 def detail(request, blog_id):
     blog= get_object_or_404(Me_blog, pk=blog_id)
     blog.city_name = Cities[blog.blog_city][1]
@@ -112,14 +111,15 @@ def detail(request, blog_id):
     }
 
     return render(request, "bloggings/blog_detail.html", context)
-
+@login_required
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.user == request.user:
         comment.delete()
-        
-    return redirect('bloggings:blog_detail', blog_id=comment.blog.id)
+        return redirect('bloggings:blog_detail', blog_id=comment.blog.id)
+    else:
+        return HttpResponseForbidden("You are not allowed to delete this comment.")
 
 def blog_all(request):
     blog_all_list = Me_blog.objects.order_by("blog_type")

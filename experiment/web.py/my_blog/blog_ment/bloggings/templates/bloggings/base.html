@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+<head>
 {# Load the tag library #}
 {% load bootstrap4 %}
 
@@ -10,21 +13,12 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
-<style>
-    .dropdown-menu {
-        background-color: #696969;
-        width: auto;
-        padding: 0;
-        border: none;
-    }
-    .dropdown-menu .btn {
-    width: 100%; /* 按钮宽度填满菜单 */
-    color: white; /* 调整文字颜色 */
-    border-radius: 0; /* 去掉按钮圆角 */
-}
-</style>
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link type="text/css" rel="stylesheet" href="{% static 'cssBase.css' %}">
+</head>
 
-
+<body>
 <div class="container-fluid text-center">
     <h2 class="text-primary" style="margin: auto; width:25%;">
         <!-- <a href="{% url 'bloggings:home' %}" class="text-decoration-none">
@@ -32,30 +26,59 @@
         </a> -->
     </h2>
 </div>
+
 <nav class="navbar navbar-expand-sm bg-light bg-dark navbar-dark" style="border-radius: 10px;margin: 5px 40px 0px 40px;">
     <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'bloggings:home' %}">个人实验系统</a>
                 <ul class="navbar-nav w-100 justify-content-around">
+                    <!-- 六个分类项 -->
                     <li class="nav-item">
                        <a class="btn btn-dark" href="{% url 'bloggings:home' %}">主页</a> 
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="tech">
                         <a class="btn btn-dark" href="{% url 'bloggings:blog_tech' %}">科技</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="current">
                         <a class="btn btn-dark" href="{% url 'bloggings:blog_current' %}">实事</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="finance">
                         <a class="btn btn-dark" href="{% url 'bloggings:blog_finance' %}">财经</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="read">
                         <a class="btn btn-dark" href="{% url 'bloggings:blog_read' %}">阅读</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="scenery">
                         <a class="btn btn-dark" href="{% url 'bloggings:blog_scenery' %}">风景</a> 
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="products">
                         <a class="btn btn-dark" href="{% url 'bloggings:blog_products' %}">商品</a> 
+                    </li>
+
+                    <!-- 分类下拉菜单 -->
+                    <li class="nav-item dropdown" id="category-six">
+                        <a class="btn btn-dark dropdown-toggle" href="#" id="toggleCategories" role="button" data-toggle="dropdown" aria-expanded="false">
+                            分类
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="toggleCategories">
+                            <li class="nav-item">
+                                <a class="btn btn-dark" href="{% url 'bloggings:blog_tech' %}">科技</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-dark" href="{% url 'bloggings:blog_current' %}">实事</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-dark" href="{% url 'bloggings:blog_finance' %}">财经</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-dark" href="{% url 'bloggings:blog_read' %}">阅读</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-dark" href="{% url 'bloggings:blog_scenery' %}">风景</a> 
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-dark" href="{% url 'bloggings:blog_products' %}">商品</a> 
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <form id="first-form" action="{% url 'bloggings:blog_all' %}" method="post" class="d-inline">
@@ -117,3 +140,5 @@
 <div style="text-decoration: none; text-align: center;">
 <a style="color: gray; text-decoration: none;" href="https://beian.miit.gov.cn/" target="_blank">互联网ICP备案：蜀ICP备2024072952号</a>
 </div>
+</body>
+</html>

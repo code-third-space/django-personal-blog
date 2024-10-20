@@ -1,0 +1,12 @@
+.dropdown-menu {
+    background-color: #696969;
+    width: auto;
+    padding: 0;
+    border: none;
+}
+
+.dropdown-menu .btn {
+width: 100%; /* 按钮宽度填满菜单 */
+color: white; /* 调整文字颜色 */
+border-radius: 0; /* 去掉按钮圆角 */
+}

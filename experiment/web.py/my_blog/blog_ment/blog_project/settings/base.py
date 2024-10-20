@@ -153,6 +153,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR /'..'/ 'bloggings' / 'static',
+]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 DINGTALK_WEB_HOOK = "https://oapi.dingtalk.com/robot/send?access_token=0f9e5896fa84f6ba38211bcd3e82760ce64c80b193c8992e1558b8e59adf3463"

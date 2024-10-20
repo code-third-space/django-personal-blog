@@ -1,5 +1,27 @@
+@media only screen and (max-width: 768px) {
+    /* 在手机屏幕上隐藏特定ID的项 */
+    #tech, #current, #finance, #read, #scenery, #products {
+        display: none; 
+    }
+
+    #category-six {
+        display: block; /* 显示下拉菜单 */
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    /* 在电脑屏幕上显示所有导航项 */
+    #tech, #current, #finance, #read, #scenery, #products {
+        display: block; 
+    }
+
+    #category-six {
+        display: none; /* 在电脑屏幕上隐藏分类下拉菜单 */
+    }
+}
+
 .dropdown-menu {
-    background-color: #696969;
+    background-color:#696969;
     width: auto;
     padding: 0;
     border: none;

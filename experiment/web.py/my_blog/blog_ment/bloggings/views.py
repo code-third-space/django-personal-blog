@@ -133,6 +133,7 @@ def blog_all(request):
     page_obj = paginator.get_page(page_number)
     context = {
         "blog_all_list": page_obj,
+        "page_obj": page_obj,
         }
     return render(request, "bloggings/blog_all.html", context)
 

@@ -4,6 +4,10 @@
         display: none; 
     }
 
+    .nav {
+        margin: 3% 4%;
+    }
+
     #category-six {
         display: block; /* 显示下拉菜单 */
     }

@@ -1,3 +1,10 @@
+@media only screen and (max-width: 768px) {
+    #group-six, #demo {
+        display: none;
+    }
+}
+
+
 .group {
     padding: 0;
     margin: 0;

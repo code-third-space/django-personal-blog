@@ -7,6 +7,26 @@
     #category-six {
         display: block; /* 显示下拉菜单 */
     }
+    .navbar-nav {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-around;
+    }
+    .navbar-brand {
+        width: 35%;
+        margin: 0;
+    }
+    .nav-item {
+        flex-grow: 1;
+        text-align: center;
+    }
+    .btn {
+        display: inline-block;
+        width: auto;
+    }
+    .dropdown-menu {
+        background-color: transparent;
+    }
 }
 
 @media only screen and (min-width: 769px) {
@@ -18,10 +38,13 @@
     #category-six {
         display: none; /* 在电脑屏幕上隐藏分类下拉菜单 */
     }
+
+    .dropdown-menu {
+        background-color: #696969;
+    }
 }
 
 .dropdown-menu {
-    background-color:#696969;
     width: auto;
     padding: 0;
     border: none;

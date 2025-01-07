@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .models import Area_User
 from django.utils.html import format_html
 from .dingtalk import send
+from .tasks import send_dingtalk_message
 
 import csv
 from datetime import datetime
@@ -47,7 +48,7 @@ def notify_bloguser(ModelAdmin, request, queryset):
         blogusers = obj.username+";"+blogusers
         if obj.username:
             interviewers = obj.username+";"+interviewers
-    send("用户 %s 注册通过 %s" % (blogusers, interviewers))
+    send_dingtalk_message.delay("用户 %s 注册通过 %s" % (blogusers, interviewers))
 
 notify_bloguser.short_description = u"注册通知"
 

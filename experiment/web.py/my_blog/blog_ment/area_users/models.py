@@ -11,7 +11,7 @@ UserTypes = [
 
 class Area_User(models.Model):
     userid = models.AutoField(primary_key=True, verbose_name=_("用户ID"))
-    creator = models.ForeignKey(User, verbose_name=_("创作者"), null=True, on_delete=models.PROTECT)
+    creator = models.ForeignKey(User, verbose_name=_("创作者"), null=True, on_delete=models.CASCADE)
     username = models.CharField(max_length=135, verbose_name=_("用户名"))
     city = models.CharField(max_length=135, verbose_name=_("所在城市"))
     phone = models.CharField(max_length=135, verbose_name=_("手机号码"))

@@ -6,7 +6,7 @@
 {% block content %}
 
 {% load static %}
-<link type="text/css" rel="stylesheet" href="{% static 'cssBlogCategory.css' %}">
+<link type="text/css" rel="stylesheet" href="{% static 'bloggings/cssBlogCategory.css' %}">
 
 <style>
     body {
@@ -23,7 +23,11 @@
         <div class="col-md-4">
             <div class="category-box">
                 <a href="/blog_detail/{{blog.id}}" class="text-decoration-none">
-                    <img src="{{ blog.picture.url }}" alt="实事图片" class="category-image">
+                    {% if blog.picture %}
+                        <img src="{{ blog.picture.url }}" alt="实事图片" class="category-image">
+                    {% else %}
+                    <p>暂无图片</p>
+                    {% endif %}
                 </a>
                 <div class="category-title">{{ blog.blog_title }}</div>
                 <p></p>

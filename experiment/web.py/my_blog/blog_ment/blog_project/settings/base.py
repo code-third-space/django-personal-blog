@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', '47.109.32.142', 'www.pepopen.cn']
 
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 SIMPLE_BACKEND_REDIRECT_URL = '/accounts/login/'
 
 # Application definition
@@ -60,12 +61,13 @@ REST_FRAMEWORK = {
 
 
 MIDDLEWARE = [
+    'area_users.performance.performance_logger_middleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
 
-    'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -104,19 +106,19 @@ DATABASES = {
     }
 }
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": "redis://127.0.0.1:6379",
-#         "TIMEOUT": 300,
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#             # "PASSWORD": "mysecret",
-#             "SOCKET_CONNECT_TIMEOUT": 5,
-#             "SOCKET_TIMEOUT": 5,
-#         }
-#     }
-# }
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "TIMEOUT": 2,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            # "PASSWORD": "mysecret",
+            "SOCKET_CONNECT_TIMEOUT": 1,
+            "SOCKET_TIMEOUT": 1,
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -155,6 +157,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR /'..'/ 'bloggings' / 'static',
+    BASE_DIR /'..'/ 'area_users' / 'static',
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
@@ -182,11 +185,13 @@ LOGGING = {
             'style': '{',
         },
     },
+
     'filters': {
         'require_debug_true': {
             '()': 'django.utils.log.RequireDebugTrue',
         },
     },
+
     'handlers': {
         'console': {
             'level': 'DEBUG',
@@ -199,7 +204,13 @@ LOGGING = {
             'class': 'django.utils.log.AdminEmailHandler',
             'filters': ['require_debug_true'],
         },
+        "performance": {
+            "class": "logging.FileHandler",
+            "formatter": 'simple',
+            "filename": os.path.join(os.path.dirname(BASE_DIR), 'blog_ment.performance.log'),
+        },
     },
+
     'loggers': {
         'django': {
             'handlers': ['console'],
@@ -215,7 +226,36 @@ LOGGING = {
             'level': 'INFO',
             'filters': ['require_debug_true'],
         },
+        "area_users.performance": {
+            "handlers": ["console", "performance"],
+            "level": "INFO",
+            "propagate": False,
+        },
     },
 }
 
 CSRF_TRUSTED_ORIGINS = ['http://47.109.32.142','http://www.pepopen.cn',]
+
+# 邮件设置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = 'retcrylyxz@163.com'
+EMAIL_HOST_PASSWORD = 'DLgdDsHservSH9pM'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Celery Configuration Options
+CELERY_BROKER_URL = 'redis://localhost:6379/0' 
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIER = 'json'
+
+CELERY_TIMEZONE = "Australia/Tasmania"
+CELERY_MAX_TASKS_PER_CHILD = 10
+CELERY_LOG_FILE = os.path.join(BASE_DIR, "logs", "celery_work.log")
+CELERYBEAT_LOG_FILE = os.path.join(BASE_DIR, "logs", "celery_beat.log")
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60

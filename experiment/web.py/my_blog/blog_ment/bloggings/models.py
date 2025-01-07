@@ -39,7 +39,7 @@ Cities = [
     [15, "莫斯科"],
 ]
 
-class Category(models.Model):
+class Category(models.Model): #创建了category模型
     name = models.CharField(max_length=100)
     
     def __str__(self):
@@ -59,7 +59,9 @@ class Me_blog(models.Model):
     creator = models.ForeignKey(User, verbose_name=_("创作者"), null=True, on_delete=models.PROTECT)
     created_date = models.DateTimeField(verbose_name=_("创建日期"), default=datetime.now)
     modified_date = models.DateTimeField(verbose_name=_("修改时间"), default=datetime.now)
-    blog_detail = models.TextField(max_length=10240, verbose_name=_("正文"))
+    blog_detail_one = models.TextField(max_length=10240, blank=True, null=True, verbose_name=_("正文"))
+    blog_detail_two = models.TextField(max_length=1024, blank=True, null=True, verbose_name=_("正文中部"))
+    blog_detail_three = models.TextField(max_length=1024, blank=True, null=True, verbose_name=_("正文下部"))
     picture = models.ImageField(upload_to='picture', blank=True, verbose_name=_("图片"))
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE, verbose_name=_("分类"))
     tags = models.ManyToManyField(Tag, blank=True, verbose_name=_("标签"))

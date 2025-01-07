@@ -53,15 +53,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('', include("bloggings.urls")),
-    path('area_users/detail/', include("area_users.urls")),
+    path('area_users/', include("area_users.urls")),
 
     path('api', include(router.urls)),
     path('api-auth/', include("rest_framework.urls", namespace='rest_framework')),
 ]
 
 from django.conf import settings
-
 from django.conf.urls.static import static
+
 urlpatterns += static(settings.MEDIA_URL,
                       document_root=settings.MEDIA_ROOT)
 

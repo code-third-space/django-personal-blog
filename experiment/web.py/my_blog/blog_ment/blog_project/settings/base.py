@@ -106,19 +106,19 @@ DATABASES = {
     }
 }
 
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-        "TIMEOUT": 2,
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            # "PASSWORD": "mysecret",
-            "SOCKET_CONNECT_TIMEOUT": 1,
-            "SOCKET_TIMEOUT": 1,
-        }
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379/1",
+#         "TIMEOUT": 2,
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#             # "PASSWORD": "mysecret",
+#             "SOCKET_CONNECT_TIMEOUT": 1,
+#             "SOCKET_TIMEOUT": 1,
+#         }
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

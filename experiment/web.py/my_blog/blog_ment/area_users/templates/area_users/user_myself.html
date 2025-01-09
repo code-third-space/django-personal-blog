@@ -4,7 +4,15 @@
 
 {% block content %}
 <div>
+    {% if errors %}
+        <ul>
+            {% for error in errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <form action="{% url 'area_users:Search' %}" method="get" style="text-align: center;">
+        {% csrf_token %}
         <input type="text" name="q">
         <input type="submit" value="Search">
     </form>
@@ -66,10 +74,10 @@
             </tr>
             {% endfor %}
             {% else %}
-            <p>hello</p>
+            <p>hello、 你好</p>
             <p>立刻创作<strong>
                 <input class="btn btn-info" type="button" style="width: 120px;"
-                        value="申请" onclick="location.href='/area_users/detail/'">
+                        value="申请" onclick="location.href='/area_users/user_detail/'">
             </strong></p>
             {% endif %}
         </tbody>

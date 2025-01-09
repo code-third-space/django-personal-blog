@@ -1,5 +1,7 @@
 
-body {
-    background-image: url(../../../../../../../../Pictures/pap.er/2153815987722387456.heic);
+#background {
+    background-image: url(images/hills-2836301_1280.jpg);
     background-repeat: no-repeat;
+    width: auto;
+    height: auto;
 }

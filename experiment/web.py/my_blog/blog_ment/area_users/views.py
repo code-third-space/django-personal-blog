@@ -40,12 +40,20 @@ def user_myself(request):
 
 def Search(request):
     titleName = []
+    errors = []
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
-        titleName = Me_blog.objects.filter(blog_title__icontains=q
-                                           ).values('id', 'blog_title', 'blog_detail_one', 'created_date')
+        if not q:
+            errors.append("Enter a search term.")
+        elif len(q) > 20:
+            errors.append("Please enter at most 20 characters.")
+        else:
+            titleName = Me_blog.objects.filter(blog_title__icontains=q
+                ).values('id', 'blog_title', 'blog_detail_one', 'created_date')
+            content = {
+                'titleName': titleName,
+            }
+            cache.clear()
+            return render(request, "area_users/user_myself.html", content)
         cache.clear()
-    content = {
-        'titleName': titleName,
-    }
-    return render(request, "area_users/user_myself.html", content)
+    return render(request, "area_users/user_myself.html", {'errors': errors})

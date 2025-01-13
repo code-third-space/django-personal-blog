@@ -25,7 +25,7 @@ from .forms import CommentForm
 def blog_display(request):
     # 定义 display的视图函数
     blog_list = Me_blog.objects.order_by("blog_type")
-    
+
     catego_blogs = {
         # 每个分类的第一个blog
         'tech_blogs':Me_blog.objects.filter(blog_type=0).order_by('-id').first(),

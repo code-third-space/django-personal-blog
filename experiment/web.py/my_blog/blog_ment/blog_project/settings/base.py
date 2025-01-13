@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-1&*7v*bt-off)#fw((y3!ipa97#jv+#4*lro7o4a3e339^&4iv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '47.109.32.142', 'www.pepopen.cn']
+ALLOWED_HOSTS = ['127.0.0.1', '47.109.32.142', 'www.pepopen.cn', 'localhost']
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -234,7 +234,7 @@ LOGGING = {
     },
 }
 
-CSRF_TRUSTED_ORIGINS = ['http://47.109.32.142','http://www.pepopen.cn',]
+CSRF_TRUSTED_ORIGINS = ['https://47.109.32.142','https://www.pepopen.cn','https://127.0.0.1','https://localhost']
 
 # 邮件设置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

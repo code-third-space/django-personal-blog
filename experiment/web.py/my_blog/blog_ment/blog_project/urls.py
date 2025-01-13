@@ -55,7 +55,7 @@ urlpatterns = [
     path('', include("bloggings.urls")),
     path('area_users/', include("area_users.urls")),
 
-    path('api', include(router.urls)),
+    path('api/', include(router.urls)),
     path('api-auth/', include("rest_framework.urls", namespace='rest_framework')),
 ]
 

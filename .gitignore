@@ -1,2 +1,8 @@
 # 忽略 DS_Store
 .DS_Store
+
+# 忽略 .pyc 
+*.pyc
+
+# 忽略 __pycache__/
+__pycache__/

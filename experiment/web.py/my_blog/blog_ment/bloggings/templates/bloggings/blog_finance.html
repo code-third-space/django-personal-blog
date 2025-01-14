@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
 {% extends 'bloggings/base.html' %}
 
 {% block content%}
-
 {% load static %}
 <link type="text/css" rel="stylesheet" href="{% static 'bloggings/cssBlogCategory.css' %}">
  
@@ -13,9 +9,8 @@
         background: linear-gradient(to bottom, #fafad2, #ffd700);
     }
 </style>
-</head>
-<body>
 
+<body>
 <div class="container-fluid" style="width: 98%;">
     <div class="row">
         {% if blog_finance_list %}
@@ -93,8 +88,5 @@
         </ul>
     </div>
 </div>
-
-{% endblock %}
-
 </body>
-</html>
+{% endblock %}

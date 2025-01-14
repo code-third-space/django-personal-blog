@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-
 {% extends 'bloggings/base.html' %}
 
 {% block content %}
 {% load static %}
-
 <link type="text/css" rel="stylesheet" href="{% static 'area_users/user_detail.css' %}">
 
-</head>
 <body>
 <div class="container-lg mt-3" id="background" style="margin: auto; width: 80%;">
     <table class="table table-striped">
@@ -34,9 +28,5 @@
     {% endif %}
     </table>
 </div>
-
-{% endblock %}
-
 </body>
-
-</html>
+{% endblock %}

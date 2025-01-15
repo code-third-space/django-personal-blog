@@ -234,12 +234,6 @@ LOGGING = {
     },
 }
 
-# CSRF 的配置
-CSRF_TRUSTED_ORIGINS = ['https://47.109.32.142','https://www.pepopen.cn','https://127.0.0.1','https://localhost']
-# 设置 CSRF cookie 安全选项
-CSRF_COOKIE_SECURE = True  # 仅在 HTTPS 上发送 CSRF cookie
-
-
 # 邮件设置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.163.com'
@@ -263,8 +257,3 @@ CELERY_LOG_FILE = os.path.join(BASE_DIR, "logs", "celery_work.log")
 CELERYBEAT_LOG_FILE = os.path.join(BASE_DIR, "logs", "celery_beat.log")
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
-
-# HTTPS 的配置
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True # 自动将 HTTP 请求重定向到 HTTPS
-

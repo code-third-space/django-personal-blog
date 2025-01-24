@@ -10,7 +10,7 @@ UserTypes = [
 ]
 
 class Area_User(models.Model):
-    userid = models.AutoField(primary_key=True, verbose_name=_("用户ID"))
+    userid = models.IntegerField(verbose_name=_("用户编号"))
     creator = models.ForeignKey(User, verbose_name=_("创作者"), null=True, on_delete=models.CASCADE)
     username = models.CharField(max_length=135, verbose_name=_("用户名"))
     city = models.CharField(max_length=135, verbose_name=_("所在城市"))
@@ -33,9 +33,6 @@ class Area_User(models.Model):
             ('notify', "notify interviewer for blogusers"),
         ]
 
-
-    def __unicode__(self):
-        return self.username
     
     def __str__(self):
         return self.username

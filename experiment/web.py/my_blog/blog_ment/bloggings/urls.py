@@ -5,6 +5,7 @@ from .views import custom_logout
 app_name = 'bloggings'
 
 urlpatterns = [
+    path("blog_search/", views.blog_search, name='searchBlogAll'),
     path("blog_display/", views.blog_display, name='blog_display'),
     path("blog_detail/<int:blog_id>/", views.detail, name='blog_detail'),
     path("delete_comment/<int:comment_id>/", views.delete_comment, name='delete_comment'),

@@ -67,12 +67,12 @@ def blog_display(request):
     # print("Number of blogs:", len(blog_list))
 
     overview_blogs = blog_list[:8]
-    type_a_blogs = categorized_blogs["type_a_blogs"][:7]
-    type_b_blogs = categorized_blogs["type_b_blogs"][:7]
-    type_c_blogs = categorized_blogs["type_c_blogs"][:7]
-    type_d_blogs = categorized_blogs["type_d_blogs"][:7]
-    type_e_blogs = categorized_blogs["type_e_blogs"][:7]
-    type_f_blogs = categorized_blogs["type_f_blogs"][:7]
+    type_a_blogs = categorized_blogs["type_a_blogs"][:4]
+    type_b_blogs = categorized_blogs["type_b_blogs"][:4]
+    type_c_blogs = categorized_blogs["type_c_blogs"][:4]
+    type_d_blogs = categorized_blogs["type_d_blogs"][:4]
+    type_e_blogs = categorized_blogs["type_e_blogs"][:4]
+    type_f_blogs = categorized_blogs["type_f_blogs"][:4]
 
     context = {
         "blog_list": overview_blogs,
@@ -339,3 +339,23 @@ def send_blog_creation_email(user_email, blog_title):
     recipient_list = [user_email]
 
     send_mail(subject, message, from_email, recipient_list)
+
+def blog_search(request):
+    titleName = []
+    errors = []
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        if not q:
+            errors.append("Enter a search term.")
+        elif len(q) > 20:
+            errors.append("Please enter at most 20 characters.")
+        else:
+            titleName = Me_blog.objects.filter(blog_title__icontains=q
+                ).values('id', 'blog_title', 'blog_detail_one', 'created_date')
+            content = {
+                'titleName': titleName,
+            }
+            cache.clear()
+            return render(request, "bloggings/blog_search.html", content)
+        cache.clear()
+    return render(request, "bloggings/blog_search.html", {'errors': errors})

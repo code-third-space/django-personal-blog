@@ -36,7 +36,8 @@
 @media only screen and (min-width: 769px) {
     /* 在电脑屏幕上显示所有导航项 */
     #tech, #current, #finance, #read, #scenery, #products {
-        display: block; 
+        display: block;
+        width: 70px;
     }
 
     #category-six {
@@ -58,4 +59,12 @@
 width: 100%; /* 按钮宽度填满菜单 */
 color: white; /* 调整文字颜色 */
 border-radius: 0; /* 去掉按钮圆角 */
+}
+
+.vertical-divider {
+    width: 1px;
+    background-color: #e0ffff;
+    height: 80%;
+    margin: auto 15px;
+    display: inline-block;
 }

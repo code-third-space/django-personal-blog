@@ -2,13 +2,13 @@
 <html>
 <head>
 {# Load the tag library #}
-{% load bootstrap4 %}
+{% load django_bootstrap5 %}
 
 {% load i18n %}
 
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
-{% bootstrap_javascript jquery='full' %}
+{% bootstrap_javascript %}
 
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
@@ -27,106 +27,114 @@
     </h2>
 </div>
 
-<nav class="navbar navbar-expand-sm bg-light bg-dark navbar-dark" style="border-radius: 10px;margin: 5px 40px 0px 40px">
-    <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'bloggings:home' %}">个人实验系统</a>
-                <ul class="navbar-nav w-100 justify-content-around">
-                    <!-- 六个分类项 -->
-                    <li class="nav-item" id="paga01">
-                       <a class="btn btn-dark" href="{% url 'bloggings:home' %}">主页</a> 
-                    </li>
-                    <li class="nav-item" id="tech">
+<nav class="navbar navbar-expand-sm bg-light bg-dark navbar-dark shadow" 
+        style="border-radius: 10px;margin: 5px 40px 25px 40px">
+    <div class="container-fluid" style="justify-content: start; height: 48px;">
+        <!-- 网站名称 -->
+        <a class="navbar-brand" href="{% url 'bloggings:home' %}">个人试验系统</a>
+        <!-- 竖线 -->
+        <div class="vertical-divider"></div>
+        <!-- 六个分类项 -->
+        <ul class="navbar-nav" style="width: 430px;">
+            <li class="nav-item" id="tech">
+                <a class="btn btn-dark" href="{% url 'bloggings:blog_tech' %}">科技</a>
+            </li>
+            <li class="nav-item" id="current">
+                <a class="btn btn-dark" href="{% url 'bloggings:blog_current' %}">资讯</a>
+            </li>
+            <li class="nav-item" id="finance">
+                <a class="btn btn-dark" href="{% url 'bloggings:blog_finance' %}">财经</a>
+            </li>
+            <li class="nav-item" id="read">
+                <a class="btn btn-dark" href="{% url 'bloggings:blog_read' %}">阅读</a>
+            </li>
+            <li class="nav-item" id="scenery">
+                <a class="btn btn-dark" href="{% url 'bloggings:blog_scenery' %}">风景</a> 
+            </li>
+            <li class="nav-item" id="products">
+                <a class="btn btn-dark" href="{% url 'bloggings:blog_products' %}">物品</a> 
+            </li>
+        </ul>
+        <!-- 分类下拉菜单 -->
+            <ul class="navbar-nav" style="margin-left: 200px;">
+                <li class="nav-item dropdown" id="category-six">
+                    <a class="btn btn-dark dropdown-toggle" href="#" id="toggleCategories" role="button" data-toggle="dropdown" aria-expanded="false">
+                        分类
+                    </a>
+                <ul class="dropdown-menu" aria-labelledby="toggleCategories">
+                    <li class="nav-item">
                         <a class="btn btn-dark" href="{% url 'bloggings:blog_tech' %}">科技</a>
                     </li>
-                    <li class="nav-item" id="current">
+                    <li class="nav-item">
                         <a class="btn btn-dark" href="{% url 'bloggings:blog_current' %}">实事</a>
                     </li>
-                    <li class="nav-item" id="finance">
+                    <li class="nav-item">
                         <a class="btn btn-dark" href="{% url 'bloggings:blog_finance' %}">财经</a>
                     </li>
-                    <li class="nav-item" id="read">
+                    <li class="nav-item">
                         <a class="btn btn-dark" href="{% url 'bloggings:blog_read' %}">阅读</a>
                     </li>
-                    <li class="nav-item" id="scenery">
+                    <li class="nav-item">
                         <a class="btn btn-dark" href="{% url 'bloggings:blog_scenery' %}">风景</a> 
                     </li>
-                    <li class="nav-item" id="products">
+                    <li class="nav-item">
                         <a class="btn btn-dark" href="{% url 'bloggings:blog_products' %}">商品</a> 
                     </li>
-
-                    <!-- 分类下拉菜单 -->
-                    <li class="nav-item dropdown" id="category-six">
-                        <a class="btn btn-dark dropdown-toggle" href="#" id="toggleCategories" role="button" data-toggle="dropdown" aria-expanded="false">
-                            分类
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="toggleCategories">
-                            <li class="nav-item">
-                                <a class="btn btn-dark" href="{% url 'bloggings:blog_tech' %}">科技</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-dark" href="{% url 'bloggings:blog_current' %}">实事</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-dark" href="{% url 'bloggings:blog_finance' %}">财经</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-dark" href="{% url 'bloggings:blog_read' %}">阅读</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-dark" href="{% url 'bloggings:blog_scenery' %}">风景</a> 
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-dark" href="{% url 'bloggings:blog_products' %}">商品</a> 
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <form id="first-form" action="{% url 'bloggings:blog_all' %}" method="post" class="d-inline">
-                            {% csrf_token %}
-                            <button class="btn btn-dark" type="submit">全部</button>
-                        </form>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="btn btn-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                            我的
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li>
-                                <form id="login-form" action="{% url 'auth_login' %}" method="post">
-                                    {% csrf_token %}
-                                    <button class="btn" type="submit">登录</button>
-                                </form> 
-                            </li>
-                            <li>
-                                <form id="logout-form" action="{% url 'auth_logout' %}" method="post">
-                                    {% csrf_token %}
-                                    <button class="btn" type="submit">退出</button>
-                                </form>
-                            </li>
-                            <li>
-                                <form id="myself-form" action="{% url 'area_users:user_myself' %}" method="post" class="d-inline">
-                                    {% csrf_token %}
-                                    <button class="btn" type="submit">自己</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
                 </ul>
+                </li>
+                <li class="nav-item" style="display: flex; align-items: center; justify-content: center;">
+                    <form id="search-all" action="{% url 'bloggings:searchBlogAll' %}" method="get">
+                        {% csrf_token %}
+                        <input type="text" name="q" placeholder="搜索开始"
+                        class="form-control me-2">
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form id="first-form" action="{% url 'bloggings:blog_all' %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button class="btn btn-dark" type="submit">全部</button>
+                    </form>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="btn btn-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        我的
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <form id="login-form" action="{% url 'auth_login' %}" method="post">
+                                {% csrf_token %}
+                                <button class="btn" type="submit">登录</button>
+                            </form> 
+                        </li>
+                        <li>
+                            <form id="logout-form" action="{% url 'auth_logout' %}" method="post">
+                                {% csrf_token %}
+                                <button class="btn" type="submit">退出</button>
+                            </form>
+                        </li>
+                        <li>
+                            <form id="myself-form" action="{% url 'area_users:user_myself' %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button class="btn" type="submit">自己</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
     </div>
 </nav>
-<hr>
 
 {% block header %}
 
 {% if user.is_authenticated %}
-    <p  class="text-info" style="margin: auto;text-align: center;font-size: 6;">
+    <p  class="text-info" style="margin: 5px;text-align: center;font-size: 6;">
         {% blocktranslate with user_name=user.username %}
-            欢迎来到个人实验系统{{user_name}}
+            欢迎来到个人试验系统{{user_name}}
         {% endblocktranslate %}
         
     </p>
 {% else %}
-    <p style="margin:auto;text-align: center;font-size: 1.8em;">
+    <p style="margin: 5px;text-align: center;font-size: 1.8em;">
         {% blocktranslate %} 欢迎你 {% endblocktranslate %}
     </p>
 {% endif %}
@@ -136,9 +144,14 @@
 {% block content %}
 {% endblock %}
 
-<br>
+<br/>
 <div style="text-decoration: none; text-align: center;">
-<a style="color: gray; text-decoration: none;" href="https://beian.miit.gov.cn/" target="_blank">互联网ICP备案：蜀ICP备2024072952号</a>
+    <span class="text-left mx-2" style="color: gray;">
+        匠风练习实验 &nbsp;&nbsp;|
+    </span>
+    <a style="color: gray; text-decoration: none;" 
+    href="https://beian.miit.gov.cn/" 
+    target="_blank">互联网ICP备案：蜀ICP备2024072952号</a>
 </div>
 </body>
 </html>

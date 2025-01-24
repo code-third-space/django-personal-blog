@@ -47,7 +47,8 @@
 
 .carousel-control-prev-icon, 
 .carousel-control-next-icon {
-    filter:invert(1);
+    filter:invert(1); 
+    z-index: 15;
 }
 
 .carousel-item {
@@ -56,23 +57,34 @@
 }
 
 .carousel-item img {
-    width: 720px;
-    height: 415px;
+    width: 75%;
     object-fit: cover;
     border-radius: 10px;
 }
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    z-index: 15;
+.carousel-control-prev,
+.carousel-control-next {
+   top: 50%;
+   transform: translateY(-50%);
+   width: 5%;
+}
+
+.carousel-control-prev {
+    left: 0;
+}
+
+.carousel-control-next {
+    right: 0;
 }
 
 .list-group-item a {
     display: block;
     width: 100%;
-    height: 100%;
+    height: 75px;
     text-decoration: none;
     color: inherit;
     padding: 10px;
+    text-align: start;
+    line-height: 50px;
 }
 
 .truncate {
@@ -90,4 +102,8 @@
     border-radius: 10px;
     border: 1px solid #ddd;
     overflow: hidden;
+}
+
+.transparent {
+    background-color: transparent !important;
 }

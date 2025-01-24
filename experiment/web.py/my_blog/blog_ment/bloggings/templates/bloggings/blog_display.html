@@ -4,151 +4,142 @@
 {% load static %}
 <link type="text/css" rel="stylesheet" href="{% static 'bloggings/cssBlogdisplay.css' %}">
 
-<div class="container-fluid">
+<!-- 第一部分 -->
+<div id="content-one" class="container-fluid" style="margin: 0 40px; height: 500px;">
     <div class="row">
-        <!-- 左侧部分: 分类-->
-         <div class="col-md-3 p-0">
-            <ul class="group" id="group-six" style="margin-left: 40px; margin-right: 20px;">
-                <li class="list-group-item" style="background-color: #2f3338;color: white;">
-                    <a href="{% url 'bloggings:blog_tech' %}">科技区</a>
-                </li>
-                <li class="list-group-item" style="background-color: #2f3338;color: white;">
-                    <a href="{% url 'bloggings:blog_current' %}">实事区</a>
-                </li>
-                <li class="list-group-item" style="background-color: #2f3338;color: white;">
-                    <a href="{% url 'bloggings:blog_finance' %}">财经区</a>
-                </li>
-                <li class="list-group-item" style="background-color: #2f3338;color: white;">
-                    <a href="{% url 'bloggings:blog_read' %}">阅读区</a>
-                </li>
-                <li class="list-group-item" style="background-color: #2f3338;color: white;">
-                    <a href="{% url 'bloggings:blog_scenery' %}">风景区</a>
-                </li>
-                <li class="list-group-item" style="background-color: #2f3338;color: white;">
-                    <a href="{% url 'bloggings:blog_products' %}">商品区</a>
-                </li>
-            </ul>
-        </div>
-        <!-- 中间轮播部分 -->
-        <div class="col-md-6 p-0">
-            <div id="demo" class="carousel slide" data-ride="carousel">
+        <!-- 留空部分 -->
+        <!--<div class="col-md-3"></div>-->
+        <!-- 轮播部分 -->
+        <div class="col-md-12">
+            <div id="demo1" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
+                    {% if blog_list %}
                     {% for blog in blog_list %}
-                    <button type="button" data-target="#demo"
-                            data-slide-to="{{ forloop.counter0 }}"
-                            class="{% if forloop.first %}active{% endif %}">
+                    <button type="button" data-bs-target="#demo1" 
+                        data-bs-slide-to="{{ forloop.counter0 }}"
+                        class="{% if forloop.first %}active{% endif %}">
                     </button>
                     {% endfor %}
-                </div>
+                    {% endif %}
+                </div> 
                 <div class="carousel-inner">
-                {% if blog_list %}
-                {% for blog in blog_list %}
-                <div class="carousel-item {% if forloop.first%}active{% endif %}">
-                    <img src="{{ blog.picture.url }}" alt="图片" class="d-block mx-auto img-fluid">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>{{blog.blog_title}}</h5>
+                    {% if blog_list %}
+                    {% for blog in blog_list %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="d-flex" style="align-items: center; height: 500px;">
+                            <div class="card" style="width: 400px;">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ blog.blog_title }}</h4>
+                                    <p class="card-text">{{ blog.blog_detail_one|truncatechars:120}}</p>
+                                    <a class="btn btn-primary" href="/blog_detail/{{blog.id}}">点击开始查看</a>
+                                </div>
+                            </div>
+                            {% if blog.picture and blog.picture.url %}
+                            <img src="{{ blog.picture.url }}" alt="图片" 
+                                class="d-block mx-auto img-fluid" style="width: 60%;">
+                            {% else %}
+                            <img class="card-img-top" src="/blog_ment/blog_project/media/picture/fail_default.png"
+                                class="d-block mx-auto img-fluid" style="width: 60%;">
+                            {% endif %}
+                        </div>
+                        <button type="button" class="carousel-control-prev" data-bs-target="#demo1" data-bs-slide="prev"
+                            style="margin-left: 400px;">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button type="button" class="carousel-control-next" data-bs-target="#demo1" data-bs-slide="next"
+                            style="margin-right: 40px;">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
                     </div>
+                    {% endfor %}
+                    {% endif %}
                 </div>
-                {% endfor %}
-                {% else %}
-                <p>没有知道博客</p>
-                {% endif %}
-                </div>
-            <button class="carousel-control-prev" type="button" data-target="#demo" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-target="#demo" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
             </div>
         </div>
-        <!-- 待定区域 -->
-         <div class="col-md-3 p-0">
-            <ul class="group" id="group-six-next" style="margin-left: 20px; margin-right: 40px;">
-                <li class="list-group-item" style="background-color: #2f3338;">{% if tech_blog %}
-                    <a href="/blog_detail/{{ tech_blog.id }}" class="truncate" style="background-color: #2f3338; color: white;">
-                        {{ tech_blog.blog_title}}</a>{% else %}无最新消息{% endif %}
-                </li>
-                <li class="list-group-item" style="background-color: #2f3338;">{% if current_blog %}
-                    <a href="/blog_detail/{{ current_blog.id }}" class="truncate"style="background-color: #2f3338; color: white;">
-                        {{ current_blog.blog_title }}</a>{% else %} 无最新消息 {% endif %}
-                </li>
-                <li class="list-group-item" style="background-color: #2f3338;">{% if finance_blog %}
-                    <a href="/blog_detail/{{ finance_blog.id }}" class="truncate"style="background-color: #2f3338; color: white;">
-                        {{ finance_blog.blog_title }}</a>{% else %} 无最新消息 {% endif %}
-                </li>
-                <li class="list-group-item" style="background-color: #2f3338;">{% if read_blog %}
-                    <a href="/blog_detail/{{ read_blog.id }}" class="truncate"style="background-color: #2f3338; color: white;">
-                        {{ read_blog.blog_title }}</a>{% else %} 无最新消息 {% endif %}
-                </li>
-                <li class="list-group-item" style="background-color: #2f3338;">{% if scenery_blog %}
-                    <a href="/blog_detail/{{ scenery_blog.id }}" class="truncate"style="background-color: #2f3338; color: white;">
-                        {{ scenery_blog.blog_title }}</a>{% else %} 无最新消息 {% endif %}
-                </li>
-                <li class="list-group-item" style="background-color: #2f3338;">{% if products_blog %}
-                    <a href="/blog_detail/{{ products_blog.id }}" class="truncate"style="background-color: #2f3338; color: white;">
-                        {{ products_blog.blog_title }}</a>{% else %} 无最新消息 {% endif %}
-                </li>     
-            </ul>
-         </div>
     </div>
     <script>
-        var carouselInterval; // 定义变量以存储定时器的 ID
-    
+        let carouselInterval;
+        const carousel = document.getElementById('demo1');
+        const bsCarousel = new bootstrap.Carousel(carousel, {
+            interval: false // 禁用 Bootsrtap 默认的自动轮播， 自己控制
+        });
+
         // 启动自动轮播
         function startCarousel() {
-            carouselInterval = setInterval(function() {
-                $('#demo').carousel('next'); // 切换到下一个幻灯片
-            }, 3000); // 每 3 秒切换一次幻灯片
+            if (!carouselInterval) {
+                carouselInterval = setInterval(() => {
+                    bsCarousel.next();
+                }, 3000);
+            }
         }
-    
-        // 停止自动轮播
+
+        // 停止自动轮播 
         function pauseCarousel() {
-            clearInterval(carouselInterval);
+            if (carouselInterval) {
+                clearInterval(carouselInterval);
+                carouselInterval = null;
+            }
         }
-    
+
         // 鼠标悬停时显示特定图像
         function showImage(index) {
-            $('#demo').carousel(index); // 激活指定索引的幻灯片
+            bsCarousel.to(index); // 激活指定索引的幻灯片
+            pauseCarousel(); // 暂停自动轮播
         }
-    
+
         // 鼠标移开时恢复自动轮播
         function resumeCarousel() {
             startCarousel();
         }
-    
-        // 页面加载时启动自动轮播
-        $(document).ready(function() {
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
             startCarousel();
+
+            // 添加鼠标悬停时间处理
+            carousel.addEventListener('mouseenter', pauseCarousel);
+            carousel.addEventListener('mouseleave', startCarousel);
+        });
+
+        // 为图片显示和隐藏功能添加事件监听器
+        document.querySelectorAll('[onmouseover]').forEach(element => {
+            const imageId = element.getAttribute('onmouseover').match(/'[^']+)'/)[1];
+            element.onmouseover = () => showImage(imageId);
+            element.onmouseout = () => hideImage(imageId);
         });
     </script>
 </div>
 
-<div class="mt-3" id="content" style="margin: 0px 40px;padding: 0; width: 96%;">
-    <h2 class="alert alert-primary text-center" style="border-radius: 10px;">总览</h2>
+<!-- 第二部分 -->
+<div class="mt-3" id="content" style="margin: 0px;padding: 0;
+    height: 650px; background-color: #477979;">
     <div class="row">
         <div class="col-md-6">
-        <table class="table table-striped table-hover radius-1">
+        <table class="table table-hover"
+            style="height: 650px;">
         <thead>
-            <tr class="table-primary">
-                <td>标题</td>
-                <td>地点</td>
-                <td>类型</td>
+            <tr style="height: 60px; line-height: 40px;">
+                <td class="transparent">标题</td>
+                <td class="transparent">地点</td>
+                <td class="transparent">类型</td>
             </tr>
         </thead>
         <tbody>
         {% if blog_list %}
             {% for blog in blog_list %}
             <tr>
-                <td class="text-left"
+                <td class="text-left transparent"
                     onmouseover="showImage('image-{{ blog.id }}')"
                     onmouseout="hideImage('image-{{ blog.id }}')">
-                    <a href="/blog_detail/{{blog.id}}/" class="text-decoration-none">
+                    <a href="/blog_detail/{{blog.id}}/" class="text-decoration-none"
+                        style="color: #fdf5f6;">
                         {{blog.blog_title}}
                     </a>
                 </td>
-                <td class="text-warning text-center">{{ blog.city_name }}</td>
-                <td class="text-success text-right">{{ blog.type_name}}</td>
+                <td class="text-warning text-center transparent">{{ blog.city_name }}</td>
+                <td class="text-right transparent" style="color: #7fff00;">
+                    {{ blog.type_name}}
+                </td>
             </tr>
             {% endfor %}
         {% else %}
@@ -162,18 +153,19 @@
         <div class="col-md-6">
             <table class="table table-hover radius-1">
                 <thead>
-                    <tr class="table-primary">
-                    <td>图像</td>
+                    <tr style="height: 60px; line-height: 40px">
+                    <td class="transparent">图像</td>
                     </tr>
                 </thead>
                 <tbody>
                 {% if blog_list %}
                 {% for blog in blog_list %}
                     <tr style="height: 0; display: table-row;">
-                    <td style="padding: 0; border: none;">
+                    <td class="transparent transparent" 
+                        style="padding: 0; border: none;">
                     {% if blog.picture %}
                     <img id="image-{{ blog.id }}" src="{{ blog.picture.url }}" alt="图片展示" 
-                    style="max-width: 960px; height: 390px; display: none; border-radius: 100px;">
+                    style="max-width: 660px;max-height: 580px; display: none; border-radius: 20px;">
                     {% endif %}
                     </td>
                     </tr>
@@ -199,179 +191,149 @@
     </script>
     </div>
 </div>
-
+<!-- 第三部分 -->
 <div id="content-two" style="width: 96%;margin: 0px 40px;padding: 0;">
-    <h2 class="alert alert-primary text-center" style="border-radius: 10px;">分类区</h2>
-    <div class="row">
-        <div class="col-md-6">
-        <h3 class="bg-info text-center" style="border-radius: 10px;">技术 Blogs</h3>
-            <table class="table table-striped table-hover radius-1">
-                <thead>
-                    <tr class="table-primary">
-                        <td>标题</td>
-                        <td>位置</td>
-                        <td class="text-center">国家</td>
-                    </tr>
-                </thead>
-                <tbody>
-                {% if type_a_blogs %}
-                    {% for blog in type_a_blogs  %}
-                <tr>
-                    <td class="text-info">
-                    <a href="/blog_detail/{{blog.id}}" class="text-decoration-none truncate-6">
-                        {{blog.blog_title}}
-                    </a>
-                    </td>
-                    <td class="text-success bg-transparent">{{blog.city_name}}</td>
-                    <td>{{blog.countries_name}}</td>
-                </tr>
-                    {% endfor %}
+    <hr style="border-width: 5px; border-radius: 5px; color: #DAA520;">
+    <h2 class="alert alert-primary text-center" style="border-radius: 10px;">↓修改中↓</h2>
+    <div style="height: 480px;">
+        <h3 style="margin-bottom: 40px; margin-left: 50px; margin-top: 20px;">技术 Blogs</h3>
+        <div style="height: 400px; display: flex; flex-wrap: wrap; gap: 55px;">
+            {% if type_a_blogs %}
+            {% for blog in type_a_blogs %}
+            <div class="card" style="width: 22%;height: 360px;">
+                {% if blog.picture and blog.picture.url %}
+                <img class="card-img-top" src="{{ blog.picture.url }}" style="width: 100%;height: 40%;">
+                {% else %}
+                <img class="card-img-top" src="/media/picture/fail_default.png" 
+                    style="width: 100%;height: 40%;">
                 {% endif %}
-                </tbody>
-            </table>
-        </div>
-
-        <div class="col-md-6">
-        <h3 class="bg-info text-center" style="border-radius: 10px;">财经 Blogs</h3>
-            <table class="table table-striped table-hover radius-1">
-                <thead>
-                    <tr class="table-primary">
-                        <td>标题</td>
-                        <td>位置</td>
-                        <td class="text-center">图像</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% if type_b_blogs %}
-                        {% for blog in type_b_blogs %}
-                    <tr>
-                        <td><a href="/blog_detail/{{blog.id}}" class="text-decoration-none truncate-6">
-                            {{blog.blog_title}}
-                        </a>
-                        </td>
-                        <td class="text-success bg-transparent">{{blog.city_name}}</td>
-                        <td>{{blog.countries_name}}</td>
-                    </tr>
-                        {% endfor %}
-                    {% endif %}
-                </tbody>
-            </table>
+                <div class="card-body">
+                    <h5 class="card-title" style="height: 20%;">{{ blog.blog_title | truncatechars:20 }}</h5>
+                    <p class="card-text">{{ blog.blog_detail_one | truncatechars:25 }}</p>
+                    <a class="btn btn-info" style="margin-top: 30px;"
+                        href="/blog_detail/{{ blog.id }}">点击查看</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-6">
-        <h3 class="bg-info text-center" style="border-radius: 10px;">实事 Blogs</h3>
-            <table class="table table-striped table-hover radius-1">
-                <thead>
-                    <tr class="table-primary">
-                        <td>标题</td>
-                        <td>位置</td>
-                        <td class="text-center">国家</td>
-                    </tr>
-                </thead>
-                <tbody>
-                {% if type_c_blogs %}
-                    {% for blog in type_c_blogs  %}
-                <tr>
-                    <td class="text-info">
-                    <a href="/blog_detail/{{blog.id}}" class="text-decoration-none truncate-6">
-                        {{blog.blog_title}}
-                    </a>
-                    </td>
-                    <td class="text-success bg-transparent">{{blog.city_name}}</td>
-                    <td>{{blog.countries_name}}</td>
-                </tr>
-                    {% endfor %}
-                {% endif %}
-                </tbody>
-            </table>
-        </div>
-
-        <div class="col-md-6">
-        <h3 class="bg-info text-center" style="border-radius: 10px;">阅读 Blogs</h3>
-            <table class="table table-striped table-hover radius-1">
-                <thead>
-                    <tr class="table-primary">
-                        <td>标题</td>
-                        <td>位置</td>
-                        <td class="text-center">图像</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% if type_d_blogs %}
-                        {% for blog in type_d_blogs %}
-                    <tr>
-                        <td><a href="/blog_detail/{{blog.id}}" class="text-decoration-none truncate-6">
-                            {{blog.blog_title}}
-                        </a>
-                        </td>
-                        <td class="text-success bg-transparent">{{blog.city_name}}</td>
-                        <td>{{blog.countries_name}}</td>
-                    </tr>
-                        {% endfor %}
-                    {% endif %}
-                </tbody>
-            </table>
+    <hr/>
+    <div style="height: 480px;">
+        <h3 style="margin-bottom: 40px; margin-left: 50px; margin-top: 20px;">财经 Blogs</h3>
+        <div style="height: 400px; display: flex; flex-wrap: wrap; gap: 55px;">
+            {% if type_b_blogs %}
+            {% for blog in type_b_blogs %}
+            <div class="card" style="width: 22%;height: 360px;">
+                {% if blog.picture and blog.picture.url %}
+                <img class="card-img-top" src="{{ blog.picture.url }}" style="width: 100%;height: 40%;">
+                {% else %}
+                <img class="card-img-top" src="/media/picture/fail_default.png" 
+                    style="width: 100%;height: 40%;">
+                {% endif %}                <div class="card-body">
+                    <h5 class="card-title" style="height: 20%;">{{ blog.blog_title | truncatechars:20 }}</h5>
+                    <p class="card-text">{{ blog.blog_detail_one | truncatechars:25 }}</p>
+                    <a class="btn btn-info" style="margin-top: 30px;"
+                        href="/blog_detail/{{ blog.id }}">点击查看</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-6">
-        <h3 class="bg-info text-center" style="border-radius: 10px;">风景 Blogs</h3>
-            <table class="table table-striped table-hover radius-1">
-                <thead>
-                    <tr class="table-primary">
-                        <td>标题</td>
-                        <td>位置</td>
-                        <td class="text-center">国家</td>
-                    </tr>
-                </thead>
-                <tbody>
-                {% if type_e_blogs %}
-                    {% for blog in type_e_blogs  %}
-                <tr>
-                    <td class="text-info">
-                    <a href="/blog_detail/{{blog.id}}" class="text-decoration-none truncate-6">
-                        {{blog.blog_title}}
-                    </a>
-                    </td>
-                    <td class="text-success bg-transparent">{{blog.city_name}}</td>
-                    <td>{{blog.countries_name}}</td>
-                </tr>
-                    {% endfor %}
+    <hr/>
+    <div style="height: 480px;">
+        <h3 style="margin-bottom: 40px; margin-left: 50px; margin-top: 20px;">新闻 Blogs</h3>
+        <div style="height: 400px; display: flex; flex-wrap: wrap; gap: 55px;">
+            {% if type_c_blogs %}
+            {% for blog in type_c_blogs %}
+            <div class="card" style="width: 22%;height: 360px;">
+                {% if blog.picture and blog.picture.url %}
+                <img class="card-img-top" src="{{ blog.picture.url }}" style="width: 100%;height: 40%;">
+                {% else %}
+                <img class="card-img-top" src="/media/picture/fail_default.png" 
+                    style="width: 100%;height: 40%;">
                 {% endif %}
-                </tbody>
-            </table>
+                <div class="card-body">
+                    <h5 class="card-title" style="height: 20%;">{{ blog.blog_title | truncatechars:20 }}</h5>
+                    <p class="card-text">{{ blog.blog_detail_one | truncatechars:25 }}</p>
+                    <a class="btn btn-info" style="margin-top: 30px;"
+                        href="/blog_detail/{{ blog.id }}">点击查看</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
         </div>
-
-        <div class="col-md-6">
-        <h3 class="bg-info text-center" style="border-radius: 10px;">商品 Blogs</h3>
-            <table class="table table-striped table-hover radius-1">
-                <thead>
-                    <tr class="table-primary">
-                        <td>标题</td>
-                        <td>位置</td>
-                        <td class="text-center">图像</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% if type_f_blogs %}
-                        {% for blog in type_f_blogs %}
-                    <tr>
-                        <td><a href="/blog_detail/{{blog.id}}" class="text-decoration-none truncate-6">
-                            {{blog.blog_title}}
-                        </a>
-                        </td>
-                        <td class="text-success bg-transparent">{{blog.city_name}}</td>
-                        <td>{{blog.countries_name}}</td>
-                    </tr>
-                        {% endfor %}
-                    {% endif %}
-                </tbody>
-            </table>
+    </div>
+    <hr/>
+    <div style="height: 480px;">
+        <h3 style="margin-bottom: 40px; margin-left: 50px; margin-top: 20px;">阅读 Blogs</h3>
+        <div style="height: 400px; display: flex; flex-wrap: wrap; gap: 55px;">
+            {% if type_d_blogs %}
+            {% for blog in type_d_blogs %}
+            <div class="card" style="width: 22%;height: 360px;">
+                {% if blog.picture and blog.picture.url %}
+                <img class="card-img-top" src="{{ blog.picture.url }}" style="width: 100%;height: 40%;">
+                {% else %}
+                <img class="card-img-top" src="/media/picture/fail_default.png" 
+                    style="width: 100%;height: 40%;">
+                {% endif %}                <div class="card-body">
+                    <h5 class="card-title" style="height: 20%;">{{ blog.blog_title | truncatechars:20 }}</h5>
+                    <p class="card-text">{{ blog.blog_detail_one | truncatechars:25 }}</p>
+                    <a class="btn btn-info" style="margin-top: 30px;"
+                        href="/blog_detail/{{ blog.id }}">点击查看</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <hr/>
+    <div style="height: 480px;">
+        <h3 style="margin-bottom: 40px; margin-left: 50px; margin-top: 20px;">风景 Blogs</h3>
+        <div style="height: 400px; display: flex; flex-wrap: wrap; gap: 55px;">
+            {% if type_e_blogs %}
+            {% for blog in type_e_blogs %}
+            <div class="card" style="width: 22%;height: 360px;">
+                {% if blog.picture and blog.picture.url %}
+                <img class="card-img-top" src="{{ blog.picture.url }}" style="width: 100%;height: 40%;">
+                {% else %}
+                <img class="card-img-top" src="/media/picture/fail_default.png" 
+                    style="width: 100%;height: 40%;">
+                {% endif %}                <div class="card-body">
+                    <h5 class="card-title" style="height: 20%;">{{ blog.blog_title | truncatechars:20 }}</h5>
+                    <p class="card-text">{{ blog.blog_detail_one | truncatechars:25 }}</p>
+                    <a class="btn btn-info" style="margin-top: 30px;"
+                        href="/blog_detail/{{ blog.id }}">点击查看</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <hr/>
+    <div style="height: 480px;">
+        <h3 style="margin-bottom: 40px; margin-left: 50px; margin-top: 20px;">货品 Blogs</h3>
+        <div style="height: 400px; display: flex; flex-wrap: wrap; gap: 55px;">
+            {% if type_f_blogs %}
+            {% for blog in type_f_blogs %}
+            <div class="card" style="width: 22%;height: 360px;">
+                {% if blog.picture and blog.picture.url %}
+                <img class="card-img-top" src="{{ blog.picture.url }}" style="width: 100%;height: 40%;">
+                {% else %}
+                <img class="card-img-top" src="/media/picture/fail_default.png" 
+                    style="width: 100%;height: 40%;">
+                {% endif %}                <div class="card-body">
+                    <h5 class="card-title" style="height: 20%;">{{ blog.blog_title | truncatechars:20 }}</h5>
+                    <p class="card-text">{{ blog.blog_detail_one | truncatechars:25 }}</p>
+                    <a class="btn btn-info" style="margin-top: 30px;"
+                        href="/blog_detail/{{ blog.id }}">点击查看</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>
-<p class="text-align:center">已到底了<strong><a href="#group-six-next">返回</a></strong></p>
+<p class="text-align:center">已到底了<strong><a href="#content-one">返回</a></strong></p>
 {% endblock %}

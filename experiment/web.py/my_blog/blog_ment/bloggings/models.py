@@ -7,11 +7,11 @@ from django.utils.translation import gettext_lazy as _
 
 BlogTypes = [
     [0, "技术类"],
-    [1, "实事类"],
+    [1, "资讯类"],
     [2, "财经类"],
     [3, "阅读类"],
     [4, "风景类"],
-    [5, "商品类"],
+    [5, "物品类"],
 ]
 
 Countries = [

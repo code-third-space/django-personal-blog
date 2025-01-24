@@ -35,10 +35,10 @@ SIMPLE_BACKEND_REDIRECT_URL = '/accounts/login/'
 # Application definition
 
 INSTALLED_APPS = [
-    'bootstrap4',
+    'django_bootstrap5',
     'registration',
     'grappelli',
-    'bloggings',
+    'bloggings',    
     'area_users',
     'reviewers',
     'rest_framework',
@@ -99,10 +99,22 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# Mysql 数据库配置
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": 'mysql.connector.django',
+        "OPTIONS": {
+            "read_default_file": 
+                str(Path(__file__).resolve().parent.parent / "../database_conf/my.cnf"),
+        }
     }
 }
 

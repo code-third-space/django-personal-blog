@@ -8,4 +8,4 @@
 __pycache__/
 
 # 忽略 my.cnf 文件
-my.cnf
+experiment/web.py/my_blog/blog_ment/database_conf/my.cnf

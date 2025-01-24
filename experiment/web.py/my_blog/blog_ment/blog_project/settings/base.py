@@ -113,7 +113,7 @@ DATABASES = {
         "ENGINE": 'mysql.connector.django',
         "OPTIONS": {
             "read_default_file": 
-                str(Path(__file__).resolve().parent.parent / "../database_conf/my.cnf"),
+                str(Path(__file__).resolve().parent.parent.parent / "database_conf/my.cnf"),
         }
     }
 }

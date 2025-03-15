@@ -1,5 +1,7 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.auth.models import User
+from comments.models import Comment
 from datetime import datetime
 from django.utils.translation import gettext_lazy as _
 # Create your models here.
@@ -65,20 +67,9 @@ class Me_blog(models.Model):
     picture = models.ImageField(upload_to='picture', blank=True, verbose_name=_("图片"))
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE, verbose_name=_("分类"))
     tags = models.ManyToManyField(Tag, blank=True, verbose_name=_("标签"))
+    comments = GenericRelation(Comment)
 
     class Meta:
         verbose_name = _("博客")
         verbose_name_plural = _("博客展示")
 
-class Comment(models.Model):
-    blog = models.ForeignKey(Me_blog, related_name="comments", verbose_name=_("用户评论"), on_delete=models.CASCADE)
-    user = models.ForeignKey(User, verbose_name=_("用户"), on_delete=models.CASCADE)
-    text = models.TextField(max_length=2048, verbose_name=_("评论内容"))
-    created_date = models.DateTimeField(auto_now_add=True, verbose_name=_("创建时间"))
-
-    class Meta:
-        verbose_name = _("评论")
-        verbose_name_plural = _("评论展示")
-
-    def __str__(self):
-        return f"Comment by {self.user.username} on {self.blog}"

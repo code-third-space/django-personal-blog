@@ -12,12 +12,13 @@ from bloggings.utils import my_function # 日志
 from django.core.paginator import Paginator, EmptyPage # 分页, 页数超出异常
 from django.core.mail import send_mail # 发送邮件
 from django.conf import settings  # 访问配置信息
+from django.contrib.contenttypes.models import ContentType
 import logging
 logger = logging.getLogger('area_users.performance')
 
 from .models import Me_blog, Comment
 from .models import Cities,Countries,BlogTypes
-from .forms import CommentForm
+from comments.forms import CommentForm
 
 # Create your views here.
 
@@ -94,32 +95,39 @@ def blog_display(request):
 
     return render(request, 'bloggings/blog_display.html',context)
 
-def detail(request, blog_id):
+def blog_detail(request, blog_id):
     # 详情页
     blog= get_object_or_404(Me_blog, pk=blog_id) 
     blog.city_name = Cities[blog.blog_city][1]
 
     # comments = blog.comments.all()
     logger.info('blog info fetched from databases blogid')
+    # 获取博客的ContentType
+    content_type = ContentType.objects.get_for_model(Me_blog)
 
-    form = CommentForm()
-
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_authenticated:
+        # 处理评论提交
         form = CommentForm(request.POST)
         if form.is_valid():
-            comment = form.save(commit=False)
-            comment.blog = blog # 关联到当前博客
-            comment.user = request.user # 设置评论的用户
-            comment.save()
+            new_comment = form.save(commit=False)
+            new_comment.user = request.user # 设置评论的用户
+            new_comment.content_type = content_type #设置内容种类
+            new_comment.object_id = blog_id # 设置对象id
+            new_comment.save()
 
-            comments = blog.comments.all()
+            # 清除缓存
             cache.clear()
 
+            # 处理AJAX请求
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                comments_html = render_to_string('bloggings/comments_list.html', {'comments': comments})
+                comments_html = render_to_string('bloggings/comments_list.html', {'comments': blog.comments.all()})
                 return JsonResponse({'comments_html': comments_html})
             
-            return redirect('bloggings:blog_detail', blog_id=blog.id) #重定向到该博客详情页
+            return HttpResponseRedirect(reverse('bloggings:blog_detail', args=[blog_id])) #重定向到该博客详情页
+    else:
+        form = CommentForm()
+    
+    # 获取评论
     comments = blog.comments.all()
 
     context = {
@@ -132,15 +140,16 @@ def detail(request, blog_id):
 
 @login_required
 def delete_comment(request, comment_id):
-    # 删除评论视图
-    comment = get_object_or_404(Comment, pk=comment_id)
-
-    if comment.user == request.user:
+    comment = get_object_or_404(Comment, id=comment_id)
+    # 检查用户是否有权限删除评论
+    if request.user == comment.user:
+        # 获取评论所属的博客ID
+        blog_id = comment.object_id
         comment.delete()
-        cache.clear()
-        return redirect('bloggings:blog_detail', blog_id=comment.blog.id)
+        return HttpResponseRedirect(reverse('bloggings:blog_detail', args=[blog_id]))
     else:
-        return HttpResponseForbidden("You are not allowed to delete this comment.")
+        # 如果用户无权删除，重定向到博客详情页
+        return HttpResponseRedirect(reverse('bloggings:blog_detail', args=[comment.object_id]))
 
 def blog_all(request):
     # 全部blog视图

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'registration',
     'grappelli',
     'bloggings',    
-    'area_users',
+    'area_users.apps.AreaUsersConfig',
+    'comments',
     'reviewers',
     'rest_framework',
 
@@ -115,6 +116,9 @@ DATABASES = {
             "read_default_file": 
                 str(Path(__file__).resolve().parent.parent.parent / "database_conf/my.cnf"),
         }
+    },
+    "TEST": {
+        'NAME': 'test_django',
     }
 }
 
@@ -183,9 +187,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-LOGGING = {
-    'version': 1,
+LOGGING = { # 定义日志格式
+    'version': 1, # 版本号
     'disable_existing_loggers': False,
+    
+    #格式化器定义
     'formatters': {
         'verbose': {
             'format': 
@@ -193,17 +199,26 @@ LOGGING = {
             'style': '{',
         },
         'simple': {
-            'format': '{levelname} {message}', 
+            'format': '{levelname} {asctime} {message}', 
             'style': '{',
         },
+        'detailed': {
+            'format': '[{asctime}] [{levelname}] {pathname}:{lineno} - {message}',
+            'style': '{',
+        }
     },
 
+    # 过滤器定义
     'filters': {
         'require_debug_true': {
             '()': 'django.utils.log.RequireDebugTrue',
         },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',  # 仅在DEBUG=False时通过
+        },
     },
 
+    # 处理器定义
     'handlers': {
         'console': {
             'level': 'DEBUG',

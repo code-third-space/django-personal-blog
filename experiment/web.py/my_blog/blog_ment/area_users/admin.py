@@ -10,7 +10,7 @@ import csv
 from datetime import datetime
 
 # Register your models here.
-exportable_fields = ('userid', 'username', 'city', 'email', 'gener', 'phone', 'user_remark')
+exportable_fields = ('user', 'city', 'gener', 'phone', 'user_remark')
 
 def export_model_as_csv(ModelAdmin, request, queryset):
     response = HttpResponse(content_type='text/csv')
@@ -45,9 +45,9 @@ def notify_bloguser(ModelAdmin, request, queryset):
     blogusers = ""
     interviewers = ""
     for obj in queryset:
-        blogusers = obj.username+";"+blogusers
-        if obj.username:
-            interviewers = obj.username+";"+interviewers
+        blogusers = obj.user.username+";"+blogusers
+        if obj.user.username:
+            interviewers = obj.user.username+";"+interviewers
     send_dingtalk_message.delay("用户 %s 注册通过 %s" % (blogusers, interviewers))
 
 notify_bloguser.short_description = u"注册通知"
@@ -64,14 +64,15 @@ class Area_Admin(admin.ModelAdmin):
     image_tag.allow_tags = True
     image_tag.short_description = 'Image'
 
-    list_display = ('userid','username', 'city','email','gener','image_tag')
+    list_display = ('user_id','user_name', 'city','user_email','gener','image_tag')
 
-    search_fields = ('username', 'user_ramark',)
+    search_fields = ('user__name', 'user_remark',)
     list_filter = ('city',)
-    ordering = ('userid',)
-    readonly_fields = ('userid',)
+    ordering = ('user',)
+    readonly_fields = ('user',)
     list_per_page = 3
     save_on_top = True
+
     def has_export_permission(self, request):
         if request.user.is_superuser:
             return True
@@ -80,14 +81,25 @@ class Area_Admin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {'fields': (
-        ('userid',),('username', 'city','phone'),('email','gener','user_remark'),
+        ('user',),('city','phone'),('gener','user_remark'),
         ('picture','back_ground')
         )}),
     )
 
     def save_model(self, request, obj, form, change):  
-        obj.creator = request.user                     
-        super().save_model(request,obj,form,change) 
+        super().save_model(request,obj,form,change)
+
+    def user_id(self, obj):
+        return obj.user.id
+    user_id.short_description = "用户ID"
+
+    def user_name(self, obj):
+        return obj.user.username
+    user_name.short_description = "用户名"
+
+    def user_email(self, obj):
+        return obj.user.email
+    user_email.short_description = "邮箱"
 
 
 admin.site.register(Area_User, Area_Admin)

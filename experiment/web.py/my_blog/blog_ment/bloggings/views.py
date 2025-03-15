@@ -1,17 +1,17 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.template.loader import render_to_string
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
-from django.core.cache import cache
-from django.http import HttpResponseRedirect, HttpResponseForbidden, Http404, JsonResponse
-from django.urls import reverse
-from django.views.generic.edit import CreateView
-from django.views.generic.detail import DetailView
-from django.contrib.auth import logout
-from bloggings.utils import my_function
-from django.core.paginator import Paginator, EmptyPage
-from django.core.mail import send_mail
-from django.conf import settings
+from django.shortcuts import render, get_object_or_404, redirect # 导入渲染， 404错误和重定向
+from django.template.loader import render_to_string #渲染成字符串
+from django.contrib.auth.mixins import LoginRequiredMixin # 类视图
+from django.contrib.auth.decorators import login_required # 装饰器，确认登录
+from django.core.cache import cache # 缓存框架
+from django.http import HttpResponseRedirect, HttpResponseForbidden, Http404, JsonResponse # http重定向， 返回403，404，返回json格式文件 
+from django.urls import reverse # 反向解析
+from django.views.generic.edit import CreateView # 通用类视图，创建对象
+from django.views.generic.detail import DetailView # 详细信息
+from django.contrib.auth import logout # 登出
+from bloggings.utils import my_function # 日志
+from django.core.paginator import Paginator, EmptyPage # 分页, 页数超出异常
+from django.core.mail import send_mail # 发送邮件
+from django.conf import settings  # 访问配置信息
 import logging
 logger = logging.getLogger('area_users.performance')
 

@@ -1,0 +1,73 @@
+{% for comment in comments %}
+<div class="comment" id="comment-{{ comment.id }}">
+  <div class="comment-avatar">
+    {% if comment.user.profile.avatar %}
+    <img src="{{ comment.user.profile.avatar.url }}" alt="{{ comment.user.username }}">
+    {% else %}
+    <img src="{% static 'images/default-avatar.png' %}" alt="{{ comment.user.username }}">
+    {% endif %}
+  </div>
+  <div class="comment-content">
+    <div class="comment-header">
+      <span class="comment-author">{{ comment.user.username }}</span>
+      <span class="comment-date">{{ comment.created_at|date:"Y-m-d H:i" }}</span>
+    </div>
+    <div class="comment-text">{{ comment.text|linebreaks }}</div>
+    <div class="comment-actions">
+      <button class="reply-btn" data-comment-id="{{ comment.id }}">回复</button>
+      {% if comment.user == request.user %}
+      <form class="delete-form" action="{% url 'bloggings:delete_comment' comment.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="delete-btn">删除</button>
+      </form>
+      {% endif %}
+    </div>
+    
+    <!-- 回复表单 (默认隐藏) -->
+    <div class="reply-form-container" id="reply-form-{{ comment.id }}" style="display: none;">
+      <form class="reply-form" method="post" action="{% url 'bloggings:add_reply' comment.id %}">
+        {% csrf_token %}
+        <textarea name="text" rows="3" placeholder="回复 {{ comment.user.username }}..."></textarea>
+        <div class="form-actions">
+          <button type="submit" class="submit-btn">提交回复</button>
+          <button type="button" class="cancel-btn" data-comment-id="{{ comment.id }}">取消</button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- 回复列表 -->
+    {% if comment.replies.all %}
+    <div class="replies">
+      {% for reply in comment.replies.all %}
+      <div class="reply">
+        <div class="reply-avatar">
+          {% if reply.user.profile.avatar %}
+          <img src="{{ reply.user.profile.avatar.url }}" alt="{{ reply.user.username }}">
+          {% else %}
+          <img src="{% static 'images/default-avatar.png' %}" alt="{{ reply.user.username }}">
+          {% endif %}
+        </div>
+        <div class="reply-content">
+          <div class="reply-header">
+            <span class="reply-author">{{ reply.user.username }}</span>
+            <span class="reply-date">{{ reply.created_at|date:"Y-m-d H:i" }}</span>
+          </div>
+          <div class="reply-text">{{ reply.text|linebreaks }}</div>
+          {% if reply.user == request.user %}
+          <form class="delete-form" action="{% url 'bloggings:delete_comment' reply.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn small">删除</button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% empty %}
+<div class="no-comments">
+  <p>暂无评论，来发表第一条评论吧！</p>
+</div>
+{% endfor %} 

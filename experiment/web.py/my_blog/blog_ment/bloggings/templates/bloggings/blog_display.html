@@ -61,52 +61,17 @@
         let carouselInterval;
         const carousel = document.getElementById('demo1');
         const bsCarousel = new bootstrap.Carousel(carousel, {
-            interval: false // 禁用 Bootsrtap 默认的自动轮播， 自己控制
+            interval: 3000,  // 设置默认轮播间隔为3秒
+            pause: 'hover'   // 鼠标悬停时暂停
         });
-
-        // 启动自动轮播
-        function startCarousel() {
-            if (!carouselInterval) {
-                carouselInterval = setInterval(() => {
-                    bsCarousel.next();
-                }, 3000);
-            }
-        }
-
-        // 停止自动轮播 
-        function pauseCarousel() {
-            if (carouselInterval) {
-                clearInterval(carouselInterval);
-                carouselInterval = null;
-            }
-        }
-
-        // 鼠标悬停时显示特定图像
-        function showImage(index) {
-            bsCarousel.to(index); // 激活指定索引的幻灯片
-            pauseCarousel(); // 暂停自动轮播
-        }
-
-        // 鼠标移开时恢复自动轮播
-        function resumeCarousel() {
-            startCarousel();
-        }
 
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', () => {
-            startCarousel();
-
-            // 添加鼠标悬停时间处理
-            carousel.addEventListener('mouseenter', pauseCarousel);
-            carousel.addEventListener('mouseleave', startCarousel);
+            // 启动轮播
+            bsCarousel.cycle();
         });
 
-        // 为图片显示和隐藏功能添加事件监听器
-        document.querySelectorAll('[onmouseover]').forEach(element => {
-            const imageId = element.getAttribute('onmouseover').match(/'[^']+)'/)[1];
-            element.onmouseover = () => showImage(imageId);
-            element.onmouseout = () => hideImage(imageId);
-        });
+        // 移除之前的事件监听器代码，使用 Bootstrap 内置的暂停功能
     </script>
 </div>
 

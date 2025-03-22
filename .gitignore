@@ -12,3 +12,6 @@ experiment/web.py/my_blog/blog_ment/database_conf/my.cnf
 
 # 忽略 blog_ment.performance.log 文件
 experiment/web.py/my_blog/blog_ment/blog_ment.performance.log
+
+# 忽略测试文件test_pages.py
+experiment/web.py/my_blog/blog_ment/test_pages.py

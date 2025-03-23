@@ -5,105 +5,104 @@
 <link type="text/css" rel="stylesheet" href="{% static 'bloggings/cssBlogdisplay.css' %}">
 
 <!-- 第一部分 -->
-<div id="content-one" class="container-fluid" style="margin: 0 40px; height: 500px;">
-    <div class="row">
-        <!-- 留空部分 -->
-        <!--<div class="col-md-3"></div>-->
-        <!-- 轮播部分 -->
-        <div class="col-md-12">
+<div id="content-one" class="container-fluid" style="margin: 0 auto; max-width: 100%; height: 600px; background: linear-gradient(to right, #2c3e50, #3498db);">
+    <div class="row justify-content-center">
+        <div class="col-12">
             <div id="demo1" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    {% if blog_list %}
-                    {% for blog in blog_list %}
-                    <button type="button" data-bs-target="#demo1" 
-                        data-bs-slide-to="{{ forloop.counter0 }}"
-                        class="{% if forloop.first %}active{% endif %}">
-                    </button>
-                    {% endfor %}
-                    {% endif %}
-                </div> 
+                <!-- 轮播内容 -->
                 <div class="carousel-inner">
                     {% if blog_list %}
                     {% for blog in blog_list %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <div class="d-flex" style="align-items: center; height: 500px;">
-                            <div class="card" style="width: 400px;">
-                                <div class="card-body">
-                                    <h4 class="card-title">{{ blog.blog_title }}</h4>
-                                    <p class="card-text">{{ blog.blog_detail_one|truncatechars:120}}</p>
-                                    <a class="btn btn-primary" href="/blog_detail/{{blog.id}}">点击开始查看</a>
+                        <div class="container py-4">
+                            <div class="row align-items-center">
+                                <!-- 左侧卡片 -->
+                                <div class="col-md-5">
+                                    <div class="card bg-white">
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{ blog.blog_title }}</h4>
+                                            <p class="card-text">{{ blog.blog_detail_one|truncatechars:120}}</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="badge bg-primary">{{ blog.type_name }}</span>
+                                                <a class="btn btn-primary" href="/blog_detail/{{blog.id}}">查看详情</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 右侧图片 -->
+                                <div class="col-md-7">
+                                    {% if blog.picture and blog.picture.url %}
+                                    <img src="{{ blog.picture.url }}" alt="图片" 
+                                        class="img-fluid rounded shadow" 
+                                        style="width: 100%; height: 450px; object-fit: cover;">
+                                    {% else %}
+                                    <img src="/media/picture/fail_default.png"
+                                        class="img-fluid rounded shadow" 
+                                        style="width: 100%; height: 350px; object-fit: cover;">
+                                    {% endif %}
                                 </div>
                             </div>
-                            {% if blog.picture and blog.picture.url %}
-                            <img src="{{ blog.picture.url }}" alt="图片" 
-                                class="d-block mx-auto img-fluid" style="width: 60%;">
-                            {% else %}
-                            <img class="card-img-top" src="/media/picture/fail_default.png"
-                                class="d-block mx-auto img-fluid" style="width: 60%;">
-                            {% endif %}
                         </div>
-                        <button type="button" class="carousel-control-prev" data-bs-target="#demo1" data-bs-slide="prev"
-                            style="margin-left: 400px;">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button type="button" class="carousel-control-next" data-bs-target="#demo1" data-bs-slide="next"
-                            style="margin-right: 40px;">
-                            <span class="carousel-control-next-icon"></span>
-                        </button>
                     </div>
                     {% endfor %}
                     {% endif %}
                 </div>
+
+                <!-- 控制按钮 -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#demo1" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#demo1" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
             </div>
         </div>
     </div>
+
     <script>
-        let carouselInterval;
-        const carousel = document.getElementById('demo1');
-        const bsCarousel = new bootstrap.Carousel(carousel, {
-            interval: 3000,  // 设置默认轮播间隔为3秒
-            pause: 'hover'   // 鼠标悬停时暂停
-        });
-
-        // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', () => {
-            // 启动轮播
-            bsCarousel.cycle();
+            const carousel = document.getElementById('demo1');
+            new bootstrap.Carousel(carousel, {
+                interval: 5000,
+                pause: false
+            });
         });
-
-        // 移除之前的事件监听器代码，使用 Bootstrap 内置的暂停功能
     </script>
 </div>
 
 <!-- 第二部分 -->
-<div class="mt-3" id="content" style="margin: 0px; padding: 30px 0;
+<div id="content" style="margin: 0px; padding: 50px 0;
     background: linear-gradient(135deg, #3a6073, #16222a); color: #fff; border-radius: 0;">
     <div class="container">
-        <div class="row mb-4">
+        <div class="row mb-5">
             <div class="col-12 text-center">
-                <h2 class="display-4" style="font-weight: 300; color: #f8f9fa;">博客精选</h2>
-                <p class="lead" style="color: #adb5bd;">探索我们的精选博客内容</p>
-                <hr style="width: 50px; height: 3px; background-color: #3498db; border: none; margin: 20px auto;">
+                <h2 class="display-4" style="font-weight: 300; color: #f8f9fa; letter-spacing: 1px;">博客精选</h2>
+                <p class="lead" style="color: #adb5bd; font-size: 1.2rem;">探索我们的精选博客内容</p>
+                <hr style="width: 80px; height: 4px; background-color: #3498db; border: none; margin: 25px auto; opacity: 0.8;">
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card bg-transparent border-0 h-100">
-                    <div class="card-header bg-transparent border-bottom border-light">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card bg-transparent border-0 h-100 shadow-sm" style="border-radius: 15px; overflow: hidden;">
+                    <div class="card-header bg-dark bg-opacity-50 border-bottom border-light">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h3 class="m-0" style="color: #f8f9fa;">博客列表</h3>
-                            <span class="badge bg-primary rounded-pill">{{ blog_list|length }} 篇</span>
+                            <h3 class="m-0" style="color: #f8f9fa; font-size: 1.5rem;">
+                                <i class="bi bi-collection me-2"></i>博客列表
+                            </h3>
+                            <span class="badge bg-primary rounded-pill" style="font-size: 0.9rem; padding: 8px 12px;">
+                                {{ blog_list|length }} 篇
+                            </span>
                         </div>
                     </div>
                     <div class="card-body p-0">
-                        <div class="list-group list-group-flush" style="max-height: 500px; overflow-y: auto;">
+                        <div class="list-group list-group-flush" style="max-height: 500px; overflow-y: auto; scrollbar-width: thin;">
                             {% if blog_list %}
                                 {% for blog in blog_list %}
                                 <div class="list-group-item bg-transparent border-light d-flex align-items-center blog-item"
                                      onmouseover="showImage('image-{{ blog.id }}')"
                                      onmouseout="hideImage('image-{{ blog.id }}')">
-                                    <div class="me-3" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
+                                    <div class="me-3" style="width: 50px; height: 50px; border-radius: 12px; overflow: hidden; flex-shrink: 0; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">
                                         {% if blog.picture and blog.picture.url %}
                                         <img src="{{ blog.picture.url }}" alt="缩略图" style="width: 100%; height: 100%; object-fit: cover;">
                                         {% else %}
@@ -114,7 +113,7 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <a href="/blog_detail/{{blog.id}}/" class="text-decoration-none blog-title">
-                                            <h5 class="mb-1" style="color: #e9ecef; transition: color 0.3s;">{{blog.blog_title}}</h5>
+                                            <h5 class="mb-1" style="color: #e9ecef; transition: color 0.3s; font-size: 1.1rem;">{{blog.blog_title}}</h5>
                                         </a>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <small style="color: #adb5bd;">
@@ -124,6 +123,9 @@
                                                 {{ blog.type_name }}
                                             </span>
                                         </div>
+                                    </div>
+                                    <div class="ms-2">
+                                        <i class="bi bi-chevron-right" style="color: #adb5bd; font-size: 1.2rem;"></i>
                                     </div>
                                 </div>
                                 {% endfor %}
@@ -138,25 +140,28 @@
                 </div>
             </div>
             
-            <div class="col-md-6">
-                <div class="card bg-transparent border-0 h-100">
-                    <div class="card-header bg-transparent border-bottom border-light">
-                        <h3 class="m-0" style="color: #f8f9fa;">预览</h3>
+            <div class="col-lg-6">
+                <div class="card bg-transparent border-0 h-100 shadow-sm" style="border-radius: 15px; overflow: hidden;">
+                    <div class="card-header bg-dark bg-opacity-50 border-bottom border-light">
+                        <h3 class="m-0" style="color: #f8f9fa; font-size: 1.5rem;">
+                            <i class="bi bi-image me-2"></i>预览
+                        </h3>
                     </div>
-                    <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 500px;">
-                        <div class="text-center preview-placeholder" style="color: #6c757d;">
-                            <i class="bi bi-image" style="font-size: 3rem;"></i>
-                            <p class="mt-3">将鼠标悬停在左侧博客上查看预览</p>
+                    <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 500px; background-color: rgba(0,0,0,0.2); border-radius: 0 0 15px 15px;">
+                        <div class="text-center preview-placeholder" style="color: #adb5bd;">
+                            <i class="bi bi-image" style="font-size: 4rem;"></i>
+                            <p class="mt-3" style="font-size: 1.1rem;">将鼠标悬停在左侧博客上查看预览</p>
                         </div>
                         {% if blog_list %}
                             {% for blog in blog_list %}
                                 {% if blog.picture %}
-                                <div class="image-preview" id="image-{{ blog.id }}" style="display: none; width: 100%; height: 100%;">
+                                <div class="image-preview" id="image-{{ blog.id }}" style="display: none; width: 100%; height: 100%; text-align: center;">
                                     <img src="{{ blog.picture.url }}" alt="图片展示" 
-                                        style="max-width: 100%; max-height: 450px; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
-                                    <div class="mt-3 text-center">
-                                        <a href="/blog_detail/{{blog.id}}/" class="btn btn-outline-light btn-sm">
-                                            查看详情 <i class="bi bi-arrow-right"></i>
+                                        style="max-width: 100%; max-height: 340px; object-fit: contain; border-radius: 12px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);">
+                                    <div class="mt-4 text-center">
+                                        <h5 style="color: #e9ecef; margin-bottom: 15px;">{{ blog.blog_title }}</h5>
+                                        <a href="/blog_detail/{{blog.id}}/" class="btn btn-outline-light">
+                                            查看详情 <i class="bi bi-arrow-right ms-1"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -171,18 +176,21 @@
     
     <style>
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .list-group-flush > .list-group-item {
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
             padding: 15px;
             cursor: pointer;
+            border-left: 3px solid transparent;
         }
         
         .list-group-item:hover {
             background-color: rgba(255, 255, 255, 0.1) !important;
+            border-left: 3px solid #3498db !important;
+            transform: translateX(5px);
         }
         
         .blog-title h5:hover {
@@ -190,7 +198,7 @@
         }
         
         .image-preview {
-            animation: fadeIn 0.3s;
+            animation: fadeIn 0.4s ease-out;
         }
         
         /* 自定义滚动条 */
@@ -214,10 +222,11 @@
         
         /* 博客类型标签颜色 */
         .blog-type-badge {
-            padding: 5px 8px;
-            border-radius: 4px;
+            padding: 5px 10px;
+            border-radius: 6px;
             font-size: 0.75rem;
             font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
     </style>
     
@@ -239,12 +248,6 @@
         }
         
         function hideImage(imageId) {
-            // 如果不想在鼠标移开时隐藏图片，可以注释掉下面的代码
-            // var img = document.getElementById(imageId);
-            // if (img) {
-            //     img.style.display = 'none';
-            // }
-            
             // 保持图片显示，不做任何操作
         }
         
@@ -275,148 +278,147 @@
 </div>
 
 <!-- 第三部分 -->
-<div id="content-two" style="width: 96%;margin: 0px 30px;padding: 0;">
-    <hr style="border-width: 5px; border-radius: 5px; color: #DAA520;">
-    <h2 class="alert alert-primary text-center" style="border-radius: 10px;">↓修改中↓</h2>
-    <div style="height: 480px;">
-        <h3 style="margin-bottom: 40px; margin-left: 50px; margin-top: 20px;">技术 Blogs</h3>
-        <div style="height: 400px; display: flex; flex-wrap: wrap; gap: 4%;">
-            {% if type_a_blogs %}
-            {% for blog in type_a_blogs %}
-            <div class="card" style="width: 22%;height: 360px;">
-                {% if blog.picture and blog.picture.url %}
-                <img class="card-img-top" src="{{ blog.picture.url }}" style="width: 100%;height: 40%;">
+<div id="content-two" class="container-fluid py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="display-4" style="font-weight: 300; color: #2c3e50; letter-spacing: 1px;">分类博客</h2>
+                <p class="lead text-muted">按照不同主题浏览我们的博客内容</p>
+                <hr style="width: 80px; height: 4px; background-color: #3498db; border: none; margin: 25px auto; opacity: 0.8;">
+            </div>
+        </div>
+
+        <!-- 技术博客 -->
+        <div class="mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="mb-0" style="color: #2c3e50; border-left: 5px solid #3498db; padding-left: 15px;">
+                    <i class="bi bi-code-slash me-2"></i>技术博客
+                </h3>
+                <a href="#" class="btn btn-outline-primary btn-sm">查看更多</a>
+            </div>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                {% if type_a_blogs %}
+                {% for blog in type_a_blogs %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 hover-card">
+                        <div class="position-relative">
+                            {% if blog.picture and blog.picture.url %}
+                            <img src="{{ blog.picture.url }}" class="card-img-top" alt="博客图片" style="height: 180px; object-fit: cover;">
+                            {% else %}
+                            <img src="/media/picture/fail_default.png" class="card-img-top" alt="默认图片" style="height: 180px; object-fit: cover;">
+                            {% endif %}
+                            <div class="position-absolute top-0 end-0 m-2">
+                                <span class="badge" style="background-color: #3498db;">{{ blog.type_name }}</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title" style="height: 50px; overflow: hidden;">{{ blog.blog_title | truncatechars:40 }}</h5>
+                            <p class="card-text text-muted" style="height: 50px; overflow: hidden;">{{ blog.blog_detail_one | truncatechars:60 }}</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
+                                <i class="bi bi-geo-alt-fill"></i> {{ blog.city_name }}
+                            </small>
+                            <a href="/blog_detail/{{ blog.id }}" class="btn btn-sm btn-primary">
+                                阅读全文 <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
                 {% else %}
-                <img class="card-img-top" src="/media/picture/fail_default.png" 
-                    style="width: 100%;height: 40%;">
+                <div class="col-12 text-center py-5">
+                    <i class="bi bi-journal-x" style="font-size: 3rem; color: #6c757d;"></i>
+                    <p class="mt-3 text-muted">暂无技术类博客</p>
+                </div>
                 {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title" style="height: 20%;">{{ blog.blog_title | truncatechars:20 }}</h5>
-                    <p class="card-text">{{ blog.blog_detail_one | truncatechars:25 }}</p>
-                    <a class="btn btn-info" style="margin-top: 30px;"
-                        href="/blog_detail/{{ blog.id }}">点击查看</a>
-                </div>
             </div>
-            {% endfor %}
-            {% endif %}
         </div>
-    </div>
-    <hr/>
-    <div style="height: 480px;">
-        <h3 style="margin-bottom: 40px; margin-left: 50px; margin-top: 20px;">财经 Blogs</h3>
-        <div style="height: 400px; display: flex; flex-wrap: wrap; gap: 4%;">
-            {% if type_b_blogs %}
-            {% for blog in type_b_blogs %}
-            <div class="card" style="width: 22%;height: 360px;">
-                {% if blog.picture and blog.picture.url %}
-                <img class="card-img-top" src="{{ blog.picture.url }}" style="width: 100%;height: 40%;">
-                {% else %}
-                <img class="card-img-top" src="/media/picture/fail_default.png" 
-                    style="width: 100%;height: 40%;">
-                {% endif %}                <div class="card-body">
-                    <h5 class="card-title" style="height: 20%;">{{ blog.blog_title | truncatechars:20 }}</h5>
-                    <p class="card-text">{{ blog.blog_detail_one | truncatechars:25 }}</p>
-                    <a class="btn btn-info" style="margin-top: 30px;"
-                        href="/blog_detail/{{ blog.id }}">点击查看</a>
-                </div>
+
+        <!-- 财经博客 -->
+        <div class="mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="mb-0" style="color: #2c3e50; border-left: 5px solid #2ecc71; padding-left: 15px;">
+                    <i class="bi bi-graph-up me-2"></i>财经博客
+                </h3>
+                <a href="#" class="btn btn-outline-success btn-sm">查看更多</a>
             </div>
-            {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-    <hr/>
-    <div style="height: 480px;">
-        <h3 style="margin-bottom: 40px; margin-left: 50px; margin-top: 20px;">新闻 Blogs</h3>
-        <div style="height: 400px; display: flex; flex-wrap: wrap; gap: 4%;">
-            {% if type_c_blogs %}
-            {% for blog in type_c_blogs %}
-            <div class="card" style="width: 22%;height: 360px;">
-                {% if blog.picture and blog.picture.url %}
-                <img class="card-img-top" src="{{ blog.picture.url }}" style="width: 100%;height: 40%;">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                {% if type_b_blogs %}
+                {% for blog in type_b_blogs %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 hover-card">
+                        <div class="position-relative">
+                            {% if blog.picture and blog.picture.url %}
+                            <img src="{{ blog.picture.url }}" class="card-img-top" alt="博客图片" style="height: 180px; object-fit: cover;">
+                            {% else %}
+                            <img src="/media/picture/fail_default.png" class="card-img-top" alt="默认图片" style="height: 180px; object-fit: cover;">
+                            {% endif %}
+                            <div class="position-absolute top-0 end-0 m-2">
+                                <span class="badge" style="background-color: #2ecc71;">{{ blog.type_name }}</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title" style="height: 50px; overflow: hidden;">{{ blog.blog_title | truncatechars:40 }}</h5>
+                            <p class="card-text text-muted" style="height: 50px; overflow: hidden;">{{ blog.blog_detail_one | truncatechars:60 }}</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
+                                <i class="bi bi-geo-alt-fill"></i> {{ blog.city_name }}
+                            </small>
+                            <a href="/blog_detail/{{ blog.id }}" class="btn btn-sm btn-success">
+                                阅读全文 <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
                 {% else %}
-                <img class="card-img-top" src="/media/picture/fail_default.png" 
-                    style="width: 100%;height: 40%;">
+                <div class="col-12 text-center py-5">
+                    <i class="bi bi-journal-x" style="font-size: 3rem; color: #6c757d;"></i>
+                    <p class="mt-3 text-muted">暂无财经类博客</p>
+                </div>
                 {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title" style="height: 20%;">{{ blog.blog_title | truncatechars:20 }}</h5>
-                    <p class="card-text">{{ blog.blog_detail_one | truncatechars:25 }}</p>
-                    <a class="btn btn-info" style="margin-top: 30px;"
-                        href="/blog_detail/{{ blog.id }}">点击查看</a>
-                </div>
             </div>
-            {% endfor %}
-            {% endif %}
         </div>
+
+        <!-- 其他分类可以按照类似方式添加 -->
+        <!-- 这里只展示了两个分类，其他分类可以按照类似的模式添加 -->
     </div>
-    <hr/>
-    <div style="height: 480px;">
-        <h3 style="margin-bottom: 40px; margin-left: 50px; margin-top: 20px;">阅读 Blogs</h3>
-        <div style="height: 400px; display: flex; flex-wrap: wrap; gap: 4%;">
-            {% if type_d_blogs %}
-            {% for blog in type_d_blogs %}
-            <div class="card" style="width: 22%;height: 360px;">
-                {% if blog.picture and blog.picture.url %}
-                <img class="card-img-top" src="{{ blog.picture.url }}" style="width: 100%;height: 40%;">
-                {% else %}
-                <img class="card-img-top" src="/media/picture/fail_default.png" 
-                    style="width: 100%;height: 40%;">
-                {% endif %}                <div class="card-body">
-                    <h5 class="card-title" style="height: 20%;">{{ blog.blog_title | truncatechars:20 }}</h5>
-                    <p class="card-text">{{ blog.blog_detail_one | truncatechars:25 }}</p>
-                    <a class="btn btn-info" style="margin-top: 30px;"
-                        href="/blog_detail/{{ blog.id }}">点击查看</a>
-                </div>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-    <hr/>
-    <div style="height: 480px;">
-        <h3 style="margin-bottom: 40px; margin-left: 50px; margin-top: 20px;">风景 Blogs</h3>
-        <div style="height: 400px; display: flex; flex-wrap: wrap; gap: 4%;">
-            {% if type_e_blogs %}
-            {% for blog in type_e_blogs %}
-            <div class="card" style="width: 22%;height: 360px;">
-                {% if blog.picture and blog.picture.url %}
-                <img class="card-img-top" src="{{ blog.picture.url }}" style="width: 100%;height: 40%;">
-                {% else %}
-                <img class="card-img-top" src="/media/picture/fail_default.png" 
-                    style="width: 100%;height: 40%;">
-                {% endif %}                <div class="card-body">
-                    <h5 class="card-title" style="height: 20%;">{{ blog.blog_title | truncatechars:20 }}</h5>
-                    <p class="card-text">{{ blog.blog_detail_one | truncatechars:25 }}</p>
-                    <a class="btn btn-info" style="margin-top: 30px;"
-                        href="/blog_detail/{{ blog.id }}">点击查看</a>
-                </div>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-    <hr/>
-    <div style="height: 480px;">
-        <h3 style="margin-bottom: 40px; margin-left: 50px; margin-top: 20px;">货品 Blogs</h3>
-        <div style="height: 400px; display: flex; flex-wrap: wrap; gap: 4%;">
-            {% if type_f_blogs %}
-            {% for blog in type_f_blogs %}
-            <div class="card" style="width: 22%;height: 360px;">
-                {% if blog.picture and blog.picture.url %}
-                <img class="card-img-top" src="{{ blog.picture.url }}" style="width: 100%;height: 40%;">
-                {% else %}
-                <img class="card-img-top" src="/media/picture/fail_default.png" 
-                    style="width: 100%;height: 40%;">
-                {% endif %}                <div class="card-body">
-                    <h5 class="card-title" style="height: 20%;">{{ blog.blog_title | truncatechars:20 }}</h5>
-                    <p class="card-text">{{ blog.blog_detail_one | truncatechars:25 }}</p>
-                    <a class="btn btn-info" style="margin-top: 30px;"
-                        href="/blog_detail/{{ blog.id }}">点击查看</a>
-                </div>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </div>
-    </div>
+
+    <style>
+        .hover-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+        
+        .card-title {
+            color: #2c3e50;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .hover-card:hover .card-title {
+            color: #3498db;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .row-cols-md-2 > * {
+                flex: 0 0 auto;
+                width: 100%;
+            }
+        }
+    </style>
 </div>
-<p class="text-align:center">已到底了<strong><a href="#content-one">返回</a></strong></p>
+
+<div class="text-center py-4 bg-light">
+    <a href="#content-one" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-up-circle me-2"></i>返回顶部
+    </a>
+</div>
 {% endblock %}

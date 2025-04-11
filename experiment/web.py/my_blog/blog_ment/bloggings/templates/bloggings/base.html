@@ -10,8 +10,8 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
+<!-- {# Display django.contrib.messages as Bootstrap alerts #} -->
+<!-- {% bootstrap_messages %} -->
 
 {% load static %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -127,7 +127,7 @@
                 <ul class="dropdown-menu dropdown-menu-end shadow" 
                     style="border-radius: 10px; border: none; margin-top: 10px;">
                     <li>
-                        <form id="login-form" action="{% url 'auth_login' %}" method="post">
+                        <form id="login-form" action="{% url 'accounts:login' %}" method="post">
                             {% csrf_token %}
                             <button class="dropdown-item" type="submit">
                                 <i class="bi bi-box-arrow-in-right"></i> 登录
@@ -135,13 +135,13 @@
                         </form>
                     </li>
                     <li>
-                        <form id="logout-form" action="{% url 'auth_logout' %}" method="post">
+                        <form id="logout-form" action="{% url 'accounts:logout' %}" method="post">
                             {% csrf_token %}
                             <button class="btn" type="submit">退出</button>
                         </form>
                     </li>
                     <li>
-                        <form id="myself-form" action="{% url 'area_users:user_myself' %}" method="post" class="d-inline">
+                        <form id="myself-form" action="{% url 'accounts:profile' %}" method="post" class="d-inline">
                             {% csrf_token %}
                             <button class="btn" type="submit">自己</button>
                         </form>

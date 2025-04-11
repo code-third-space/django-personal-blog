@@ -1,9 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import gettext_lazy as _
-
+from django.conf import settings  # 添加此导入
 #Create your models here.
 
 class Comment(models.Model):
@@ -11,7 +10,7 @@ class Comment(models.Model):
     object_id = models.PositiveIntegerField(verbose_name=_("对象ID"))
     content_object = GenericForeignKey('content_type', 'object_id')
     
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("用户"))
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_("用户"))
     text = models.TextField(verbose_name=_("评论内容"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("创建时间"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("更新时间"))
@@ -24,4 +23,9 @@ class Comment(models.Model):
         verbose_name_plural = _("评论管理")
     
     def __str__(self):
-        return f'评论来自{self.user.username} 于 {self.content_object}'
+        try:
+            username = self.user.username if hasattr(self.user, 'username') else "未知用户"
+            content_obj = str(self.content_object) if self.content_object else f"对象(ID:{self.object_id})"
+            return f'评论来自{username} 于 {content_obj}'
+        except Exception:
+            return f'评论ID:{self.id if hasattr(self, "id") else "未知"}'

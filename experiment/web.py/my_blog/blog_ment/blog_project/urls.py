@@ -19,18 +19,19 @@ from django.urls import path, include
 from django.utils.translation import gettext as _
 
 from bloggings.models import Me_blog
-from django.contrib.auth.models import User
+# 修改导入的用户模型
+from accounts.models import CustomUser  # 替换原来的 User 导入
 from rest_framework import routers, serializers, viewsets
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'is_staff']
+        model = CustomUser  # 修改为 CustomUser
+        fields = ['url', 'username', 'email', 'is_staff', 'phone']  # 添加自定义字段
 
 # ViewSets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()  # 修改为 CustomUser
     serializer_class = UserSerializer
 
 class Me_blogSerializer(serializers.HyperlinkedModelSerializer):
@@ -51,9 +52,8 @@ router.register(r"bloggings", Me_blogViewSet)
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
-    path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/', include('accounts.urls')),
     path('', include("bloggings.urls")),
-    path('area_users/', include("area_users.urls")),
 
     path('api/', include(router.urls)),
     path('api-auth/', include("rest_framework.urls", namespace='rest_framework')),

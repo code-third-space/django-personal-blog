@@ -17,6 +17,6 @@ urlpatterns = [
     path("blog_read/", views.blog_read, name='blog_read'),
     path("blog_scenery/", views.blog_scenery, name='blog_scenery'),
     path("blog_products/", views.blog_products, name='blog_products'),
-    path('accounts/logout/', custom_logout, name='logout'),
+    # path('accounts/logout/', custom_logout, name='logout'),
     path('', views.blog_display, name='home'),
 ]

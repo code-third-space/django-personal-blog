@@ -39,10 +39,10 @@ INSTALLED_APPS = [
     'registration',
     'grappelli',
     'bloggings',    
-    'area_users.apps.AreaUsersConfig',
     'comments',
     'reviewers',
     'rest_framework',
+    'accounts',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -62,7 +62,6 @@ REST_FRAMEWORK = {
 
 
 MIDDLEWARE = [
-    'area_users.performance.performance_logger_middleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
 
@@ -170,10 +169,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend'
+]
+
+# 登录重定向URL
+LOGIN_REDIRECT_URL = 'home'  # 替换为您的主页URL名称
+LOGOUT_REDIRECT_URL = 'home'  # 替换为您的主页URL名称
+LOGIN_URL = 'accounts:login'
+
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR /'..'/ 'bloggings' / 'static',
-    BASE_DIR /'..'/ 'area_users' / 'static',
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
@@ -252,11 +261,6 @@ LOGGING = { # 定义日志格式
             'handlers': ['console', 'mail_admins'],
             'level': 'INFO',
             'filters': ['require_debug_true'],
-        },
-        "area_users.performance": {
-            "handlers": ["console", "performance"],
-            "level": "INFO",
-            "propagate": False,
         },
     },
 }

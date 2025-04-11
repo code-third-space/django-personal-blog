@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
-from django.contrib.auth.models import User
+from django.conf import settings
 from comments.models import Comment
 from datetime import datetime
 from django.utils.translation import gettext_lazy as _
-# Create your models here.
+from django.conf import settings  # 添加此导入
 
 
 BlogTypes = [
@@ -54,11 +54,12 @@ class Tag(models.Model):
         return self.name
 
 class Me_blog(models.Model):
+    # 将 auth.User 更改为 settings.AUTH_USER_MODEL
     blog_title = models.CharField(max_length=56, blank=False, verbose_name=_("标题"))
     blog_type = models.SmallIntegerField(blank=False, choices=BlogTypes, verbose_name=_("博客类型"))
     blog_countries = models.SmallIntegerField(blank=False, choices=Countries, verbose_name=_("所在国"))
     blog_city = models.SmallIntegerField(blank=False, choices=Cities, verbose_name=_("所在城市"))
-    creator = models.ForeignKey(User, verbose_name=_("创作者"), null=True, on_delete=models.PROTECT)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("创作者"), null=True, on_delete=models.PROTECT)
     created_date = models.DateTimeField(verbose_name=_("创建日期"), default=datetime.now)
     modified_date = models.DateTimeField(verbose_name=_("修改时间"), default=datetime.now)
     blog_detail_one = models.TextField(max_length=10240, blank=True, null=True, verbose_name=_("正文"))

@@ -10,7 +10,8 @@ import csv
 from datetime import datetime
 
 # Register your models here.
-exportable_fields = ('user', 'city', 'gener', 'phone', 'user_remark')
+# 修改导出字段，移除 'user'
+exportable_fields = ('city', 'gener', 'phone', 'user_remark')
 
 def export_model_as_csv(ModelAdmin, request, queryset):
     response = HttpResponse(content_type='text/csv')
@@ -41,35 +42,39 @@ class Area_UserForm(forms.ModelForm):
         fields = '__all__'
 
 
+# 修改通知函数，不再引用 user
 def notify_bloguser(ModelAdmin, request, queryset):
     blogusers = ""
     interviewers = ""
     for obj in queryset:
-        blogusers = obj.user.username+";"+blogusers
-        if obj.user.username:
-            interviewers = obj.user.username+";"+interviewers
-    send_dingtalk_message.delay("用户 %s 注册通过 %s" % (blogusers, interviewers))
+        blogusers = f"ID:{obj.id};" + blogusers
+    send_dingtalk_message.delay(f"用户 {blogusers} 注册通过")
 
 notify_bloguser.short_description = u"注册通知"
 
 class Area_Admin(admin.ModelAdmin):
     form = Area_UserForm
     actions = [export_model_as_csv, notify_bloguser]
-
+    
     def image_tag(self, obj):
         if obj.picture:
-            if obj.picture:
-                return format_html('<img src="{}" style="width:100px;height:80px;"/>'.format(obj.picture.url))
-            return ""
+            return format_html('<img src="{}" style="width:100px;height:80px;"/>'.format(obj.picture.url))
+        return ""
     image_tag.allow_tags = True
     image_tag.short_description = 'Image'
 
-    list_display = ('user_id','user_name', 'city','user_email','gener','image_tag')
+    # 修改 list_display，移除引用 user 的方法
+    list_display = ('id', 'city', 'phone', 'gener', 'image_tag')
 
-    search_fields = ('user__name', 'user_remark',)
+    search_fields = ('user_remark',)  # 移除 'user__name'
     list_filter = ('city',)
-    ordering = ('user',)
-    readonly_fields = ('user',)
+    
+    # 修改 ordering，不再引用 user
+    ordering = ('id',)
+    
+    # 修改 readonly_fields，不再引用 user
+    readonly_fields = ('blog_count',)
+    
     list_per_page = 3
     save_on_top = True
 
@@ -79,27 +84,29 @@ class Area_Admin(admin.ModelAdmin):
         else:
             return False  
 
+    # 修改 fieldsets，移除 user 字段
     fieldsets = (
         (None, {'fields': (
-        ('user',),('city','phone'),('gener','user_remark'),
-        ('picture','back_ground')
+        ('city','phone'),('gener','user_remark'),
+        ('picture','back_ground'), ('user_type', 'blog_count')
         )}),
     )
 
     def save_model(self, request, obj, form, change):  
         super().save_model(request,obj,form,change)
 
-    def user_id(self, obj):
-        return obj.user.id
-    user_id.short_description = "用户ID"
+    # 注释掉或删除所有引用 user 的方法
+    # def user_id(self, obj):
+    #     return obj.user.id
+    # user_id.short_description = "用户ID"
 
-    def user_name(self, obj):
-        return obj.user.username
-    user_name.short_description = "用户名"
+    # def user_name(self, obj):
+    #     return obj.user.username
+    # user_name.short_description = "用户名"
 
-    def user_email(self, obj):
-        return obj.user.email
-    user_email.short_description = "邮箱"
+    # def user_email(self, obj):
+    #     return obj.user.email
+    # user_email.short_description = "邮箱"
 
 
 admin.site.register(Area_User, Area_Admin)

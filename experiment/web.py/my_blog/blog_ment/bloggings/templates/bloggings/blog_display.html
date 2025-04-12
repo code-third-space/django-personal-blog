@@ -4,42 +4,52 @@
 {% load static %}
 <link type="text/css" rel="stylesheet" href="{% static 'bloggings/cssBlogdisplay.css' %}">
 
-<!-- 第一部分 -->
-<div id="content-one" class="container-fluid" style="margin: 0 auto; max-width: 100%; height: 600px; background: linear-gradient(to right, #2c3e50, #3498db);">
+<!-- 第一部分 - 简洁优雅设计 -->
+<div id="content-one" class="container-fluid" style="margin: 0 auto; max-width: 100%; min-height: 600px; background: linear-gradient(135deg, #f5f7fa, #c3cfe2);">
     <div class="row justify-content-center">
         <div class="col-12">
-            <div id="demo1" class="carousel slide" data-bs-ride="carousel">
+            <!-- 标题区域 -->
+            <div class="text-center py-4">
+                <h2 style="font-weight: 300; color: #2c3e50; letter-spacing: 2px; font-size: 2.2rem; margin-bottom: 0.5rem;">
+                    精选内容
+                </h2>
+                <div style="width: 50px; height: 3px; background-color: #3498db; margin: 0 auto 1.5rem;"></div>
+            </div>
+            
+            <!-- 轮播区域 -->
+            <div id="demo1" class="carousel slide" data-bs-ride="carousel" style="margin: 0 auto; max-width: 1200px;">
                 <!-- 轮播内容 -->
-                <div class="carousel-inner">
+                <div class="carousel-inner" style="border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
                     {% if blog_list %}
                     {% for blog in blog_list %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}" style="background-color: white;">
                         <div class="container py-4">
                             <div class="row align-items-center">
                                 <!-- 左侧卡片 -->
                                 <div class="col-md-5">
-                                    <div class="card bg-white">
-                                        <div class="card-body">
-                                            <h4 class="card-title">{{ blog.blog_title }}</h4>
-                                            <p class="card-text">{{ blog.blog_detail_one|truncatechars:120}}</p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <span class="badge bg-primary">{{ blog.type_name }}</span>
-                                                <a class="btn btn-primary" href="/blog_detail/{{blog.id}}">查看详情</a>
-                                            </div>
-                                        </div>
+                                    <div class="p-4">
+                                        <span class="d-inline-block" style="font-size: 0.85rem; color: #3498db; margin-bottom: 1rem; border-bottom: 2px solid #3498db; padding-bottom: 5px;">{{ blog.type_name }}</span>
+                                        <h3 style="color: #2c3e50; font-weight: 500; margin-bottom: 1.2rem; line-height: 1.4;">{{ blog.blog_title }}</h3>
+                                        <p style="color: #7f8c8d; line-height: 1.6; margin-bottom: 1.5rem; font-size: 1rem;">{{ blog.blog_detail_one|truncatechars:120}}</p>
+                                        <a href="/blog_detail/{{blog.id}}" class="btn" style="background-color: white; color: #3498db; border: 1px solid #3498db; border-radius: 4px; padding: 8px 20px; transition: all 0.3s;">
+                                            阅读全文
+                                        </a>
                                     </div>
                                 </div>
+                                
                                 <!-- 右侧图片 -->
                                 <div class="col-md-7">
-                                    {% if blog.picture and blog.picture.url %}
-                                    <img src="{{ blog.picture.url }}" alt="图片" 
-                                        class="img-fluid rounded shadow" 
-                                        style="width: 100%; height: 450px; object-fit: cover;">
-                                    {% else %}
-                                    <img src="/media/picture/fail_default.png"
-                                        class="img-fluid rounded shadow" 
-                                        style="width: 100%; height: 350px; object-fit: cover;">
-                                    {% endif %}
+                                    <div style="overflow: hidden; border-radius: 8px;">
+                                        {% if blog.picture and blog.picture.url %}
+                                        <img src="{{ blog.picture.url }}" alt="图片" 
+                                            class="img-fluid" 
+                                            style="width: 100%; height: 450px; object-fit: cover;">
+                                        {% else %}
+                                        <img src="/media/picture/fail_default.png"
+                                            class="img-fluid" 
+                                            style="width: 100%; height: 450px; object-fit: cover;">
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -48,13 +58,27 @@
                     {% endif %}
                 </div>
 
-                <!-- 控制按钮 -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#demo1" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
+                <!-- 控制按钮 - 简化设计 -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#demo1" data-bs-slide="prev" style="width: 40px; opacity: 0.7;">
+                    <span class="carousel-control-prev-icon" style="background-color: rgba(0,0,0,0.3); border-radius: 50%; padding: 10px;"></span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#demo1" data-bs-slide="next">
-                    <span class="carousel-control-next-icon"></span>
+                <button class="carousel-control-next" type="button" data-bs-target="#demo1" data-bs-slide="next" style="width: 40px; opacity: 0.7;">
+                    <span class="carousel-control-next-icon" style="background-color: rgba(0,0,0,0.3); border-radius: 50%; padding: 10px;"></span>
                 </button>
+                
+                <!-- 轮播指示器 - 简约风格 -->
+                <div class="carousel-indicators" style="bottom: -40px;">
+                    {% if blog_list %}
+                    {% for blog in blog_list %}
+                    <button type="button" data-bs-target="#demo1" data-bs-slide-to="{{ forloop.counter0 }}"
+                        class="{% if forloop.first %}active{% endif %}"
+                        style="width: 10px; height: 10px; border-radius: 50%; background-color: #3498db;
+                            opacity: {% if forloop.first %}1{% else %}0.5{% endif %}; margin: 0 5px;">
+                    </button>
+
+                    {% endfor %}
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
@@ -64,75 +88,92 @@
             const carousel = document.getElementById('demo1');
             new bootstrap.Carousel(carousel, {
                 interval: 5000,
-                pause: false
+                pause: 'hover'
+            });
+            
+            // 添加鼠标悬停效果
+            const readButtons = document.querySelectorAll('.carousel-item .btn');
+            readButtons.forEach(button => {
+                button.addEventListener('mouseover', () => {
+                    button.style.backgroundColor = '#3498db';
+                    button.style.color = 'white';
+                });
+                button.addEventListener('mouseout', () => {
+                    button.style.backgroundColor = 'white';
+                    button.style.color = '#3498db';
+                });
             });
         });
     </script>
 </div>
 
-<!-- 第二部分 -->
-<div id="content" style="margin: 0px; padding: 50px 0;
-    background: linear-gradient(135deg, #3a6073, #16222a); color: #fff; border-radius: 0;">
+<!-- 第二部分 - 简洁优雅设计 -->
+<div id="content" style="margin: 0px; padding: 60px 0;
+    background-color: #f8f9fa; color: #2c3e50; border-radius: 0;">
     <div class="container">
         <div class="row mb-5">
             <div class="col-12 text-center">
-                <h2 class="display-4" style="font-weight: 300; color: #f8f9fa; letter-spacing: 1px;">博客精选</h2>
-                <p class="lead" style="color: #adb5bd; font-size: 1.2rem;">探索我们的精选博客内容</p>
-                <hr style="width: 80px; height: 4px; background-color: #3498db; border: none; margin: 25px auto; opacity: 0.8;">
+                <h2 style="font-weight: 300; color: #2c3e50; letter-spacing: 2px; font-size: 2.2rem; margin-bottom: 0.5rem;">
+                    博客精选
+                </h2>
+                <div style="width: 50px; height: 3px; background-color: #3498db; margin: 0 auto 1.5rem;"></div>
+                <p style="color: #7f8c8d; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">探索我们的精选博客内容</p>
             </div>
         </div>
         
         <div class="row g-4">
+            <!-- 左侧博客列表 -->
             <div class="col-lg-6">
-                <div class="card bg-transparent border-0 h-100 shadow-sm" style="border-radius: 15px; overflow: hidden;">
-                    <div class="card-header bg-dark bg-opacity-50 border-bottom border-light">
+                <div class="card h-100 border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+                    <div class="card-header bg-white border-bottom" style="padding: 20px;">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h3 class="m-0" style="color: #f8f9fa; font-size: 1.5rem;">
-                                <i class="bi bi-collection me-2"></i>博客列表
+                            <h3 style="color: #2c3e50; font-size: 1.3rem; font-weight: 500; margin: 0;">
+                                博客列表
                             </h3>
-                            <span class="badge bg-primary rounded-pill" style="font-size: 0.9rem; padding: 8px 12px;">
+                            <span style="background-color: #3498db; color: white; font-size: 0.85rem; padding: 5px 12px; border-radius: 20px;">
                                 {{ blog_list|length }} 篇
                             </span>
                         </div>
                     </div>
                     <div class="card-body p-0">
-                        <div class="list-group list-group-flush" style="max-height: 500px; overflow-y: auto; scrollbar-width: thin;">
+                        <div class="list-group list-group-flush" style="max-height: 500px; overflow-y: auto;">
                             {% if blog_list %}
                                 {% for blog in blog_list %}
-                                <div class="list-group-item bg-transparent border-light d-flex align-items-center blog-item"
+                                <div class="list-group-item border-bottom d-flex align-items-center blog-item"
                                      onmouseover="showImage('image-{{ blog.id }}')"
-                                     onmouseout="hideImage('image-{{ blog.id }}')">
-                                    <div class="me-3" style="width: 50px; height: 50px; border-radius: 12px; overflow: hidden; flex-shrink: 0; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">
+                                     onmouseout="hideImage('image-{{ blog.id }}')"
+                                     style="padding: 15px 20px; transition: all 0.3s ease;">
+                                    <div class="me-3" style="width: 45px; height: 45px; border-radius: 8px; overflow: hidden; flex-shrink: 0;">
                                         {% if blog.picture and blog.picture.url %}
                                         <img src="{{ blog.picture.url }}" alt="缩略图" style="width: 100%; height: 100%; object-fit: cover;">
                                         {% else %}
-                                        <div style="width: 100%; height: 100%; background-color: #6c757d; display: flex; align-items: center; justify-content: center;">
-                                            <i class="bi bi-image" style="color: #fff;"></i>
+                                        <div style="width: 100%; height: 100%; background-color: #e9ecef; display: flex; align-items: center; justify-content: center;">
+                                            <i class="bi bi-image" style="color: #6c757d;"></i>
                                         </div>
                                         {% endif %}
                                     </div>
                                     <div class="flex-grow-1">
-                                        <a href="/blog_detail/{{blog.id}}/" class="text-decoration-none blog-title">
-                                            <h5 class="mb-1" style="color: #e9ecef; transition: color 0.3s; font-size: 1.1rem;">{{blog.blog_title}}</h5>
+                                        <a href="/blog_detail/{{blog.id}}/" class="text-decoration-none">
+                                            <h5 style="color: #2c3e50; margin-bottom: 5px; font-size: 1rem; font-weight: 500; transition: color 0.3s;">{{blog.blog_title}}</h5>
                                         </a>
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <small style="color: #adb5bd;">
-                                                <i class="bi bi-geo-alt-fill me-1"></i>{{ blog.city_name }}
+                                            <small style="color: #95a5a6; font-size: 0.8rem;">
+                                                <i class="bi bi-geo-alt me-1"></i>{{ blog.city_name }}
                                             </small>
-                                            <span class="badge blog-type-badge">
+                                            <span style="font-size: 0.75rem; padding: 3px 8px; border-radius: 4px; background-color: #f1f1f1; color: #3498db;">
                                                 {{ blog.type_name }}
                                             </span>
                                         </div>
                                     </div>
                                     <div class="ms-2">
-                                        <i class="bi bi-chevron-right" style="color: #adb5bd; font-size: 1.2rem;"></i>
+                                        <i class="bi bi-chevron-right" style="color: #bdc3c7; font-size: 0.9rem;"></i>
                                     </div>
                                 </div>
                                 {% endfor %}
                             {% else %}
-                                <div class="list-group-item bg-transparent text-center py-5">
-                                    <i class="bi bi-journal-x" style="font-size: 3rem; color: #6c757d;"></i>
-                                    <p class="mt-3 text-muted">暂无可用的博客</p>
+                                <div class="list-group-item text-center py-5">
+                                    <i class="bi bi-journal-x" style="font-size: 2.5rem; color: #bdc3c7;"></i>
+                                    <p class="mt-3" style="color: #95a5a6;">暂无可用的博客</p>
                                 </div>
                             {% endif %}
                         </div>
@@ -140,27 +181,28 @@
                 </div>
             </div>
             
+            <!-- 右侧预览 -->
             <div class="col-lg-6">
-                <div class="card bg-transparent border-0 h-100 shadow-sm" style="border-radius: 15px; overflow: hidden;">
-                    <div class="card-header bg-dark bg-opacity-50 border-bottom border-light">
-                        <h3 class="m-0" style="color: #f8f9fa; font-size: 1.5rem;">
-                            <i class="bi bi-image me-2"></i>预览
+                <div class="card h-100 border-0 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+                    <div class="card-header bg-white border-bottom" style="padding: 20px;">
+                        <h3 style="color: #2c3e50; font-size: 1.3rem; font-weight: 500; margin: 0;">
+                            预览
                         </h3>
                     </div>
-                    <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 500px; background-color: rgba(0,0,0,0.2); border-radius: 0 0 15px 15px;">
-                        <div class="text-center preview-placeholder" style="color: #adb5bd;">
-                            <i class="bi bi-image" style="font-size: 4rem;"></i>
-                            <p class="mt-3" style="font-size: 1.1rem;">将鼠标悬停在左侧博客上查看预览</p>
+                    <div class="card-body d-flex align-items-center justify-content-center" style="min-height: 500px; background-color: #f8f9fa;">
+                        <div class="text-center preview-placeholder" style="color: #bdc3c7;">
+                            <i class="bi bi-image" style="font-size: 3rem;"></i>
+                            <p class="mt-3" style="font-size: 1rem;">将鼠标悬停在左侧博客上查看预览</p>
                         </div>
                         {% if blog_list %}
                             {% for blog in blog_list %}
                                 {% if blog.picture %}
                                 <div class="image-preview" id="image-{{ blog.id }}" style="display: none; width: 100%; height: 100%; text-align: center;">
                                     <img src="{{ blog.picture.url }}" alt="图片展示" 
-                                        style="max-width: 100%; max-height: 340px; object-fit: contain; border-radius: 12px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);">
+                                        style="max-width: 100%; max-height: 340px; object-fit: contain; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
                                     <div class="mt-4 text-center">
-                                        <h5 style="color: #e9ecef; margin-bottom: 15px;">{{ blog.blog_title }}</h5>
-                                        <a href="/blog_detail/{{blog.id}}/" class="btn btn-outline-light">
+                                        <h5 style="color: #2c3e50; margin-bottom: 15px; font-weight: 500;">{{ blog.blog_title }}</h5>
+                                        <a href="/blog_detail/{{blog.id}}/" class="btn" style="background-color: white; color: #3498db; border: 1px solid #3498db; border-radius: 4px; padding: 8px 20px; transition: all 0.3s;">
                                             查看详情 <i class="bi bi-arrow-right ms-1"></i>
                                         </a>
                                     </div>
@@ -175,58 +217,49 @@
     </div>
     
     <style>
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .list-group-flush > .list-group-item {
-            transition: all 0.3s ease;
-            padding: 15px;
-            cursor: pointer;
-            border-left: 3px solid transparent;
-        }
-        
-        .list-group-item:hover {
-            background-color: rgba(255, 255, 255, 0.1) !important;
-            border-left: 3px solid #3498db !important;
-            transform: translateX(5px);
-        }
-        
-        .blog-title h5:hover {
-            color: #3498db !important;
-        }
-        
-        .image-preview {
-            animation: fadeIn 0.4s ease-out;
-        }
-        
         /* 自定义滚动条 */
         .list-group::-webkit-scrollbar {
             width: 6px;
         }
         
         .list-group::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
+            background: #f1f1f1;
             border-radius: 10px;
         }
         
         .list-group::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
+            background: #dcdde1;
             border-radius: 10px;
         }
         
         .list-group::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.5);
+            background: #bdc3c7;
         }
         
-        /* 博客类型标签颜色 */
-        .blog-type-badge {
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        /* 列表项悬停效果 */
+        .blog-item:hover {
+            background-color: #f8f9fa;
+            transform: translateX(5px);
+        }
+        
+        .blog-item:hover h5 {
+            color: #3498db !important;
+        }
+        
+        /* 图片预览动画 */
+        .image-preview {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 按钮悬停效果 */
+        .btn:hover {
+            background-color: #3498db !important;
+            color: white !important;
         }
     </style>
     
@@ -250,30 +283,6 @@
         function hideImage(imageId) {
             // 保持图片显示，不做任何操作
         }
-        
-        // 页面加载完成后设置博客类型标签颜色
-        document.addEventListener('DOMContentLoaded', function() {
-            // 为不同类型的博客设置不同的颜色
-            const typeColors = {
-                '技术': '#3498db',
-                '财经': '#2ecc71',
-                '新闻': '#e74c3c',
-                '阅读': '#9b59b6',
-                '风景': '#1abc9c',
-                '货品': '#f39c12'
-            };
-            
-            // 为每个博客类型标签设置颜色
-            document.querySelectorAll('.blog-type-badge').forEach(badge => {
-                const typeName = badge.textContent.trim();
-                if (typeColors[typeName]) {
-                    badge.style.backgroundColor = typeColors[typeName];
-                } else {
-                    // 如果没有预定义的颜色，使用默认颜色
-                    badge.style.backgroundColor = '#6c757d';
-                }
-            });
-        });
     </script>
 </div>
 

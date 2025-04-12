@@ -1,0 +1,390 @@
+{% extends 'bloggings/base.html' %}
+
+{% block content %}
+{% load static %}
+<link type="text/css" rel="stylesheet" href="{% static 'bloggings/cssBlogCategory.css' %}">
+
+<style>
+    body {
+        background: linear-gradient(135deg, #2c3e50, #34495e);
+        color: #ecf0f1;
+    }
+    
+    /* 页面头部样式优化 */
+    .tech-header {
+        padding: 50px 0;
+        text-align: center;
+        margin-bottom: 40px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .tech-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.05;
+    }
+    
+    .tech-header h1 {
+        font-weight: 300;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+        position: relative;
+    }
+    
+    .tech-header h1::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(to right, #e74c3c, #f39c12);
+    }
+    
+    /* 筛选区域 */
+    .filter-section {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+        backdrop-filter: blur(5px);
+    }
+    
+    .filter-section .form-control {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #ecf0f1;
+    }
+    
+    .filter-section .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .filter-section .btn {
+        background: linear-gradient(to right, #e74c3c, #f39c12);
+        border: none;
+        color: white;
+    }
+    
+    /* 博客卡片样式优化 */
+    .blog-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        margin-bottom: 30px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .blog-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .card-img-container {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .card-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .blog-card:hover .card-img-container img {
+        transform: scale(1.1);
+    }
+    
+    .card-img-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        padding: 15px;
+        transition: all 0.3s ease;
+    }
+    
+    .card-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: linear-gradient(to right, #e74c3c, #f39c12);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+    
+    .card-content {
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        color: #ecf0f1;
+    }
+    
+    .card-title {
+        color: #ecf0f1;
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 10px;
+        height: 50px;
+        overflow: hidden;
+        transition: color 0.3s;
+    }
+    
+    .blog-card:hover .card-title {
+        color: #f39c12;
+    }
+    
+    .card-excerpt {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+    
+    .card-meta {
+        display: flex;
+        justify-content: space-between;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.85rem;
+        margin-top: auto;
+        padding-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .card-meta i {
+        margin-right: 5px;
+    }
+    
+    .card-link {
+        display: inline-block;
+        margin-top: 15px;
+        color: #f39c12;
+        font-weight: 500;
+        transition: all 0.3s;
+        text-decoration: none;
+    }
+    
+    .card-link:hover {
+        color: #e74c3c;
+        transform: translateX(5px);
+    }
+    
+    /* 分页样式优化 */
+    .pagination {
+        margin-top: 40px;
+    }
+    
+    .pagination .page-link {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #ecf0f1;
+        margin: 0 5px;
+        border-radius: 5px;
+        transition: all 0.3s;
+    }
+    
+    .pagination .page-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+    }
+    
+    .pagination .page-item.active .page-link {
+        background: linear-gradient(to right, #e74c3c, #f39c12);
+        border-color: transparent;
+        box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+    }
+    
+    .pagination .page-item.disabled .page-link {
+        color: rgba(255, 255, 255, 0.3);
+        background-color: rgba(255, 255, 255, 0.02);
+    }
+    
+    /* 空内容提示样式 */
+    .empty-message {
+        text-align: center;
+        padding: 60px 30px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        margin: 30px 0;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .empty-message i {
+        font-size: 3rem;
+        color: rgba(255, 255, 255, 0.2);
+        margin-bottom: 20px;
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+        .tech-header {
+            padding: 30px 0;
+        }
+        
+        .filter-section {
+            padding: 15px;
+        }
+        
+        .filter-section .row > div {
+            margin-bottom: 10px;
+        }
+    }
+</style>
+
+<div class="container py-4">
+    <div class="tech-header">
+        <h1>技术博客</h1>
+        <p class="lead">探索最新的技术趋势和解决方案</p>
+    </div>
+    
+    <!-- 筛选区域 -->
+    <div class="filter-section">
+        <div class="row g-3 align-items-center">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent text-light border-0"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control" placeholder="搜索技术博客...">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select">
+                    <option selected>所有技术分类</option>
+                    <option>前端开发</option>
+                    <option>后端开发</option>
+                    <option>移动开发</option>
+                    <option>人工智能</option>
+                    <option>云计算</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select">
+                    <option selected>最新发布</option>
+                    <option>最多阅读</option>
+                    <option>最多评论</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button class="btn w-100">筛选</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        {% if blog_tech_list %}
+            {% for blog in blog_tech_list %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="blog-card">
+                    <div class="card-img-container">
+                        <a href="/blog_detail/{{blog.id}}">
+                            {% if blog.picture and blog.picture.url %}
+                            <img src="{{ blog.picture.url }}" alt="{{ blog.blog_title }}">
+                            {% else %}
+                            <img src="/media/picture/fail_default.png" alt="默认图片">
+                            {% endif %}
+                        </a>
+                        <div class="card-badge">{{ blog.type_name }}</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">{{ blog.blog_title }}</h3>
+                        <p class="card-excerpt">{{ blog.blog_detail_one|truncatechars:120 }}</p>
+                        <div class="card-meta">
+                            <span><i class="bi bi-geo-alt"></i>{{ blog.city_name }}</span>
+                            <span><i class="bi bi-calendar3"></i>{{ blog.created_date|date:"Y-m-d" }}</span>
+                        </div>
+                        <a href="/blog_detail/{{blog.id}}" class="card-link">阅读全文 <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="empty-message">
+                    <i class="bi bi-journal-x"></i>
+                    <h3>暂无技术博客</h3>
+                    <p>敬请期待更多精彩内容</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if blog_tech_list %}
+    <div class="mt-5">
+        <ul class="pagination justify-content-center">
+            <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                <a class="page-link" 
+                href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% else %}javascript:void(0);{% endif %}">
+                    <i class="bi bi-chevron-left"></i> 上一页
+                </a>
+            </li>
+            {% for num in page_obj.paginator.page_range %}
+            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% endfor %}
+            <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                <a class="page-link" 
+                href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% else %}javascript:void(0);{% endif %}">
+                    下一页 <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    // 为筛选功能添加基础交互效果
+    document.addEventListener('DOMContentLoaded', function() {
+        // 筛选按钮点击效果
+        const filterBtn = document.querySelector('.filter-section .btn');
+        if (filterBtn) {
+            filterBtn.addEventListener('click', function() {
+                // 这里可以添加实际筛选逻辑
+                this.innerHTML = '<i class="bi bi-hourglass-split me-1"></i> 筛选中...';
+                setTimeout(() => {
+                    this.innerHTML = '筛选';
+                }, 1000);
+            });
+        }
+        
+        // 卡片悬停效果增强
+        const blogCards = document.querySelectorAll('.blog-card');
+        blogCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderColor = '#f39c12';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+            });
+        });
+    });
+</script>
+{% endblock %}

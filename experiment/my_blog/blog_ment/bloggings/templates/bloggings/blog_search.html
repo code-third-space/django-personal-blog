@@ -1,137 +1,304 @@
 {% extends 'bloggings/base.html' %}
 
 {% block content %}
-<div class="container py-4">
-    <div class="search-header text-center mb-4">
-        <h2 class="display-5 fw-bold">搜索结果</h2>
-        <div class="col-lg-6 mx-auto">
-            <p class="lead mb-4">以下是与您的搜索相关的博客内容</p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <form id="search-again" action="{% url 'bloggings:searchBlogAll' %}" method="get" class="d-flex">
-                    {% csrf_token %}
-                    <input type="text" name="q" placeholder="重新搜索" class="form-control me-2">
-                    <button class="btn btn-primary" type="submit">搜索</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    {% if titleName %}
-    <div class="row">
-        {% for blog in titleName %}
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow-sm hover-card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <span class="badge bg-primary">{{ blog.type_name }}</span>
-                        <small class="text-muted">{{ blog.created_date|date:"Y-m-d" }}</small>
-                    </div>
-                    <h5 class="card-title">
-                        <a href="/blog_detail/{{blog.id}}" class="text-decoration-none stretched-link">
-                            {{blog.blog_title}}
-                        </a>
-                    </h5>
-                    <p class="card-text text-muted">{{ blog.blog_detail_one|truncatechars:80 }}</p>
-                    <div class="d-flex justify-content-between align-items-center mt-3">
-                        <div class="btn-group">
-                            <a href="/blog_detail/{{blog.id}}" class="btn btn-sm btn-outline-secondary">查看详情</a>
+<div class="search-container py-5">
+    <div class="container">
+        <!-- 搜索头部区域 -->
+        <div class="search-hero text-center mb-5">
+            <h2 class="display-4 fw-bold text-primary mb-3">探索知识的海洋</h2>
+            <div class="col-lg-7 mx-auto">
+                <p class="lead mb-4">您搜索的关键词: <span class="search-term">{{ request.GET.q }}</span></p>
+                <div class="search-box-wrapper">
+                    <form id="search-again" action="{% url 'bloggings:searchBlogAll' %}" method="get">
+                        <div class="input-group search-input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="bi bi-search"></i>
+                            </span>
+                            <input type="text" name="q" value="{{ request.GET.q }}" class="form-control border-start-0 shadow-none" placeholder="输入关键词开始探索...">
+                            <button class="btn btn-primary px-4" type="submit">搜索</button>
                         </div>
-                        <small class="text-muted">{{ blog.city_name }}</small>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 搜索结果计数 -->
+        {% if titleName %}
+        <div class="search-results-count mb-4">
+            <div class="d-flex align-items-center">
+                <div class="search-icon-bg me-3">
+                    <i class="bi bi-journal-text"></i>
+                </div>
+                <div>
+                    {% if titleName.paginator %}
+                    <h5 class="mb-0">找到 {{ titleName.paginator.count }} 条相关结果</h5>
+                    {% else %}
+                    <h5 class="mb-0">找到 {{ titleName|length }} 条相关结果</h5>
+                    {% endif %}
+                    <small class="text-muted">按相关度排序</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- 搜索结果卡片 -->
+        <div class="row g-4">
+            {% for blog in titleName %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 search-result-card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bg-primary rounded-pill px-3 py-2">{{ blog.type_name }}</span>
+                            <small class="text-muted"><i class="bi bi-calendar-date me-1"></i>{{ blog.created_date|date:"Y-m-d" }}</small>
+                        </div>
+                        <h5 class="card-title">
+                            <a href="/blog_detail/{{blog.id}}" class="text-decoration-none stretched-link blog-title">
+                                {{blog.blog_title}}
+                            </a>
+                        </h5>
+                        <p class="card-text text-muted">{{ blog.blog_detail_one|truncatechars:80 }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="location-badge">
+                                <i class="bi bi-geo-alt me-1"></i>{{ blog.city_name }}
+                            </div>
+                            <div class="read-more-hint">
+                                <small>阅读全文 <i class="bi bi-arrow-right ms-1"></i></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% else %}
+        <!-- 无搜索结果 -->
+        <div class="row">
+            <div class="col-12 text-center py-5">
+                <div class="empty-state">
+                    <div class="empty-icon-wrapper mb-4">
+                        <i class="bi bi-search"></i>
+                    </div>
+                    <h3 class="mb-3">未找到相关结果</h3>
+                    <p class="text-muted mb-4">很抱歉，我们找不到与"{{ request.GET.q }}"相关的内容<br>请尝试使用不同的关键词或浏览我们的博客分类</p>
+                    <div class="mt-4">
+                        <a href="{% url 'bloggings:blog_all' %}" class="btn btn-primary me-2">
+                            <i class="bi bi-grid me-2"></i>浏览全部博客
+                        </a>
+                        <a href="{% url 'bloggings:home' %}" class="btn btn-outline-secondary">
+                            <i class="bi bi-house me-2"></i>返回首页
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        {% endfor %}
-    </div>
-    
-    {% else %}
-    <div class="row">
-        <div class="col-12 text-center py-5">
-            <div class="empty-state">
-                <i class="bi bi-search" style="font-size: 4rem; color: #6c757d;"></i>
-                <h3 class="mt-4">未找到相关结果</h3>
-                <p class="text-muted">尝试使用不同的关键词或浏览我们的博客分类</p>
-                <div class="mt-4">
-                    <a href="{% url 'bloggings:blog_all' %}" class="btn btn-primary me-2">浏览全部博客</a>
-                    <a href="{% url 'bloggings:home' %}" class="btn btn-outline-secondary">返回首页</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-    
-    {% if titleName.has_other_pages %}
-    <div class="pagination-container mt-4">
-        <nav aria-label="搜索结果分页">
-            <ul class="pagination justify-content-center">
-                {% if titleName.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?q={{ request.GET.q }}&page={{ titleName.previous_page_number }}" aria-label="上一页">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="上一页">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                {% endif %}
-                
-                {% for i in titleName.paginator.page_range %}
-                    {% if titleName.number == i %}
-                    <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+        {% endif %}
+        
+        <!-- 分页控件 -->
+        {% if titleName.has_other_pages %}
+        <div class="pagination-container mt-5">
+            <nav aria-label="搜索结果分页">
+                <ul class="pagination pagination-rounded justify-content-center">
+                    {% if titleName.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ request.GET.q }}&page={{ titleName.previous_page_number }}" aria-label="上一页">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                    </li>
                     {% else %}
-                    <li class="page-item"><a class="page-link" href="?q={{ request.GET.q }}&page={{ i }}">{{ i }}</a></li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="上一页">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                    </li>
                     {% endif %}
-                {% endfor %}
-                
-                {% if titleName.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?q={{ request.GET.q }}&page={{ titleName.next_page_number }}" aria-label="下一页">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="下一页">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
+                    
+                    {% for i in titleName.paginator.page_range %}
+                        {% if titleName.number == i %}
+                        <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                        {% else %}
+                        <li class="page-item"><a class="page-link" href="?q={{ request.GET.q }}&page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if titleName.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ request.GET.q }}&page={{ titleName.next_page_number }}" aria-label="下一页">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="下一页">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 </div>
 
 <style>
-    .search-header {
-        background-color: #f8f9fa;
-        padding: 2rem 1rem;
-        border-radius: 0.5rem;
-        margin-bottom: 2rem;
+    /* 整体搜索容器样式 */
+    .search-container {
+        background-color: #f9fafb;
+        min-height: 80vh;
     }
     
-    .hover-card {
-        transition: transform 0.3s, box-shadow 0.3s;
+    /* 搜索英雄区域 */
+    .search-hero {
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+        padding: 3rem 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        margin-bottom: 2.5rem;
     }
     
-    .hover-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    /* 搜索关键词高亮 */
+    .search-term {
+        background-color: rgba(13, 110, 253, 0.1);
+        color: #0d6efd;
+        padding: 0.2rem 0.5rem;
+        border-radius: 0.25rem;
+        font-weight: 500;
     }
     
+    /* 搜索框样式 */
+    .search-box-wrapper {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .search-input-group {
+        border-radius: 50px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
+    .search-input-group .form-control {
+        height: 54px;
+        font-size: 1.1rem;
+    }
+    
+    .search-input-group .btn {
+        border-radius: 0 50px 50px 0;
+        font-weight: 500;
+        font-size: 1.1rem;
+    }
+    
+    /* 搜索结果计数 */
+    .search-results-count {
+        background-color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    
+    .search-icon-bg {
+        width: 48px;
+        height: 48px;
+        background-color: rgba(13, 110, 253, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .search-icon-bg i {
+        font-size: 1.5rem;
+        color: #0d6efd;
+    }
+    
+    /* 搜索结果卡片 */
+    .search-result-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .search-result-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .search-result-card .card-body {
+        padding: 1.5rem;
+    }
+    
+    .blog-title {
+        color: #212529;
+        font-weight: 600;
+        transition: color 0.2s;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+    
+    .blog-title:hover {
+        color: #0d6efd;
+    }
+    
+    .location-badge {
+        color: #6c757d;
+        font-size: 0.875rem;
+    }
+    
+    .read-more-hint {
+        color: #0d6efd;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .search-result-card:hover .read-more-hint {
+        opacity: 1;
+    }
+    
+    /* 无结果状态 */
     .empty-state {
-        padding: 3rem;
-        background-color: #f8f9fa;
-        border-radius: 0.5rem;
+        background-color: white;
+        padding: 4rem 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
     
+    .empty-icon-wrapper {
+        width: 100px;
+        height: 100px;
+        background-color: rgba(13, 110, 253, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+    
+    .empty-icon-wrapper i {
+        font-size: 3rem;
+        color: #0d6efd;
+    }
+    
+    /* 分页样式 */
     .pagination-container {
-        margin-top: 2rem;
-        padding-top: 1rem;
-        border-top: 1px solid #dee2e6;
+        padding-top: 1.5rem;
+    }
+    
+    .pagination-rounded .page-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 5px;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .pagination-rounded .page-item.active .page-link {
+        background-color: #0d6efd;
+        box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
     }
 </style>
 {% endblock %}

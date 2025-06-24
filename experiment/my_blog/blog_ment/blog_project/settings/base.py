@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'registration',
     'grappelli',
-    'bloggings',    
+    'articles', 
     'comments',
     'reviewers',
     'rest_framework',
@@ -182,7 +182,7 @@ LOGIN_URL = 'accounts:login'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR /'..'/ 'bloggings' / 'static',
+    BASE_DIR /'..'/ 'articles' / 'static',
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 

@@ -14,7 +14,7 @@ def register_view(request):
             user = form.save()
             login(request, user)
             messages.success(request, '注册成功！')
-            return redirect('bloggings:home')  # 替换为您的主页URL名称
+            return redirect('articles:home')  # 替换为您的主页URL名称
     else:
         form = CustomUserCreationForm()
     return render(request, 'accounts/register.html', {'form': form})
@@ -30,7 +30,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(request, '登录成功！')
-            return redirect('bloggings:home')
+            return redirect('articles:home')
         else:
             messages.error(request, '用户名或密码错误！')
     return render(request, 'accounts/login.html')
@@ -41,7 +41,7 @@ def logout_view(request):
     """
     logout(request)
     messages.success(request, '您已成功注销！')
-    return redirect('bloggings:home')  # 替换为您的主页URL名称
+    return redirect('articles:home')  # 替换为您的主页URL名称
 
 @login_required
 def profile_view(request):

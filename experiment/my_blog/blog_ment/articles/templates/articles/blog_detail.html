@@ -1,0 +1,106 @@
+{% extends 'articles/base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container py-4">
+    {% if blog %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h1 class="card-title mb-0">{{ blog.title }}</h1>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p class="text-muted">发布时间：{{blog.created_at}}</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted">作者：{{blog.author}}</p>
+                    <p class="text-muted">城市：{{blog.city_name}}</p>
+                </div>
+            </div>
+            
+            <div class="text-center mb-4">
+                {% if blog.featured_image %}
+                    <img src="{{blog.featured_image.url}}" class="img-fluid rounded" style="max-height: 300px;" alt="{{blog.title}}">
+                {% else %}
+                    <img src="{% static '../../../../../media/images/单元总结_-_Java基础语法思维导图.png' %}" 
+                         class="img-fluid rounded" style="max-height: 300px;" alt="{{blog.title}}">
+                {% endif %}
+            </div>
+            
+            <hr>
+            
+            <div class="blog-content mt-4">
+                <h3 class="mb-3">正文</h3>
+                <div class="p-3 bg-light rounded">
+                    <p style="font-size:16px; white-space: pre-wrap; line-height: 1.6;">
+                        {{ blog.content }}
+                        {{ blog.content_middle }}
+                        {{ blog.content_bottom }}
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-4 text-end">
+                <a href="/area_users/user_detail/" class="btn btn-primary">申请</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 评论区 -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-light">
+            <h3 class="mb-0">评论区</h3>
+        </div>
+        <div class="card-body">
+            {% for comment in blog.comments.all %}
+            <div class="comment border-bottom pb-3 mb-3">
+                <div class="d-flex justify-content-between">
+                    <p class="mb-1">{{ comment.text }}</p>
+                    <small class="text-muted">来自 {{ comment.user.username }}</small>
+                </div>
+                {% if comment.user == request.user %}
+                <div class="text-end mt-2">
+                    <form action="{% url 'articles:delete_comment' comment.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-danger">删除</button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <div class="alert alert-light text-center">
+                <p class="mb-0">还没有评论，快来发表第一条评论吧！</p>
+            </div>
+            {% endfor %}
+            
+            <hr>
+            
+            <!-- 评论表单 -->
+            <div class="mt-4">
+                <h4 class="mb-3">发表评论</h4>
+                {% if user.is_authenticated %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-success">提交评论</button>
+                </form>
+                {% else %}
+                <div class="alert alert-info">
+                    <p class="mb-0">请<a href="{% url 'accounts:login' %}" class="alert-link">登录</a>后发表评论</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-warning text-center">
+        <h4 class="alert-heading">抱歉！</h4>
+        <p>文章不存在或已被删除</p>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock%}

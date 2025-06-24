@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.utils.translation import gettext as _
 
-from bloggings.models import Me_blog
+from articles.models import Article
 # 修改导入的用户模型
 from accounts.models import CustomUser  # 替换原来的 User 导入
 from rest_framework import routers, serializers, viewsets
@@ -34,26 +34,26 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()  # 修改为 CustomUser
     serializer_class = UserSerializer
 
-class Me_blogSerializer(serializers.HyperlinkedModelSerializer):
+class ArticleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Me_blog
+        model = Article
         fields = '__all__'
 
-class Me_blogViewSet(viewsets.ModelViewSet):
-    queryset = Me_blog.objects.all()    
-    serializer_class = Me_blogSerializer
+class ArticleViewSet(viewsets.ModelViewSet):
+    queryset = Article.objects.all()    
+    serializer_class = ArticleSerializer
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
-router.register(r"bloggings", Me_blogViewSet)
+router.register(r"articles", ArticleViewSet)
 
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('', include("bloggings.urls")),
+    path('', include("articles.urls")),
 
     path('api/', include(router.urls)),
     path('api-auth/', include("rest_framework.urls", namespace='rest_framework')),

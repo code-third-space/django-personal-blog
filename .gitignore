@@ -31,10 +31,14 @@ experiment/my_blog/blog_ment/database_conf/my.cnf
 experiment/my_blog/blog_ment/start_local.sh
 
 ############################
-# Django 静态 & 媒体
+# Django 静态文件（collectstatic 产物）
 ############################
-blog_project/staticfiles/
-# media/        # 如需忽略上传媒体，可放开
+# 忽略任何层级下名为 staticfiles 的目录
+staticfiles/
+*/staticfiles/
+**/staticfiles/
+# 如果只想精确忽略当前项目里的收集目录，也可以写成：
+# experiment/my_blog/blog_ment/blog_project/staticfiles/
 
 ############################
 # 临时测试文件

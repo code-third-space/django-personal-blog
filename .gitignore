@@ -1,17 +1,17 @@
 ############################
 # 通用操作系统文件
 ############################
-.DS_Store                     # macOS
-Thumbs.db                     # Windows
+.DS_Store
+Thumbs.db
 
 ############################
 # Python / Django
 ############################
-*.pyc                         # 编译产物
-__pycache__/                  # 缓存目录
+*.pyc
+__pycache__/
 *.pyo
 *.pyd
-.Python                       # pyenv 本地版本
+.Python
 
 # 虚拟环境（适配任何文件夹层级）
 **/ll_env/

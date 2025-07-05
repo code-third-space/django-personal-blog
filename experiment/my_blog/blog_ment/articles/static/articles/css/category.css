@@ -1,0 +1,15 @@
+.category-bg {
+    background: #f4faff;
+    min-height: 100vh;
+    /* padding-top: 110px; */
+}
+.category-article-card {
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.category-article-card:hover {
+    box-shadow: 0 8px 32px rgba(16,163,111,0.10), 0 1.5px 6px 0 rgba(0,0,0,0.04);
+    transform: translateY(-4px) scale(1.02);
+}

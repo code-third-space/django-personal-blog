@@ -1,0 +1,118 @@
+.wave-top-bg,
+.wave-bottom-bg{
+  /* ① 删掉背景色，留透明，让 SVG 自己决定形状 */
+  /* background:#b3e0fc;   ← 这行删掉 */
+
+  position:relative;
+  height:auto;          /* 明确高度，与 SVG viewBox 对应 */
+  overflow:visible;       /* 避免多余部分撑高 */
+  line-height:0;         /* 去掉字体基线空隙 */
+  z-index:1;
+}
+
+.wave-top-bg{
+  margin-bottom:-10px;   /* 同原来，实现"无缝衔接" */
+}
+.wave-bottom-bg{
+  margin-top:-10px;
+}
+
+/* 移除重复的padding-top，已在mongodb.css中统一设置 */
+/* .main-content-bg {
+    padding-top: 110px;
+} */
+
+.feature-article-card, .category-card {
+    background: #fff;
+    border-radius: 2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+
+.category-card .badge {
+    font-size: 1rem;
+    padding: 0.7em 1.4em;
+    border-radius: 2em;
+    background: #e3f2fd;
+    color: #1976d2;
+    transition: background 0.2s, color 0.2s;
+}
+.category-card .badge:hover {
+    background: #1976d2;
+    color: #fff;
+    text-decoration: none;
+}
+
+.feature-article-list h3 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+.feature-article-list a {
+    color: #1976d2;
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+.feature-article-list a:hover {
+    color: #10A36F;
+}
+.feature-article-list > div {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1.5rem;
+}
+.feature-article-list > div:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.popular-card {
+    background: #fff;
+    border-radius: 2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    margin-top: 1.5rem;
+}
+.popular-card a {
+    color: #222;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.popular-card a:hover {
+    color: #10A36F;
+    text-decoration: underline;
+}
+.popular-card ol {
+    padding-left: 0;
+}
+
+.footer-wave-bg {
+    background: #b3e0fc;
+    position: relative;
+    margin-top: 40px;
+}
+.footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+.footer-section-title {
+    letter-spacing: 1px;
+    color: #1976d2;
+}
+.footer-list a {
+    color: #222;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.footer-list a:hover {
+    color: #10A36F;
+    text-decoration: underline;
+}
+.footer-icons a {
+    color: #1976d2;
+    transition: color 0.2s;
+}
+.footer-icons a:hover {
+    color: #10A36F;
+}
+.footer-icp {
+    margin-top: 0.5rem;
+}

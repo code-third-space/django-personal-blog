@@ -26,7 +26,7 @@
         <div class="col-md-8">
             <div class="d-flex align-items-center">
                 <span class="badge bg-primary rounded-pill me-3" style="font-size: 1rem; padding: 8px 15px;">
-                    <i class="bi bi-journal-richtext me-1"></i> {{ blog_all_list.paginator.count }} 篇博客
+                    <i class="bi bi-journal-richtext me-1"></i> {{ page_obj.paginator.count }} 篇博客
                 </span>
                 <div class="btn-group me-2">
                     <a href="?type=all" class="btn btn-outline-primary {% if not request.GET.type or request.GET.type == 'all' %}active{% endif %}">全部</a>
@@ -83,14 +83,8 @@
                                     <td class="ps-4">
                                         <a href="/blog_detail/{{blog.id}}/" class="text-decoration-none blog-title d-block">
                                             <div class="d-flex align-items-center">
-                                                <div class="blog-title-dot me-2" style="background-color: 
-                                                {% if blog.blog_type == '技术' %}#0d6efd
-                                                {% elif blog.blog_type == '财经' %}#28a745
-                                                {% elif blog.blog_type == '新闻' %}#dc3545
-                                                {% elif blog.blog_type == '阅读' %}#6f42c1
-                                                {% elif blog.blog_type == '风景' %}#20c997
-                                                {% else %}#fd7e14{% endif %}"></div>
-                                                <span>{{blog.blog_title}}</span>
+                                                <div class="blog-title-dot me-2 blog-type-{{ blog.blog_type }}"></div>
+                                                <span>{{blog.title}}</span>
                                             </div>
                                         </a>
                                     </td>
@@ -101,18 +95,18 @@
                                         <span class="badge blog-type-badge" style="color: white;">{{blog.blog_type}}</span>
                                     </td>
                                     <td>
-                                        <span class="badge country-badge">{{blog.blog_countries}}</span>
+                                        <span class="badge country-badge">{{blog.country}}</span>
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <i class="bi bi-calendar3 me-2 text-muted"></i>
-                                            <small>{{blog.created_date|date:"Y-m-d"}}</small>
+                                            <small>{{blog.created_at|date:"Y-m-d"}}</small>
                                         </div>
                                     </td>
                                     <td class="pe-4">
                                         <div class="blog-image-container">
-                                            {% if blog.picture %}
-                                            <img src="{{blog.picture.url}}" class="blog-image" alt="{{blog.blog_title}}">
+                                            {% if blog.featured_image %}
+                                            <img src="{{blog.featured_image.url}}" class="blog-image" alt="{{blog.blog_title}}">
                                             {% else %}
                                             <div class="no-image-placeholder">
                                                 <i class="bi bi-image"></i>
@@ -147,25 +141,25 @@
     </div>
 
     <!-- 分页 -->
-    {% if blog_all_list %}
+    {% if page_obj %}
     <div class="row mt-5">
         <div class="col-12">
             <nav aria-label="博客分页">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item {% if not blog_all_list.has_previous %}disabled{% endif %}">
+                    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
                         <a class="page-link" 
-                        href="{% if blog_all_list.has_previous %}?page={{ blog_all_list.previous_page_number }}{% if request.GET.type %}&type={{ request.GET.type }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% else %}javascript:void(0);{% endif %}">
+                        href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% if request.GET.type %}&type={{ request.GET.type }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% else %}javascript:void(0);{% endif %}">
                             <i class="bi bi-chevron-left"></i> 上一页
                         </a>
                     </li>
-                    {% for num in blog_all_list.paginator.page_range %}
-                        <li class="page-item {% if blog_all_list.number == num %}active{% endif %}">
+                    {% for num in page_obj.paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
                             <a class="page-link" href="?page={{ num }}{% if request.GET.type %}&type={{ request.GET.type }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ num }}</a>
                         </li>
                     {% endfor %}
-                    <li class="page-item {% if not blog_all_list.has_next %}disabled{% endif %}">
+                    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
                         <a class="page-link" 
-                        href="{% if blog_all_list.has_next %}?page={{ blog_all_list.next_page_number }}{% if request.GET.type %}&type={{ request.GET.type }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% else %}javascript:void(0);{% endif %}">
+                        href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% if request.GET.type %}&type={{ request.GET.type }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% else %}javascript:void(0);{% endif %}">
                             下一页 <i class="bi bi-chevron-right"></i>
                         </a>
                     </li>
@@ -209,6 +203,14 @@
         border-radius: 50%;
         display: inline-block;
     }
+    
+    /* 博客类型颜色 */
+    .blog-type-技术 { background-color: #0d6efd; }
+    .blog-type-财经 { background-color: #28a745; }
+    .blog-type-新闻 { background-color: #dc3545; }
+    .blog-type-阅读 { background-color: #6f42c1; }
+    .blog-type-风景 { background-color: #20c997; }
+    .blog-type-物品 { background-color: #fd7e14; }
     
     /* 图片容器样式 */
     .blog-image-container {

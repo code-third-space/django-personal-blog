@@ -98,21 +98,21 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# 数据库配置 - 使用环境变量
-import os
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# Mysql 数据库配置
 
 DATABASES = {
     "default": {
-        "ENGINE": os.getenv('DB_ENGINE', 'mysql.connector.django'),
-        "NAME": os.getenv('DB_NAME', 'djangodbl'),
-        "USER": os.getenv('DB_USER', 'djangouser'),
-        "PASSWORD": os.getenv('DB_PASSWORD', 'django'),
-        "HOST": os.getenv('DB_HOST', 'localhost'),
-        "PORT": os.getenv('DB_PORT', '3306'),
+        "ENGINE": 'mysql.connector.django',
         "OPTIONS": {
-            "charset": "utf8mb4",
-            "sql_mode": "STRICT_TRANS_TABLES",
-            "autocommit": True,
+            "read_default_file": 
+                str(Path(__file__).resolve().parent.parent.parent / "database_conf/my.cnf"),
         }
     },
     "TEST": {

@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1&*7v*bt-off)#fw((y3!ipa97#jv+#4*lro7o4a3e339^&4iv'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-1&*7v*bt-off)#fw((y3!ipa97#jv+#4*lro7o4a3e339^&4iv')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -35,10 +35,12 @@ SIMPLE_BACKEND_REDIRECT_URL = '/accounts/login/'
 # Application definition
 
 INSTALLED_APPS = [
+    'django_bootstrap5',
     'registration',
     'grappelli',
     'articles', 
     'comments',
+    'reviewers',
     'rest_framework',
     'accounts',
 
@@ -97,21 +99,21 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# 数据库配置 - 使用环境变量
-import os
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# Mysql 数据库配置
 
 DATABASES = {
     "default": {
-        "ENGINE": os.getenv('DB_ENGINE', 'mysql.connector.django'),
-        "NAME": os.getenv('DB_NAME', 'djangodbl'),
-        "USER": os.getenv('DB_USER', 'djangouser'),
-        "PASSWORD": os.getenv('DB_PASSWORD', 'django'),
-        "HOST": os.getenv('DB_HOST', 'localhost'),
-        "PORT": os.getenv('DB_PORT', '3306'),
+        "ENGINE": 'mysql.connector.django',
         "OPTIONS": {
-            "charset": "utf8mb4",
-            "sql_mode": "STRICT_TRANS_TABLES",
-            "autocommit": True,
+            "read_default_file": 
+                str(Path(__file__).resolve().parent.parent.parent / "database_conf/my.cnf"),
         }
     },
     "TEST": {
@@ -184,7 +186,7 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-DINGTALK_WEB_HOOK = "https://oapi.dingtalk.com/robot/send?access_token=0f9e5896fa84f6ba38211bcd3e82760ce64c80b193c8992e1558b8e59adf3463"
+DINGTALK_WEB_HOOK = os.getenv('DINGTALK_WEB_HOOK', "https://oapi.dingtalk.com/robot/send?access_token=0f9e5896fa84f6ba38211bcd3e82760ce64c80b193c8992e1558b8e59adf3463")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -269,8 +271,8 @@ EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
-EMAIL_HOST_USER = 'retcrylyxz@163.com'
-EMAIL_HOST_PASSWORD = 'DLgdDsHservSH9pM'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'retcrylyxz@163.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'DLgdDsHservSH9pM')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Celery Configuration Options

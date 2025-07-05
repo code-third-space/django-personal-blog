@@ -1,24 +1,43 @@
-# 忽略 DS_Store
+############################
+# 通用操作系统文件
+############################
 .DS_Store
+Thumbs.db
 
-# 忽略 .pyc 
+############################
+# Python / Django
+############################
 *.pyc
-
-# 忽略 __pycache__/
 __pycache__/
+*.pyo
+*.pyd
+.Python
 
-# 忽略 my.cnf 文件
-experiment/my_blog/blog_ment/database_conf/my.cnf
+# 虚拟环境（适配任何文件夹层级）
+**/ll_env/
+**/venv/
+**/.venv/
 
-# 忽略 blog_ment.performance.log 文件
+############################
+# 日志 & 运行时
+############################
+*.log
 experiment/my_blog/blog_ment/blog_ment.performance.log
 
-# 忽略测试文件test_pages.py
-experiment/my_blog/blog_ment/test_pages.py
-
-# 忽略本地启动脚本
+############################
+# 本地配置 / 私密脚本
+############################
+experiment/my_blog/blog_ment/database_conf/my.cnf
 experiment/my_blog/blog_ment/start_local.sh
 
-# 忽略本地运行环境
-**/ll_env/
+############################
+# Django 静态 & 媒体
+############################
+blog_project/staticfiles/
+# media/        # 如需忽略上传媒体，可放开
+
+############################
+# 临时测试文件
+############################
+experiment/my_blog/blog_ment/test_pages.py
 

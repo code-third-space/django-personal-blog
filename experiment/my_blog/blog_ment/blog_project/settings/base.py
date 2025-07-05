@@ -35,12 +35,10 @@ SIMPLE_BACKEND_REDIRECT_URL = '/accounts/login/'
 # Application definition
 
 INSTALLED_APPS = [
-    'django_bootstrap5',
     'registration',
     'grappelli',
     'articles', 
     'comments',
-    'reviewers',
     'rest_framework',
     'accounts',
 
@@ -107,14 +105,16 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 # }
 
 # Mysql 数据库配置
+# 使用环境变量，如果没有设置则使用默认值
 
 DATABASES = {
     "default": {
-        "ENGINE": 'mysql.connector.django',
-        "OPTIONS": {
-            "read_default_file": 
-                str(Path(__file__).resolve().parent.parent.parent / "database_conf/my.cnf"),
-        }
+        "ENGINE": os.getenv('DB_ENGINE', 'mysql.connector.django'),
+        "NAME": os.getenv('DB_NAME', 'djangodbl'),
+        "USER": os.getenv('DB_USER', 'djangouser'),
+        "PASSWORD": os.getenv('DB_PASSWORD', 'django'),
+        "HOST": os.getenv('DB_HOST', 'localhost'),
+        "PORT": os.getenv('DB_PORT', '3306'),
     },
     "TEST": {
         'NAME': 'test_django',

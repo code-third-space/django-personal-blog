@@ -14,7 +14,6 @@ django-redis==5.4.0
 django-registration-redux==2.13
 djangorestframework==3.16.0
 executing==2.2.0
-ipython==9.2.0
 ipython_pygments_lexers==1.1.1
 jedi==0.19.2
 kombu==5.4.2

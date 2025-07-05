@@ -1,0 +1,102 @@
+{% extends "articles/base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'articles/css/index.css' %}">
+<!-- 顶部波浪背景 -->
+<div class="wave-top-bg">
+  <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:120px;">
+    <path d="M0,60 Q360,0 720,60 T1440,60 L1440,0 L0,0 Z" fill="#b3e0fc"/>
+  </svg>
+</div>
+
+<!-- 白色内容区 -->
+<div class="main-content-bg py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 mb-4 mb-lg-0">
+        <h1 class="display-4 fw-bold mb-3">欢迎来到我的博客</h1>
+        <p class="lead text-secondary mb-4">分享技术、生活与思考，记录成长的点滴。</p>
+        <a href="{% url 'articles:all' %}" class="btn btn-success btn-lg me-3">全部文章</a>
+        <a href="#feature-section" class="btn btn-outline-success btn-lg">精选推荐</a>
+      </div>
+      <div class="col-lg-5 text-center">
+        <img src="{% static 'articles/images/banner.jpg' %}" alt="博客头图" class="img-fluid rounded-4 shadow">
+      </div>
+    </div>
+    <!-- 特色内容区：主推文章 + 分类标签 -->
+    <div class="row my-5" id="feature-section">
+      <!-- 主推文章区：多篇纵向排列 -->
+      <div class="col-lg-8 mb-4">
+        <div class="feature-article-list">
+          <h2 class="text-uppercase text-primary fs-6 mb-4" style="letter-spacing: 2px;">ARTICLES AND IDEAS</h2>
+          {% for article in feature_articles %}
+          <div class="mb-5">
+            <h3 class="fw-bold mb-1" style="font-size: 1.4rem;">{{ article.title }}</h3>
+            <div class="text-secondary mb-2" style="font-size: 1.1rem;">{{ article.subtitle }}</div>
+            <div class="mb-2" style="color: #444;">{{ article.summary|truncatechars:120 }}</div>
+            <a href="{% url 'articles:blog_detail' article.id %}" class="fw-bold" style="color:#111;text-decoration:underline; text-decoration: none">Read more</a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- 分类标签 -->
+      <div class="col-lg-4 mb-4">
+        <div class="category-card p-4 rounded-4 shadow mb-4">
+          <h2 class="text-uppercase text-danger fs-6 mb-3">BROWSE BY CATEGORY</h2>
+          <div class="d-flex flex-wrap gap-2">
+            {% for cat in categories %}
+            <a href="{{ cat.url }}" class="badge bg-info-subtle text-info fs-6 rounded-pill px-3 py-2">{{ cat.name }}</a>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="popular-card p-4 rounded-4 shadow">
+          <h2 class="text-uppercase text-danger fs-6 mb-3">POPULAR CONTENT</h2>
+          <ol class="list-unstyled mb-0">
+            {% for article in popular_articles %}
+            <li class="mb-2">
+              <a href="{% url 'articles:blog_detail' article.id %}" class="text-dark fw-bold" style="text-decoration:none;">
+                <span style="font-size:1.1rem;">{{ article.title }}</span>
+              </a>
+            </li>
+            {% endfor %}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 底部波浪背景 -->
+<div class="footer-wave-bg mt-5">
+  <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:120px;">
+    <path d="M0,60 Q360,120 720,60 T1440,60 L1440,120 L0,120 Z" fill="#b3e0fc"/>
+  </svg>
+  <div class="footer-content container py-4">
+    <div class="row text-center text-md-start justify-content-center">
+      <!-- 博客品牌 -->
+      <div class="col-md-6 mb-3">
+        <div class="footer-brand fw-bold mb-2" style="font-size:1.2rem;">个人试验系统</div>
+        <div class="footer-signature text-muted mb-2" style="font-size:1rem;">Never stop learning.</div>
+        <div class="footer-icp small text-muted">
+          <a href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2024072952号</a>
+        </div>
+      </div>
+      <!-- 关于/联系 -->
+      <div class="col-md-4 mb-3">
+        <div class="footer-section-title text-uppercase fw-bold mb-2" style="font-size:1rem;">About</div>
+        <ul class="footer-list list-unstyled mb-0">
+          <li><a href="#">关于本站</a></li>
+          <li><a href="#">联系我</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- 底部社交图标（可选） -->
+    <div class="footer-icons text-center mt-3">
+      <a href="#" class="mx-2"><i class="bi bi-github fs-5"></i></a>
+      <a href="#" class="mx-2"><i class="bi bi-linkedin fs-5"></i></a>
+      <a href="#" class="mx-2"><i class="bi bi-envelope fs-5"></i></a>
+    </div>
+  </div>
+</div>
+{% endblock %}

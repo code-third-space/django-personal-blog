@@ -5,7 +5,23 @@ from .models import get_subcategories
 
 # Register your models here.
 
+class ArticleAdminForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        blog_type = None
+        if self.instance and self.instance.blog_type is not None:
+            blog_type = self.instance.blog_type
+        subcats = get_subcategories(blog_type) if blog_type is not None else []
+        self.fields['subcategory'].widget = forms.Select(
+            choices=[('', '---------')] + [(i, name) for i, name in subcats]
+        )
+
 class ArticleAdmin(admin.ModelAdmin):
+    form = ArticleAdminForm
     search_fields = ('title',)
     list_filter = ('author', 'blog_type', 'city', 'country')
     list_display = ('title', 'get_blog_type_display', 'get_subcategory_display', 'author', 'created_at')

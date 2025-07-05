@@ -161,6 +161,7 @@
         color: rgba(255, 255, 255, 0.8);
         font-size: 0.9rem;
         margin-bottom: 15px;
+        text-align: right;
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 3;
@@ -312,8 +313,8 @@
                 <div class="blog-card">
                     <div class="card-img-container">
                         <a href="/blog_detail/{{blog.id}}">
-                            {% if blog.picture %}
-                                <img src="{{ blog.picture.url }}" alt="{{ blog.blog_title }}">
+                            {% if blog.featured_image %}
+                                <img src="{{ blog.featured_image.url }}" alt="{{ blog.blog_title }}">
                             {% else %}
                                 <div class="no-image-placeholder">
                                     <i class="bi bi-image me-2"></i> 暂无图片
@@ -323,8 +324,8 @@
                         <div class="card-badge">{{ blog.type_name }}</div>
                     </div>
                     <div class="card-content">
-                        <h3 class="card-title">{{ blog.blog_title }}</h3>
-                        <p class="card-excerpt">{{ blog.blog_detail_one|truncatechars:120 }}</p>
+                        <h3 class="card-title">{{ blog.title }}</h3>
+                        <p class="card-excerpt">{{ blog.author|truncatechars:120 }}</p>
                         <div class="card-meta">
                             <span><i class="bi bi-geo-alt"></i>{{ blog.city_name }}</span>
                             <span><i class="bi bi-calendar3"></i>{{ blog.created_date|date:"Y-m-d" }}</span>

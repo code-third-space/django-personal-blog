@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-1&*7v*bt-off)#fw((y3!ipa97#jv+#4*lro7o4a3e339^&4iv')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', '47.109.32.142', 'www.pepopen.cn', 'localhost']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -109,11 +109,11 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": os.getenv('DB_ENGINE', 'mysql.connector.django'),
-        "NAME": os.getenv('DB_NAME', 'djangodbl'),
-        "USER": os.getenv('DB_USER', 'djangouser'),
-        "PASSWORD": os.getenv('DB_PASSWORD', 'django'),
-        "HOST": os.getenv('DB_HOST', 'localhost'),
+        "ENGINE": os.getenv('DB_ENGINE'),
+        "NAME": os.getenv('DB_NAME'),
+        "USER": os.getenv('DB_USER'),
+        "PASSWORD": os.getenv('DB_PASSWORD'),
+        "HOST": os.getenv('DB_HOST'),
         "PORT": os.getenv('DB_PORT', '3306'),
     },
     "TEST": {
@@ -186,7 +186,7 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-DINGTALK_WEB_HOOK = os.getenv('DINGTALK_WEB_HOOK', "https://oapi.dingtalk.com/robot/send?access_token=0f9e5896fa84f6ba38211bcd3e82760ce64c80b193c8992e1558b8e59adf3463")
+DINGTALK_WEB_HOOK = os.getenv('DINGTALK_WEB_HOOK')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -267,13 +267,13 @@ LOGGING = { # 定义日志格式
 
 # 邮件设置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.163.com'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-EMAIL_USE_TLS = False
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'retcrylyxz@163.com')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'DLgdDsHservSH9pM')
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 465))
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'True') == 'True'
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'False') == 'True'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 
 # Celery Configuration Options
 CELERY_BROKER_URL = 'redis://localhost:6379/0' 

@@ -1,103 +1,183 @@
 {% load static %}
 {% load i18n %}
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
     <head>
         <meta charset="utf-8">
         <title>个人试验系统</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- 视口设置 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="theme-color" content="#667eea">
+        
+        <!-- 外部CSS库 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+        
+        <!-- 自定义CSS -->
+        <link rel="stylesheet" href="{% static 'articles/css/base-styles.css' %}">
+        <link rel="stylesheet" href="{% static 'articles/css/navbar-modern.css' %}">
+        <link rel="stylesheet" href="{% static 'articles/css/search.css' %}">
+        <link rel="stylesheet" href="{% static 'articles/css/mongodb.css' %}">
+        
+        <!-- 页面特定CSS -->
         {% block extra_css %}{% endblock %}
     </head>
 
 <body>
-       <!-- 导航栏 -->
-       <nav class="navbar navbar-expand-lg navbar-light shadow-sm rounded-3 py-5 mb-4 fixed-top backdrop-blur custom-navbar">
+    <!-- 现代化导航栏 -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-modern navbar-scroll-effect" role="navigation" aria-label="主导航">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="{% url 'articles:home' %}">个人试验系统</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                <span class="navbar-toggler-icon"></span>
+            <!-- 品牌Logo -->
+            <a class="navbar-brand navbar-brand-modern" href="{% url 'articles:home' %}" aria-label="返回首页">
+                <i class="bi bi-code-square navbar-brand-icon"></i>
+                <span>个人试验系统</span>
+            </a>
+            
+            <!-- 汉堡菜单按钮 -->
+            <button class="navbar-toggler navbar-toggler-modern" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="切换导航菜单">
+                <span class="navbar-toggler-icon navbar-toggler-icon-modern"></span>
             </button>
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'articles:python' %}">Python基础</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'articles:web' %}">Web开发</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'articles:backend' %}">后端架构</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'articles:database' %}">数据库</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'articles:algo' %}">算法与数据结构</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'articles:tools' %}">工具与自动化</a></li>
+            
+            <!-- 导航菜单 -->
+            <div class="collapse navbar-collapse navbar-collapse-modern" id="mainNav">
+                <!-- 主导航链接 -->
+                <ul class="navbar-nav me-auto" role="menubar">
+                    <li class="nav-item" role="none">
+                        <a class="nav-link nav-link-modern" href="{% url 'articles:python' %}" role="menuitem">
+                            <i class="bi bi-code-slash nav-link-icon"></i>Python基础
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link nav-link-modern" href="{% url 'articles:web' %}" role="menuitem">
+                            <i class="bi bi-globe nav-link-icon"></i>Web开发
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link nav-link-modern" href="{% url 'articles:backend' %}" role="menuitem">
+                            <i class="bi bi-server nav-link-icon"></i>后端架构
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link nav-link-modern" href="{% url 'articles:database' %}" role="menuitem">
+                            <i class="bi bi-database nav-link-icon"></i>数据库
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link nav-link-modern" href="{% url 'articles:algo' %}" role="menuitem">
+                            <i class="bi bi-diagram-3 nav-link-icon"></i>算法与数据结构
+                        </a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link nav-link-modern" href="{% url 'articles:tools' %}" role="menuitem">
+                            <i class="bi bi-tools nav-link-icon"></i>工具与自动化
+                        </a>
+                    </li>
                 </ul>
-                <ul class="navbar-nav ms-auto align-items-center flex-row">
-                    <li class="nav-item mx-2">
-                        <a class="nav-link p-2" href="#"><i class="bi bi-search fs-4"></i></a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link p-2" href="#"><i class="bi bi-volume-up fs-4"></i></a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link p-2" href="#"><i class="bi bi-brightness-high fs-4"></i></a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link p-2" href="#"><i class="bi bi-rss fs-4"></i></a>
-                    </li>
-                </ul>
+                
+                <!-- 右侧功能按钮 -->
+                <div class="navbar-actions">
+                    <button class="action-btn search-btn" aria-label="搜索内容">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <button class="action-btn" aria-label="语音播报">
+                        <i class="bi bi-volume-up"></i>
+                    </button>
+                    <button class="action-btn" aria-label="切换主题">
+                        <i class="bi bi-brightness-high"></i>
+                    </button>
+                    <button class="action-btn" aria-label="RSS订阅">
+                        <i class="bi bi-rss"></i>
+                    </button>
+                </div>
+                
+                <!-- 移动端功能按钮 -->
+                <div class="mobile-actions d-lg-none">
+                    <button class="mobile-action-btn" aria-label="搜索内容">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <button class="mobile-action-btn" aria-label="语音播报">
+                        <i class="bi bi-volume-up"></i>
+                    </button>
+                    <button class="mobile-action-btn" aria-label="切换主题">
+                        <i class="bi bi-brightness-high"></i>
+                    </button>
+                    <button class="mobile-action-btn" aria-label="RSS订阅">
+                        <i class="bi bi-rss"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
-   <!-- 主体内容 -->
-   {% block content %}
-   {% endblock %}
-<!-- 页脚 -->
-<footer class="text-center text-muted py-4">
-    匠风练习实验 | <a href="#" target="_blank">ICP备案号</a>
-</footer>
-<!-- 全屏搜索弹窗 -->
-<div id="fullscreen-search" class="fullscreen-search-overlay" style="display:none;">
-    <div class="fullscreen-search-content">
-        <button class="close-btn" id="close-search" aria-label="关闭搜索">
-            <i class="bi bi-x-lg"></i>
-        </button>
-        
-        <!-- 搜索标题 -->
-        <div class="mb-4">
-            <h2 class="display-5 fw-bold text-primary mb-2">探索知识的海洋</h2>
-            <p class="text-muted fs-5">输入关键词，发现精彩内容</p>
-        </div>
-        
-        <!-- 搜索表单 -->
-        <form id="fullscreen-search-form" action="{% url 'articles:search' %}" method="get" class="text-center">
-            <div class="search-input-group">
-                <i class="bi bi-search"></i>
-                <input type="text" name="q" class="search-input" placeholder="搜索博客内容..." autofocus>
-            </div>
-        </form>
-        
-        <!-- 搜索建议 -->
-        <div class="search-suggestions">
-            <span class="search-suggestion-tag" onclick="searchSuggestion('Python')">Python</span>
-            <span class="search-suggestion-tag" onclick="searchSuggestion('Web开发')">Web开发</span>
-            <span class="search-suggestion-tag" onclick="searchSuggestion('数据库')">数据库</span>
-            <span class="search-suggestion-tag" onclick="searchSuggestion('算法')">算法</span>
-            <span class="search-suggestion-tag" onclick="searchSuggestion('Django')">Django</span>
-            <span class="search-suggestion-tag" onclick="searchSuggestion('前端')">前端</span>
-        </div>
-        
-        <!-- 搜索提示 -->
-        <div class="search-tip mt-4">
-            <p class="fs-6 text-center">
-                搜索本站所有博客和代码片段。<br>
-                <span class="fw-bold">此功能为Beta版</span>，如有问题欢迎反馈！
+
+    <!-- 主体内容 -->
+    <main role="main">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="text-center text-muted py-4" role="contentinfo">
+        <div class="container">
+            <p class="mb-0">
+                匠风练习实验 | <a href="#" target="_blank" rel="noopener">ICP备案号</a>
             </p>
         </div>
+    </footer>
+
+    <!-- 全屏搜索弹窗 -->
+    <div id="fullscreen-search" class="fullscreen-search-overlay" role="dialog" aria-labelledby="search-title" aria-hidden="true">
+        <div class="fullscreen-search-content">
+            <button class="close-btn" id="close-search" aria-label="关闭搜索">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            
+            <!-- 搜索标题 -->
+            <div class="mb-4">
+                <h2 id="search-title" class="display-5 fw-bold text-primary mb-2">探索知识的海洋</h2>
+                <p class="text-muted fs-5">输入关键词，发现精彩内容</p>
+            </div>
+            
+            <!-- 搜索表单 -->
+            <form id="fullscreen-search-form" action="{% url 'articles:search' %}" method="get" class="text-center">
+                <div class="search-input-group">
+                    <i class="bi bi-search"></i>
+                    <input type="text" name="q" class="search-input" placeholder="搜索博客内容..." aria-label="搜索输入框">
+                </div>
+            </form>
+            
+            <!-- 搜索建议 -->
+            <div class="search-suggestions" role="group" aria-label="搜索建议">
+                <span class="search-suggestion-tag" role="button" tabindex="0">Python</span>
+                <span class="search-suggestion-tag" role="button" tabindex="0">Web开发</span>
+                <span class="search-suggestion-tag" role="button" tabindex="0">数据库</span>
+                <span class="search-suggestion-tag" role="button" tabindex="0">算法</span>
+                <span class="search-suggestion-tag" role="button" tabindex="0">Django</span>
+                <span class="search-suggestion-tag" role="button" tabindex="0">前端</span>
+            </div>
+            
+            <!-- 搜索提示 -->
+            <div class="search-tip mt-4">
+                <p class="fs-6 text-center">
+                    搜索本站所有博客和代码片段。<br>
+                    <span class="fw-bold">此功能为Beta版</span>，如有问题欢迎反馈！
+                </p>
+            </div>
+        </div>
     </div>
-</div>
-<!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 外部JavaScript库 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-<!-- 自定义CSS -->
-    <link rel="stylesheet" href="{% static 'articles/css/mongodb.css' %}">
-    <link rel="stylesheet" href="{% static 'articles/css/search.css' %}">
+    
+    <!-- 自定义JavaScript -->
+    <script src="{% static 'articles/js/base-interactions.js' %}"></script>
+    <script src="{% static 'articles/js/navbar-interactions.js' %}"></script>
     <script src="{% static 'articles/js/search.js' %}"></script>
+    
+    <!-- 页面特定JavaScript -->
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

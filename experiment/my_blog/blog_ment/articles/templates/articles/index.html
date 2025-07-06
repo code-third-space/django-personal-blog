@@ -3,66 +3,117 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'articles/css/index.css' %}">
-<!-- 顶部波浪背景 -->
-<div class="wave-top-bg">
-  <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:120px;">
-    <path d="M0,60 Q360,0 720,60 T1440,60 L1440,0 L0,0 Z" fill="#b3e0fc"/>
+
+<!-- 顶部波浪背景（紧跟导航栏） -->
+<div class="navbar-wave">
+  <svg viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path fill="#fff" fill-opacity="1" d="M0,32L48,26.7C96,21,192,11,288,10.7C384,11,480,21,576,24C672,27,768,21,864,16C960,11,1056,5,1152,8C1248,11,1344,21,1392,26.7L1440,32L1440,40L1392,40C1344,40,1248,40,1152,40C1056,40,960,40,864,40C768,40,672,40,576,40C480,40,384,40,288,40C192,40,96,40,48,40L0,40Z"></path>
   </svg>
 </div>
 
-<!-- 白色内容区 -->
-<div class="main-content-bg py-5">
+<!-- 主内容区域 -->
+<div class="main-content-bg">
   <div class="container">
-    <div class="row align-items-center mb-5">
-      <div class="col-lg-7 mb-4 mb-lg-0 d-flex flex-column justify-content-center">
-        <h1 class="display-4 fw-bold mb-3">欢迎来到我的博客</h1>
-        <p class="lead text-secondary mb-4">分享技术、生活与思考，记录成长的点滴。</p>
-        <div>
-          <a href="{% url 'articles:all' %}" class="btn btn-success btn-lg me-3">全部文章</a>
-          <a href="#feature-section" class="btn btn-outline-success btn-lg">精选推荐</a>
+    
+    <!-- 英雄区域 -->
+    <div class="hero-section">
+      <div class="row align-items-center">
+        <div class="col-lg-7 mb-4 mb-lg-0">
+          <div class="hero-content">
+            <h1 class="hero-title">探索技术的无限可能</h1>
+            <p class="hero-subtitle">在这里，我们分享最新的技术见解、实用的开发技巧，以及深入的技术分析。让我们一起在编程的世界里探索、学习、成长。</p>
+            <div class="hero-buttons">
+              <a href="{% url 'articles:all' %}" class="hero-btn hero-btn-primary">
+                <i class="bi bi-journal-text me-2"></i>浏览全部文章
+              </a>
+              <a href="#feature-section" class="hero-btn hero-btn-secondary">
+                <i class="bi bi-star me-2"></i>精选推荐
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-lg-5 text-center">
-        <img src="{% static 'articles/images/banner.jpg' %}" alt="博客头图" class="img-fluid rounded-5 shadow-lg" style="max-width: 420px;">
+        <div class="col-lg-5 text-center">
+          <div class="hero-image">
+            <img src="{% static 'articles/images/banner.jpg' %}" alt="技术博客头图" class="img-fluid">
+          </div>
+        </div>
       </div>
     </div>
-    <!-- 特色内容区：主推文章 + 分类标签 -->
-    <div class="row my-5" id="feature-section">
-      <!-- 主推文章区：多篇纵向排列 -->
-      <div class="col-lg-8 mb-4">
-        <div class="feature-article-list">
-          <h2 class="text-uppercase text-primary fs-6 mb-4" style="letter-spacing: 2px;">ARTICLES AND IDEAS</h2>
-          {% for article in feature_articles %}
-          <div class="mb-5">
-            <h3 class="fw-bold mb-1" style="font-size: 1.4rem;">{{ article.title }}</h3>
-            <div class="text-secondary mb-2" style="font-size: 1.1rem;">{{ article.subtitle }}</div>
-            <div class="mb-2" style="color: #444;">{{ article.summary|truncatechars:120 }}</div>
-            <a href="{% url 'articles:blog_detail' article.id %}" class="fw-bold" style="color:#1976d2;text-decoration:underline; text-decoration: none">Read more</a>
-          </div>
-          {% endfor %}
-        </div>
+
+    <!-- 特色内容区域 -->
+    <div class="feature-section" id="feature-section">
+      <div class="section-header">
+        <h2 class="section-title">精选文章</h2>
+        <p class="section-subtitle">发现最受欢迎的技术文章和深度解析</p>
       </div>
-      <!-- 分类标签 -->
-      <div class="col-lg-4 mb-4">
-        <div class="category-card p-4 rounded-4 shadow mb-4">
-          <h2 class="text-uppercase text-danger fs-6 mb-3">BROWSE BY CATEGORY</h2>
-          <div class="d-flex flex-wrap gap-2">
-            {% for cat in categories %}
-            <a href="{{ cat.url }}" class="badge bg-primary-subtle text-primary fs-6 rounded-pill px-3 py-2">{{ cat.name }}</a>
+      
+      <div class="row">
+        <!-- 主推文章区 -->
+        <div class="col-lg-8 mb-4">
+          <div class="feature-article-list">
+            {% for article in feature_articles %}
+            <div class="article-card">
+              <h3 class="article-title">{{ article.title }}</h3>
+              <div class="article-subtitle">{{ article.subtitle }}</div>
+              <div class="article-summary">{{ article.summary|truncatechars:150 }}</div>
+              <a href="{% url 'articles:blog_detail' article.id %}" class="article-link">
+                阅读全文
+              </a>
+            </div>
             {% endfor %}
           </div>
         </div>
-        <div class="popular-card p-4 rounded-4 shadow">
-          <h2 class="text-uppercase text-danger fs-6 mb-3">POPULAR CONTENT</h2>
-          <ol class="list-unstyled mb-0">
-            {% for article in popular_articles %}
-            <li class="mb-2">
-              <a href="{% url 'articles:blog_detail' article.id %}" class="text-dark fw-bold" style="text-decoration:none;">
-                <span style="font-size:1.1rem;">{{ article.title }}</span>
-              </a>
-            </li>
-            {% endfor %}
-          </ol>
+        
+        <!-- 侧边栏 -->
+        <div class="col-lg-4 mb-4">
+          <!-- 分类导航 -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">
+              <i class="bi bi-grid-3x3-gap me-2"></i>分类导航
+            </h3>
+            <div class="d-flex flex-wrap">
+              {% for cat in categories %}
+              <a href="{{ cat.url }}" class="category-tag">{{ cat.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+          
+          <!-- 热门文章 -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">
+              <i class="bi bi-fire me-2"></i>热门文章
+            </h3>
+            <ul class="popular-list">
+              {% for article in popular_articles %}
+              <li class="popular-item">
+                <a href="{% url 'articles:blog_detail' article.id %}" class="popular-link">
+                  {{ article.title }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          
+          <!-- 快速统计 -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">
+              <i class="bi bi-bar-chart me-2"></i>网站统计
+            </h3>
+            <div class="row text-center">
+              <div class="col-6">
+                <div class="stat-item">
+                  <div class="stat-number">{{ feature_articles.count }}</div>
+                  <div class="stat-label">文章总数</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="stat-item">
+                  <div class="stat-number">{{ categories.count }}</div>
+                  <div class="stat-label">分类数量</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -70,35 +121,88 @@
 </div>
 
 <!-- 底部波浪背景 -->
-<div class="footer-wave-bg mt-5">
+<div class="footer-wave-bg">
   <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:120px;">
-    <path d="M0,60 Q360,120 720,60 T1440,60 L1440,120 L0,120 Z" fill="#b3e0fc"/>
+    <path d="M0,60 Q360,120 720,60 T1440,60 L1440,120 L0,120 Z" fill="url(#footerGradient)"/>
+    <defs>
+      <linearGradient id="footerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+      </linearGradient>
+    </defs>
   </svg>
-  <div class="footer-content container py-4">
+  
+  <div class="footer-content">
     <div class="row text-center text-md-start justify-content-center">
       <!-- 博客品牌 -->
-      <div class="col-md-6 mb-3">
-        <div class="footer-brand fw-bold mb-2" style="font-size:1.2rem;">个人试验系统</div>
-        <div class="footer-signature text-muted mb-2" style="font-size:1rem;">Never stop learning.</div>
-        <div class="footer-icp small text-muted">
+      <div class="col-md-6 mb-4">
+        <div class="footer-brand">个人试验系统</div>
+        <div class="footer-signature">Never stop learning, never stop growing.</div>
+        <div class="footer-icp small">
           <a href="#" target="_blank">ICP备案号</a>
         </div>
       </div>
-      <!-- 关于/联系 -->
-      <div class="col-md-4 mb-3">
-        <div class="footer-section-title text-uppercase fw-bold mb-2" style="font-size:1rem;">About</div>
-        <ul class="footer-list list-unstyled mb-0">
+      
+      <!-- 快速链接 -->
+      <div class="col-md-3 mb-4">
+        <div class="footer-section-title">快速链接</div>
+        <ul class="footer-list">
+          <li><a href="{% url 'articles:all' %}">全部文章</a></li>
+          <li><a href="{% url 'articles:python' %}">Python基础</a></li>
+          <li><a href="{% url 'articles:web' %}">Web开发</a></li>
+          <li><a href="{% url 'articles:backend' %}">后端架构</a></li>
+        </ul>
+      </div>
+      
+      <!-- 关于我们 -->
+      <div class="col-md-3 mb-4">
+        <div class="footer-section-title">关于我们</div>
+        <ul class="footer-list">
           <li><a href="#">关于本站</a></li>
           <li><a href="#">联系我</a></li>
+          <li><a href="#">隐私政策</a></li>
+          <li><a href="#">使用条款</a></li>
         </ul>
       </div>
     </div>
-    <!-- 底部社交图标（可选） -->
-    <div class="footer-icons text-center mt-3">
-      <a href="https://github.com/" class="mx-2"><i class="bi bi-github fs-5"></i></a>
-      <a href="https://www.linkedin.com/" class="mx-2"><i class="bi bi-linkedin fs-5"></i></a>
-      <a href="#" class="mx-2"><i class="bi bi-envelope fs-5"></i></a>
+    
+    <!-- 社交图标 -->
+    <div class="footer-icons text-center">
+      <a href="https://github.com/" aria-label="GitHub">
+        <i class="bi bi-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/" aria-label="LinkedIn">
+        <i class="bi bi-linkedin"></i>
+      </a>
+      <a href="mailto:contact@example.com" aria-label="Email">
+        <i class="bi bi-envelope"></i>
+      </a>
+      <a href="#" aria-label="WeChat">
+        <i class="bi bi-wechat"></i>
+      </a>
     </div>
   </div>
 </div>
+
+<!-- 统计样式 -->
+<style>
+.stat-item {
+  padding: 1rem;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+</style>
+
 {% endblock %}

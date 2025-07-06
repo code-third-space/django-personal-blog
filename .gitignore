@@ -27,6 +27,7 @@ experiment/my_blog/blog_ment/blog_ment.performance.log
 ############################
 # 本地配置 / 私密脚本
 ############################
+.env
 experiment/my_blog/blog_ment/database_conf/my.cnf
 experiment/my_blog/blog_ment/start_local.sh
 
@@ -44,4 +45,6 @@ staticfiles/
 # 临时测试文件
 ############################
 experiment/my_blog/blog_ment/test_pages.py
+
+.cache_ggshield
 

@@ -1,11 +1,11 @@
-# 主分类保持不变
+# 主分类 - 更新为实际使用的分类名称
 BlogTypes = [
-    [0, "技术类"],
-    [1, "资讯类"],
-    [2, "财经类"],
-    [3, "阅读类"],
-    [4, "风景类"],
-    [5, "物品类"],
+    [0, "Python"],
+    [1, "Web"],
+    [2, "Backend"],
+    [3, "Database"],
+    [4, "Algo"],
+    [5, "Tools"],
 ]
 
 # 为每个主分类定义固定的二级分类
@@ -70,12 +70,12 @@ ItemCategories = [
 # 根据主分类获取对应的二级分类
 def get_subcategories(blog_type):
     subcategories_map = {
-        0: TechCategories,
-        1: NewsCategories,
-        2: FinanceCategories,
-        3: ReadingCategories,
-        4: SceneryCategories,
-        5: ItemCategories,
+        0: TechCategories,      # Python -> 技术类二级分类
+        1: NewsCategories,      # Web -> 资讯类二级分类
+        2: FinanceCategories,   # Backend -> 财经类二级分类
+        3: ReadingCategories,   # Database -> 阅读类二级分类
+        4: SceneryCategories,   # Algo -> 风景类二级分类
+        5: ItemCategories,      # Tools -> 物品类二级分类
     }
     return subcategories_map.get(blog_type, [])
 

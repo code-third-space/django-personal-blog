@@ -11,12 +11,12 @@ class Article(models.Model):
     """博客文章模型（更专业的命名替代原Me_blog）"""
     title = models.CharField(max_length=56, blank=False, verbose_name=_("标题"))
     blog_type = models.SmallIntegerField(blank=False, choices=[
-        [0, "技术类"],
-        [1, "资讯类"],
-        [2, "财经类"],
-        [3, "阅读类"],
-        [4, "风景类"],
-        [5, "物品类"],
+        [0, "Python"],
+        [1, "Web"],
+        [2, "Backend"],
+        [3, "Database"],
+        [4, "Algo"],
+        [5, "Tools"],
     ], verbose_name=_("主分类"))
     subcategory = models.SmallIntegerField(blank=True, null=True, verbose_name=_("二级分类"))
     country = models.SmallIntegerField(blank=False, choices=[

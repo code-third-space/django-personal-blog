@@ -1,4 +1,9 @@
 {% extends 'articles/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'articles/css/search.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="search-container py-5">
@@ -81,7 +86,7 @@
                     <h3 class="mb-3">未找到相关结果</h3>
                     <p class="text-muted mb-4">很抱歉，我们找不到与"{{ request.GET.q }}"相关的内容<br>请尝试使用不同的关键词或浏览我们的博客分类</p>
                     <div class="mt-4">
-                        <a href="{% url 'articles:blog_all' %}" class="btn btn-primary me-2">
+                        <a href="{% url 'articles:all' %}" class="btn btn-primary me-2">
                             <i class="bi bi-grid me-2"></i>浏览全部博客
                         </a>
                         <a href="{% url 'articles:home' %}" class="btn btn-outline-secondary">
@@ -140,165 +145,5 @@
     </div>
 </div>
 
-<style>
-    /* 整体搜索容器样式 */
-    .search-container {
-        background-color: #f9fafb;
-        min-height: 80vh;
-    }
-    
-    /* 搜索英雄区域 */
-    .search-hero {
-        background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
-        padding: 3rem 2rem;
-        border-radius: 1rem;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        margin-bottom: 2.5rem;
-    }
-    
-    /* 搜索关键词高亮 */
-    .search-term {
-        background-color: rgba(13, 110, 253, 0.1);
-        color: #0d6efd;
-        padding: 0.2rem 0.5rem;
-        border-radius: 0.25rem;
-        font-weight: 500;
-    }
-    
-    /* 搜索框样式 */
-    .search-box-wrapper {
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    
-    .search-input-group {
-        border-radius: 50px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    }
-    
-    .search-input-group .form-control {
-        height: 54px;
-        font-size: 1.1rem;
-    }
-    
-    .search-input-group .btn {
-        border-radius: 0 50px 50px 0;
-        font-weight: 500;
-        font-size: 1.1rem;
-    }
-    
-    /* 搜索结果计数 */
-    .search-results-count {
-        background-color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 0.75rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-    
-    .search-icon-bg {
-        width: 48px;
-        height: 48px;
-        background-color: rgba(13, 110, 253, 0.1);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .search-icon-bg i {
-        font-size: 1.5rem;
-        color: #0d6efd;
-    }
-    
-    /* 搜索结果卡片 */
-    .search-result-card {
-        border: none;
-        border-radius: 1rem;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        transition: all 0.3s ease;
-    }
-    
-    .search-result-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    }
-    
-    .search-result-card .card-body {
-        padding: 1.5rem;
-    }
-    
-    .blog-title {
-        color: #212529;
-        font-weight: 600;
-        transition: color 0.2s;
-        display: block;
-        margin-bottom: 0.75rem;
-    }
-    
-    .blog-title:hover {
-        color: #0d6efd;
-    }
-    
-    .location-badge {
-        color: #6c757d;
-        font-size: 0.875rem;
-    }
-    
-    .read-more-hint {
-        color: #0d6efd;
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-    
-    .search-result-card:hover .read-more-hint {
-        opacity: 1;
-    }
-    
-    /* 无结果状态 */
-    .empty-state {
-        background-color: white;
-        padding: 4rem 2rem;
-        border-radius: 1rem;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
-    
-    .empty-icon-wrapper {
-        width: 100px;
-        height: 100px;
-        background-color: rgba(13, 110, 253, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto;
-    }
-    
-    .empty-icon-wrapper i {
-        font-size: 3rem;
-        color: #0d6efd;
-    }
-    
-    /* 分页样式 */
-    .pagination-container {
-        padding-top: 1.5rem;
-    }
-    
-    .pagination-rounded .page-link {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 5px;
-        border: none;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    
-    .pagination-rounded .page-item.active .page-link {
-        background-color: #0d6efd;
-        box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
-    }
-</style>
+<!-- 搜索样式已移至 search.css -->
 {% endblock %}

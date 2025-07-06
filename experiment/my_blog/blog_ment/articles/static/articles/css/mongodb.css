@@ -180,52 +180,9 @@
     border-radius: 0 0 2rem 2rem;
 }
 
-.fullscreen-search-overlay {
-    position: fixed;
-    z-index: 2000;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(255,255,255,0.98);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-.fullscreen-search-content {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    position: relative;
-}
-.search-input-group {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 3px solid #4f6df5;
-    padding-bottom: 0.5em;
-    margin-bottom: 1.5em;
-}
-.search-input {
-    border: none;
-    outline: none;
-    font-size: 2rem;
-    width: 80%;
-    background: transparent;
-}
-.close-btn {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    font-size: 2.5rem;
-    color: #333;
-    cursor: pointer;
-    z-index: 10;
-    transition: color 0.2s;
-}
-.close-btn:hover {
-    color: #10A36F;
-}
+/* ===========================================================
+   搜索功能样式已移至 search.css
+   ========================================================= */
 
 /* ---------- 5. 导航栏遮挡问题解决方案 ------------ */
 /* 只给内容区加padding-top，波浪区不加 */

@@ -1,0 +1,648 @@
+/* ===========================================================
+   搜索功能专用样式文件
+   包含：全屏搜索弹窗、搜索结果页面、搜索建议等
+   ========================================================= */
+
+/* ===========================================================
+   全屏搜索弹窗样式
+   ========================================================= */
+
+/* 
+   全屏搜索遮罩层
+   - position: fixed 固定定位，覆盖整个屏幕
+   - z-index: 2000 确保在最顶层
+   - top/left/right/bottom: 0 铺满整个视口
+   - background: linear-gradient 创建渐变背景，从品牌色到白色再到品牌色
+   - backdrop-filter: blur(10px) 背景模糊效果，现代浏览器支持
+   - -webkit-backdrop-filter 兼容Safari浏览器
+   - display: flex 弹性布局，垂直居中内容
+   - animation: searchFadeIn 0.3s 打开时的缩放动画
+   - transition: opacity 0.3s 关闭时的透明度过渡
+*/
+.fullscreen-search-overlay {
+    position: fixed;
+    z-index: 2000;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(16, 163, 111, 0.05) 0%, 
+        rgba(255, 255, 255, 0.95) 50%, 
+        rgba(16, 163, 111, 0.05) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    animation: searchFadeIn 0.3s ease-out;
+    transition: opacity 0.3s ease;
+}
+
+/* 
+   搜索内容容器
+   - width: 100% 占满可用宽度
+   - max-width: 800px 限制最大宽度，避免在大屏幕上过宽
+   - margin: 0 auto 水平居中
+   - position: relative 为绝对定位的子元素提供参考
+   - padding: 2rem 内边距，提供呼吸空间
+   - text-align: center 文本居中对齐
+*/
+.fullscreen-search-content {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* 
+   搜索输入组容器
+   - display: flex 弹性布局，水平排列图标和输入框
+   - align-items: center 垂直居中对齐
+   - background: rgba(255,255,255,0.9) 半透明白色背景
+   - border: 2px solid 品牌色边框，透明度0.2
+   - border-radius: 50px 圆角，创建胶囊形状
+   - padding: 1.5rem 2rem 内边距，提供舒适的点击区域
+   - box-shadow: 0 20px 40px 创建深度阴影效果
+   - transition: all 0.3s ease 所有属性变化时的平滑过渡
+   - position: relative 为伪元素提供定位参考
+   - overflow: hidden 隐藏超出容器的内容（用于光效动画）
+*/
+.search-input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(16, 163, 111, 0.2);
+    border-radius: 50px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 20px 40px rgba(16, 163, 111, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 
+   搜索框光效动画 - 伪元素
+   - content: '' 创建伪元素内容
+   - position: absolute 绝对定位，相对于父容器
+   - top: 0; left: -100% 初始位置在容器左侧外部
+   - width: 100%; height: 100% 覆盖整个容器
+   - background: linear-gradient 创建从左到右的渐变光效
+   - transition: left 0.5s ease 位置变化的平滑过渡
+   效果：当输入框获得焦点时，光效从左侧滑入，营造动态效果
+*/
+.search-input-group::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(16, 163, 111, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+/* 
+   搜索框焦点状态样式
+   - :focus-within 当容器内任何元素获得焦点时触发
+   - border-color: var(--bs-primary) 边框变为品牌色
+   - box-shadow: 0 25px 50px 增强阴影效果，营造悬浮感
+   - transform: translateY(-2px) 向上移动2px，创建悬浮效果
+*/
+.search-input-group:focus-within {
+    border-color: var(--bs-primary);
+    box-shadow: 0 25px 50px rgba(16, 163, 111, 0.15);
+    transform: translateY(-2px);
+}
+
+/* 
+   焦点状态下的光效动画
+   - left: 100% 光效移动到容器右侧外部
+   - 配合transition实现从左到右的光效扫过效果
+*/
+.search-input-group:focus-within::before {
+    left: 100%;
+}
+
+/* 
+   搜索图标样式
+   - font-size: 1.8rem 图标大小
+   - color: var(--bs-primary) 品牌色
+   - margin-right: 1rem 右侧间距
+   - transition: transform 0.3s ease 变换动画
+*/
+.search-input-group i {
+    font-size: 1.8rem;
+    color: var(--bs-primary);
+    margin-right: 1rem;
+    transition: transform 0.3s ease;
+}
+
+/* 
+   焦点状态下图标放大效果
+   - transform: scale(1.1) 图标放大1.1倍
+   - 配合transition实现平滑的缩放动画
+*/
+.search-input-group:focus-within i {
+    transform: scale(1.1);
+}
+
+/* 
+   搜索输入框样式
+   - border: none 移除默认边框
+   - outline: none 移除焦点轮廓
+   - font-size: 1.5rem 字体大小
+   - width: 100% 占满容器宽度
+   - background: transparent 透明背景
+   - color: #333 深灰色文字
+   - font-weight: 400 正常字重
+   - letter-spacing: 0.5px 字母间距，提高可读性
+*/
+.search-input {
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    width: 100%;
+    background: transparent;
+    color: #333;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* 
+   输入框占位符样式
+   - color: #999 浅灰色
+   - font-weight: 300 较细字重，区分于实际输入内容
+*/
+.search-input::placeholder {
+    color: #999;
+    font-weight: 300;
+}
+
+/* 
+   关闭按钮样式
+   - position: absolute 绝对定位，相对于搜索内容容器
+   - top: 2rem; right: 2rem 右上角位置
+   - background: rgba(255,255,255,0.9) 半透明白色背景
+   - border: none 移除边框
+   - font-size: 2rem 图标大小
+   - color: #666 灰色图标
+   - cursor: pointer 鼠标指针样式
+   - z-index: 10 确保在其他元素之上
+   - transition: all 0.3s ease 所有属性变化动画
+   - width/height: 50px 固定尺寸
+   - border-radius: 50% 圆形按钮
+   - display: flex 弹性布局，居中图标
+   - box-shadow: 0 4px 12px 阴影效果
+*/
+.close-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    font-size: 2rem;
+    color: #666;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 
+   关闭按钮悬停效果
+   - color: var(--bs-primary) 图标变为品牌色
+   - background: rgba(16,163,111,0.1) 背景变为品牌色半透明
+   - transform: rotate(90deg) scale(1.1) 旋转90度并放大1.1倍
+   - 配合transition实现平滑的旋转和缩放动画
+*/
+.close-btn:hover {
+    color: var(--bs-primary);
+    background: rgba(16, 163, 111, 0.1);
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* 
+   搜索提示框样式
+   - background: rgba(255,255,255,0.8) 半透明白色背景
+   - border-radius: 20px 圆角边框
+   - padding: 1.5rem 2rem 内边距
+   - box-shadow: 0 10px 30px 柔和阴影
+   - backdrop-filter: blur(5px) 背景模糊效果
+   - border: 1px solid 品牌色半透明边框
+*/
+.search-tip {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(16, 163, 111, 0.1);
+}
+
+/* 
+   提示文本样式
+   - margin: 0 移除默认边距
+   - color: #555 中等灰色
+   - line-height: 1.6 行高，提高可读性
+*/
+.search-tip p {
+    margin: 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* 
+   渐变文字效果
+   - background: linear-gradient 创建45度渐变背景
+   - -webkit-background-clip: text 将背景裁剪到文字区域
+   - -webkit-text-fill-color: transparent 使文字透明，显示背景
+   - background-clip: text 标准属性，兼容其他浏览器
+   效果：文字显示为渐变色，从品牌色到深绿色
+*/
+.search-tip .fw-bold {
+    color: var(--bs-primary);
+    background: linear-gradient(45deg, var(--bs-primary), #0d8a5a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 
+   搜索弹窗打开动画
+   - @keyframes 定义关键帧动画
+   - from: 初始状态 - 透明度0，缩放0.9
+   - to: 结束状态 - 透明度1，缩放1
+   - 配合animation: searchFadeIn 0.3s ease-out使用
+   效果：弹窗从略微缩小且透明的状态平滑过渡到正常大小和完全不透明
+*/
+@keyframes searchFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 
+   搜索建议容器
+   - margin-top: 2rem 顶部间距
+   - display: flex 弹性布局
+   - flex-wrap: wrap 允许换行
+   - justify-content: center 水平居中
+   - gap: 0.5rem 标签之间的间距
+*/
+.search-suggestions {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* 
+   搜索建议标签样式
+   - background: rgba(16,163,111,0.1) 品牌色半透明背景
+   - color: var(--bs-primary) 品牌色文字
+   - padding: 0.5rem 1rem 内边距
+   - border-radius: 20px 圆角，创建胶囊形状
+   - font-size: 0.9rem 较小字体
+   - cursor: pointer 鼠标指针样式
+   - transition: all 0.3s ease 所有属性变化动画
+   - border: 1px solid 品牌色半透明边框
+*/
+.search-suggestion-tag {
+    background: rgba(16, 163, 111, 0.1);
+    color: var(--bs-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(16, 163, 111, 0.2);
+}
+
+/* 
+   搜索建议标签悬停效果
+   - background: var(--bs-primary) 背景变为品牌色
+   - color: white 文字变为白色
+   - transform: translateY(-2px) 向上移动2px，创建悬浮效果
+   - box-shadow: 0 5px 15px 增强阴影效果
+   效果：鼠标悬停时标签上浮并变色，提供明显的交互反馈
+*/
+.search-suggestion-tag:hover {
+    background: var(--bs-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(16, 163, 111, 0.3);
+}
+
+/* ===========================================================
+   搜索结果页面样式
+   ========================================================= */
+
+/* 
+   整体搜索容器样式
+   - background-color: #f9fafb 浅灰色背景
+   - min-height: 80vh 最小高度，确保页面有足够内容
+   - padding-top: var(--navbar-height) 为固定导航栏留出空间
+*/
+.search-container {
+    background-color: #f9fafb;
+    min-height: 80vh;
+    padding-top: var(--navbar-height) !important;
+}
+
+/* 
+   搜索英雄区域
+   - background: linear-gradient 渐变背景
+   - padding: 3rem 2rem 内边距
+   - border-radius: 1rem 圆角
+   - box-shadow: 0 10px 30px 阴影效果
+   - margin-bottom: 2.5rem 底部间距
+*/
+.search-hero {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-bottom: 2.5rem;
+}
+
+/* 
+   搜索关键词高亮
+   - background-color: rgba(13, 110, 253, 0.1) 蓝色半透明背景
+   - color: #0d6efd 蓝色文字
+   - padding: 0.2rem 0.5rem 内边距
+   - border-radius: 0.25rem 圆角
+   - font-weight: 500 中等字重
+*/
+.search-term {
+    background-color: rgba(13, 110, 253, 0.1);
+    color: #0d6efd;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+}
+
+/* 
+   搜索框包装器
+   - max-width: 600px 最大宽度
+   - margin: 0 auto 水平居中
+*/
+.search-box-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 
+   搜索结果页面搜索框样式
+   - border-radius: 50px 圆角
+   - overflow: hidden 隐藏溢出内容
+   - box-shadow: 0 5px 15px 阴影效果
+*/
+.search-input-group {
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* 
+   搜索框输入控件
+   - height: 54px 固定高度
+   - font-size: 1.1rem 字体大小
+*/
+.search-input-group .form-control {
+    height: 54px;
+    font-size: 1.1rem;
+}
+
+/* 
+   搜索按钮
+   - border-radius: 0 50px 50px 0 右侧圆角
+   - font-weight: 500 中等字重
+   - font-size: 1.1rem 字体大小
+*/
+.search-input-group .btn {
+    border-radius: 0 50px 50px 0;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* 
+   搜索结果计数
+   - background-color: white 白色背景
+   - padding: 1rem 1.5rem 内边距
+   - border-radius: 0.75rem 圆角
+   - box-shadow: 0 4px 12px 阴影效果
+*/
+.search-results-count {
+    background-color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* 
+   搜索图标背景
+   - width/height: 48px 固定尺寸
+   - background-color: rgba(13, 110, 253, 0.1) 蓝色半透明背景
+   - border-radius: 12px 圆角
+   - display: flex 弹性布局，居中图标
+*/
+.search-icon-bg {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(13, 110, 253, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 
+   搜索图标
+   - font-size: 1.5rem 图标大小
+   - color: #0d6efd 蓝色
+*/
+.search-icon-bg i {
+    font-size: 1.5rem;
+    color: #0d6efd;
+}
+
+/* 
+   搜索结果卡片
+   - border: none 移除边框
+   - border-radius: 1rem 圆角
+   - box-shadow: 0 5px 15px 阴影效果
+   - transition: all 0.3s ease 过渡动画
+*/
+.search-result-card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+/* 
+   搜索结果卡片悬停效果
+   - transform: translateY(-8px) 向上移动
+   - box-shadow: 0 15px 30px 增强阴影
+*/
+.search-result-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* 
+   搜索结果卡片内容
+   - padding: 1.5rem 内边距
+*/
+.search-result-card .card-body {
+    padding: 1.5rem;
+}
+
+/* 
+   博客标题
+   - color: #212529 深色文字
+   - font-weight: 600 中等字重
+   - transition: color 0.2s 颜色过渡
+   - display: block 块级显示
+   - margin-bottom: 0.75rem 底部间距
+*/
+.blog-title {
+    color: #212529;
+    font-weight: 600;
+    transition: color 0.2s;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+/* 
+   博客标题悬停效果
+   - color: #0d6efd 蓝色
+*/
+.blog-title:hover {
+    color: #0d6efd;
+}
+
+/* 
+   位置徽章
+   - color: #6c757d 灰色
+   - font-size: 0.875rem 较小字体
+*/
+.location-badge {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+/* 
+   阅读更多提示
+   - color: #0d6efd 蓝色
+   - opacity: 0 初始透明
+   - transition: opacity 0.3s 透明度过渡
+*/
+.read-more-hint {
+    color: #0d6efd;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* 
+   悬停时显示阅读更多提示
+   - opacity: 1 完全不透明
+*/
+.search-result-card:hover .read-more-hint {
+    opacity: 1;
+}
+
+/* 
+   无结果状态
+   - background-color: white 白色背景
+   - padding: 4rem 2rem 内边距
+   - border-radius: 1rem 圆角
+   - box-shadow: 0 10px 30px 阴影效果
+*/
+.empty-state {
+    background-color: white;
+    padding: 4rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* 
+   空状态图标包装器
+   - width/height: 100px 固定尺寸
+   - background-color: rgba(13, 110, 253, 0.1) 蓝色半透明背景
+   - border-radius: 50% 圆形
+   - display: flex 弹性布局，居中图标
+   - margin: 0 auto 水平居中
+*/
+.empty-icon-wrapper {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(13, 110, 253, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* 
+   空状态图标
+   - font-size: 3rem 大图标
+   - color: #0d6efd 蓝色
+*/
+.empty-icon-wrapper i {
+    font-size: 3rem;
+    color: #0d6efd;
+}
+
+/* 
+   分页容器
+   - padding-top: 1.5rem 顶部间距
+*/
+.pagination-container {
+    padding-top: 1.5rem;
+}
+
+/* 
+   圆角分页链接
+   - width/height: 40px 固定尺寸
+   - border-radius: 50% 圆形
+   - display: flex 弹性布局，居中内容
+   - margin: 0 5px 左右间距
+   - border: none 移除边框
+   - box-shadow: 0 2px 5px 阴影效果
+*/
+.pagination-rounded .page-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* 
+   激活状态的分页链接
+   - background-color: #0d6efd 蓝色背景
+   - box-shadow: 0 5px 15px 增强阴影
+*/
+.pagination-rounded .page-item.active .page-link {
+    background-color: #0d6efd;
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+}

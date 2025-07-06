@@ -6,18 +6,20 @@
 <div class="category-bg py-5">
   <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
-      <h1 class="fw-bold" style="font-size:2.5rem;">Algo</h1>
+      <h1 class="fw-bold" style="font-size:2.5rem;">算法与数据结构</h1>
       <span class="fs-5 text-muted">{{ article_count }} Articles</span>
     </div>
     <div class="row">
       {% for article in articles %}
-      <div class="col-md-6 col-lg-4 mb-4">
+      <div class="col-md-6 col-lg-6 mb-4">
         <div class="category-article-card p-4 rounded-4 shadow-sm h-100 bg-white">
           <h3 class="fw-bold mb-2" style="font-size:1.2rem;">{{ article.title }}</h3>
           {% if article.subtitle %}
           <div class="text-secondary mb-2" style="font-size:1rem;">{{ article.subtitle }}</div>
           {% endif %}
-          <div class="mb-3" style="color:#444;">{{ article.summary|truncatechars:100 }}</div>
+          <div class="mb-3" style="color:#444;">
+            {{ article.summary|default:article.content|truncatechars:100 }}
+          </div>
           <a href="{% url 'articles:blog_detail' article.id %}" class="fw-bold" style="color:#1976d2;text-decoration:underline;">Read more</a>
         </div>
       </div>

@@ -13,15 +13,17 @@
 <!-- 白色内容区 -->
 <div class="main-content-bg py-5">
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-7 mb-4 mb-lg-0">
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-7 mb-4 mb-lg-0 d-flex flex-column justify-content-center">
         <h1 class="display-4 fw-bold mb-3">欢迎来到我的博客</h1>
         <p class="lead text-secondary mb-4">分享技术、生活与思考，记录成长的点滴。</p>
-        <a href="{% url 'articles:all' %}" class="btn btn-success btn-lg me-3">全部文章</a>
-        <a href="#feature-section" class="btn btn-outline-success btn-lg">精选推荐</a>
+        <div>
+          <a href="{% url 'articles:all' %}" class="btn btn-success btn-lg me-3">全部文章</a>
+          <a href="#feature-section" class="btn btn-outline-success btn-lg">精选推荐</a>
+        </div>
       </div>
       <div class="col-lg-5 text-center">
-        <img src="{% static 'articles/images/banner.jpg' %}" alt="博客头图" class="img-fluid rounded-4 shadow">
+        <img src="{% static 'articles/images/banner.jpg' %}" alt="博客头图" class="img-fluid rounded-5 shadow-lg" style="max-width: 420px;">
       </div>
     </div>
     <!-- 特色内容区：主推文章 + 分类标签 -->
@@ -35,7 +37,7 @@
             <h3 class="fw-bold mb-1" style="font-size: 1.4rem;">{{ article.title }}</h3>
             <div class="text-secondary mb-2" style="font-size: 1.1rem;">{{ article.subtitle }}</div>
             <div class="mb-2" style="color: #444;">{{ article.summary|truncatechars:120 }}</div>
-            <a href="{% url 'articles:blog_detail' article.id %}" class="fw-bold" style="color:#111;text-decoration:underline; text-decoration: none">Read more</a>
+            <a href="{% url 'articles:blog_detail' article.id %}" class="fw-bold" style="color:#1976d2;text-decoration:underline; text-decoration: none">Read more</a>
           </div>
           {% endfor %}
         </div>
@@ -46,7 +48,7 @@
           <h2 class="text-uppercase text-danger fs-6 mb-3">BROWSE BY CATEGORY</h2>
           <div class="d-flex flex-wrap gap-2">
             {% for cat in categories %}
-            <a href="{{ cat.url }}" class="badge bg-info-subtle text-info fs-6 rounded-pill px-3 py-2">{{ cat.name }}</a>
+            <a href="{{ cat.url }}" class="badge bg-primary-subtle text-primary fs-6 rounded-pill px-3 py-2">{{ cat.name }}</a>
             {% endfor %}
           </div>
         </div>

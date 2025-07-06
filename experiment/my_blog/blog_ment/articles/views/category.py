@@ -39,8 +39,9 @@ def python(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-        "python_list":page_obj,
-        "page_obj":page_obj,
+        "articles": page_obj,
+        "article_count": page_obj.paginator.count,
+        "page_obj": page_obj,
     }
     return render(request, "articles/python.html", context)
 
@@ -61,8 +62,9 @@ def web(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-        "web_list":page_obj,
-        "page_obj":page_obj,
+        "articles": page_obj,
+        "article_count": page_obj.paginator.count,
+        "page_obj": page_obj,
     }
     return render(request, "articles/web.html", context)
 
@@ -83,8 +85,9 @@ def backend(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-        "backend_list":page_obj,
-        "page_obj":page_obj,
+        "articles": page_obj,
+        "article_count": page_obj.paginator.count,
+        "page_obj": page_obj,
     }
     return render(request, "articles/backend.html", context)
 
@@ -105,8 +108,9 @@ def database(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-        "database_list":page_obj,
-        "page_obj":page_obj,
+        "articles": page_obj,
+        "article_count": page_obj.paginator.count,
+        "page_obj": page_obj,
     }
     return render(request, "articles/database.html", context)
 
@@ -127,8 +131,9 @@ def algo(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-        "algo_list":page_obj,
-        "page_obj":page_obj,
+        "articles": page_obj,
+        "article_count": page_obj.paginator.count,
+        "page_obj": page_obj,
     }
     return render(request, "articles/algo.html", context)
 
@@ -148,7 +153,8 @@ def tools(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-        "tools_list":page_obj,
-        "page_obj":page_obj,
+        "articles": page_obj,
+        "article_count": page_obj.paginator.count,
+        "page_obj": page_obj,
     }
     return render(request, "articles/tools.html", context)

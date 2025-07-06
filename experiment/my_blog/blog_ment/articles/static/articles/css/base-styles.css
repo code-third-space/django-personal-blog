@@ -156,15 +156,17 @@ footer a:focus {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 9999;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
 }
 
 .fullscreen-search-overlay.show {
+    display: flex !important;
     opacity: 1;
     visibility: visible;
 }
@@ -509,14 +511,16 @@ footer a:focus {
 .navbar-brand-modern {
     margin-left: 0 !important;
     padding-left: 0.5rem !important;
-    padding: 0 !important;
-    font-size: 1.3rem !important;
+    padding-right: 1.2rem !important;
+    font-size: 1.5rem !important;
     font-weight: 700 !important;
     color: #667eea !important;
     background: none !important;
     display: flex !important;
     align-items: center !important;
     gap: 0.5rem !important;
+    min-width: 120px !important;
+    flex-shrink: 0 !important;
 }
 
 /* 波浪分割线极简 */
@@ -539,18 +543,3 @@ footer a:focus {
 .navbar-wave path {
     fill: #fff;
 }
-
-/* 导航栏内容整体左右内边距加大，防止logo被遮挡 */
-.navbar .container,
-.navbar-modern .container,
-.custom-navbar .container {
-    padding-left: 2.5rem !important;
-    padding-right: 2.5rem !important;
-}
-
-/* logo左侧留白，保证在圆角内 */
-.navbar-brand,
-.navbar-brand-modern {
-    margin-left: 0 !important;
-    padding-left: 0.5rem !important;
-} 

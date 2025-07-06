@@ -581,3 +581,16 @@
 .article-card:nth-child(4) { animation-delay: 0.3s; }
 
 .sidebar-card:nth-child(2) { animation-delay: 0.2s; }
+
+/* 首页 index.html 专用样式 */
+
+/* 1. 波浪背景、主内容、英雄区、特色内容、卡片、侧边栏、热门文章、底部波浪等结构样式 */
+
+/* 示例：
+.main-content-bg { ... }
+.hero-section { ... }
+.feature-section { ... }
+.article-card { ... }
+.sidebar-card { ... }
+.footer-wave-bg { ... }
+*/

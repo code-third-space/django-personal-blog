@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // 确保搜索弹窗初始状态正确
+    const modal = document.getElementById('fullscreen-search');
+    modal.style.display = 'none';
+    modal.style.visibility = 'hidden';
+    modal.style.opacity = '0';
+    
     // 打开搜索弹窗
     document.querySelectorAll('.bi-search').forEach(function(el) {
         el.addEventListener('click', function(e) {
@@ -41,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function openSearchModal() {
     const modal = document.getElementById('fullscreen-search');
     modal.style.display = 'flex';
+    modal.style.visibility = 'visible';
     modal.style.opacity = '0';
     
     // 添加动画效果
@@ -57,6 +64,7 @@ function closeSearchModal() {
     
     setTimeout(function() {
         modal.style.display = 'none';
+        modal.style.visibility = 'hidden';
         document.querySelector('.search-input').value = '';
     }, 300);
 }

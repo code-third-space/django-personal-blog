@@ -30,9 +30,14 @@ body {
   background: var(--table-header-bg) !important;
   color: var(--text-main) !important;
 }
-.blog-type-badge, .city-badge, .country-badge {
+.blog-type-badge, .city-badge {
   background: var(--badge-bg) !important;
   color: var(--badge-text) !important;
+  border: none;
+}
+.country-badge {
+  background: var(--badge-bg) !important;
+  color: #dc3545 !important;
   border: none;
 }
 .footer-wave-bg, .footer-content {
@@ -66,7 +71,8 @@ body {
 }
 
 .blog-row {
-    transition: all 0.3s ease;
+    /* transition: all 0.3s ease; */
+    background-color: #20c997 !important;
 }
 
 .blog-row:hover {
@@ -75,7 +81,7 @@ body {
 }
 
 .blog-title {
-    color: var(--text-main);
+    color: #fd7e14;
     font-weight: 500;
     transition: color 0.2s;
 }
@@ -104,7 +110,7 @@ body {
     font-weight: 500;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: all 0.3s;
-    color: white !important;
+    color: #17a2b8 !important;
     text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
@@ -148,7 +154,7 @@ body {
 .pagination .page-item.active .page-link {
     background-color: #0d6efd;
     border-color: #0d6efd;
-    color: white;
+    color: #0d6efd;
     box-shadow: 0 2px 5px rgba(13, 110, 253, 0.3);
 }
 

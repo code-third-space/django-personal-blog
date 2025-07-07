@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage
 from ..models import Article, Cities, Countries, BlogTypes
 from gallery.utils import get_pixabay_image
-
+from django.templatetags.static import static
 
 def all(request):
     # 全部blog视图 - 不再只显示有本地图片的博客，全部都查
@@ -11,9 +11,9 @@ def all(request):
     for blog_item in blog_all_list:
         blog_item.city_name = Cities[blog_item.city][1]
         blog_item.type_name = BlogTypes[blog_item.blog_type][1]
-        blog_item.countries_name = Countries[blog_item.country][1]
-        # 优先用Pixabay图片
-        blog_item.image = get_pixabay_image(blog_item.title)
+        blog_item.country_name = Countries[blog_item.country][1]
+        # 全部用默认图片
+        blog_item.image = static('images/default.jpg')
     
     paginator = Paginator(blog_all_list, 6)
     page_number = request.GET.get('page')

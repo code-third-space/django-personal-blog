@@ -30,7 +30,7 @@
   --spacing-sm: 0.5rem;
   --spacing-md: 0.75rem;
   --spacing-lg: 1rem;
-  --spacing-xl: 1.25rem;
+  --spacing-xl: 0.2rem;
   --spacing-2xl: 1.5rem;
   
   /* 圆角 */
@@ -140,8 +140,9 @@
 .nav-link-modern {
   color: var(--text-primary) !important;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.8rem;
   padding: var(--spacing-md) var(--spacing-xl) !important;
+  margin: 0 15px !important;
   border-radius: var(--radius-md);
   margin: 0 var(--spacing-xs);
   transition: var(--transition-bezier);

@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
         
         <!-- 自定义CSS -->
+        <link rel="stylesheet" href="{% static 'articles/css/theme.css' %}">
         <link rel="stylesheet" href="{% static 'articles/css/base-styles.css' %}">
         <link rel="stylesheet" href="{% static 'articles/css/navbar-modern.css' %}">
         <link rel="stylesheet" href="{% static 'articles/css/search.css' %}">
@@ -82,10 +83,10 @@
                     <button class="action-btn search-btn" aria-label="搜索内容">
                         <i class="bi bi-search"></i>
                     </button>
-                    <button class="action-btn" aria-label="语音播报">
+                    <button onclick="location.href='https://www.kugou.com'" class="action-btn" aria-label="语音播报">
                         <i class="bi bi-volume-up"></i>
                     </button>
-                    <button class="action-btn" aria-label="切换主题">
+                    <button class="action-btn" aria-label="切换主题 btn-toggle-dark">
                         <i class="bi bi-brightness-high"></i>
                     </button>
                     <button class="action-btn" aria-label="RSS订阅">
@@ -172,6 +173,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- 自定义JavaScript -->
+    <script src="{% static 'articles/js/theme-toggle.js' %}"></script>
     <script src="{% static 'articles/js/base-interactions.js' %}"></script>
     <script src="{% static 'articles/js/navbar-interactions.js' %}"></script>
     <script src="{% static 'articles/js/search.js' %}"></script>

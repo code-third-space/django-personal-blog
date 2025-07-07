@@ -1,18 +1,20 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage
 from ..models import Article, Cities, Countries, BlogTypes
+from gallery.utils import get_pixabay_image
 
 
 def all(request):
-    # 全部blog视图 - 只显示有图片的博客 数据库中过滤
-    blog_all_list = Article.objects.exclude(featured_image='').exclude(featured_image__isnull=True).order_by("blog_type")
+    # 全部blog视图 - 不再只显示有本地图片的博客，全部都查
+    blog_all_list = Article.objects.all().order_by("blog_type")
 
     for blog_item in blog_all_list:
         blog_item.city_name = Cities[blog_item.city][1]
         blog_item.type_name = BlogTypes[blog_item.blog_type][1]
         blog_item.countries_name = Countries[blog_item.country][1]
+        # 优先用Pixabay图片
+        blog_item.image = get_pixabay_image(blog_item.title)
     
-    # 增加每页显示数量到10个
     paginator = Paginator(blog_all_list, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

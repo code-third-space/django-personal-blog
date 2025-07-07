@@ -52,13 +52,20 @@
         <div class="col-lg-8 mb-4">
           <div class="feature-article-list">
             {% for article in feature_articles %}
-            <div class="article-card">
-              <h3 class="article-title">{{ article.title }}</h3>
-              <div class="article-subtitle">{{ article.subtitle }}</div>
-              <div class="article-summary">{{ article.summary|truncatechars:150 }}</div>
-              <a href="{% url 'articles:blog_detail' article.id %}" class="article-link">
-                阅读全文
-              </a>
+            <div class="article-card row align-items-center">
+              <div class="col-md-5">
+                <h3 class="article-title">{{ article.title }}</h3>
+                <div class="article-subtitle">{{ article.subtitle }}</div>
+                <div class="article-summary">{{ article.summary|truncatechars:80 }}</div>
+                <a href="{% url 'articles:blog_detail' article.id %}" class="article-link">
+                  阅读全文
+                </a>
+              </div>
+              <div class="col-md-7">
+                <div class="article-content-preview">
+                  {{ article.content|truncatechars:120|safe }}
+                </div>
+              </div>
             </div>
             {% endfor %}
           </div>
@@ -177,9 +184,6 @@
       <a href="mailto:contact@example.com" aria-label="Email">
         <i class="bi bi-envelope"></i>
       </a>
-      <a href="#" aria-label="WeChat">
-        <i class="bi bi-wechat"></i>
-      </a>
     </div>
   </div>
 </div>
@@ -202,6 +206,33 @@
   font-size: 0.9rem;
   color: #6c757d;
   font-weight: 500;
+}
+
+.article-card {
+  background: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px rgba(102,126,234,0.08);
+  padding: 2.5rem 2.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: stretch;
+}
+
+.article-content-preview {
+  color: #6c757d;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  background: #f8fafd;
+  border-radius: 1.5rem;
+  padding: 1.5rem 2.5rem;
+  min-height: 4.5rem;
+  max-height: 6.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(102,126,234,0.04);
 }
 </style>
 

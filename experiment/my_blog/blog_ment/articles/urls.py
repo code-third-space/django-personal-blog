@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import custom_logout
 from gallery.views import article_with_images
+from .feeds import LatestArticlesFeed
 
 app_name = 'articles'
 
@@ -18,4 +19,5 @@ urlpatterns = [
     path("algo/", views.algo, name='algo'),
     path("tools/", views.tools, name='tools'),
     path('', views.index, name='home'),
+    path('rss/', LatestArticlesFeed(), name='rss_feed'),
 ]

@@ -10,13 +10,8 @@ def article_with_images(request, blog_id):
     # 1) 拿到文章
     blog = get_object_or_404(Article, pk=blog_id)
 
-    # 2) 用 deep-translator 把标题翻成英文
-    try:
-        # 自动检测源语言，目标英文
-        query_en = GoogleTranslator(source='auto', target='en').translate(blog.title)
-    except Exception as e:
-        print(f"[gallery] 翻译失败: {e}")
-        query_en = blog.title
+    # 2) 直接使用原文
+    query = blog.title
 
     # 3) PIXABAY API Key
     API_KEY = os.getenv('PIXABAY_API_KEY')
@@ -28,7 +23,7 @@ def article_with_images(request, blog_id):
     url = (
         "https://pixabay.com/api/"
         f"?key={API_KEY}"
-        f"&q={quote(query_en)}"
+        f"&q={quote(query)}"
         f"&image_type=photo"
         f"&per_page={per_page}"
     )

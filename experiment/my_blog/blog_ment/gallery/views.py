@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from articles.models import Article
 import requests, os
 from urllib.parse import quote
+from django.templatetags.static import static
 from deep_translator import GoogleTranslator  # 新增
 
 def article_with_images(request, blog_id):
@@ -44,6 +45,9 @@ def article_with_images(request, blog_id):
             print(f"[gallery] Pixabay 返回状态：{resp.status_code}, 内容：{resp.text}")
     except Exception as e:
         print(f"[gallery] Pixabay 请求失败: {e}")
+
+    if not image:
+        image = static('images/default.jpg')
 
     # 6) 渲染模板
     return render(request, 'articles/blog_detail.html', {

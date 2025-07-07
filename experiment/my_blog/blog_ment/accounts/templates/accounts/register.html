@@ -14,28 +14,53 @@
                         {% if form.errors %}
                         <div class="alert alert-danger">
                             <strong>注册失败！</strong> 请修正以下错误：
-                            {{ form.errors }}
+                            <ul class="mb-0 mt-2">
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
                         </div>
                         {% endif %}
                         
                         <div class="mb-3">
                             <label for="{{ form.username.id_for_label }}" class="form-label">用户名</label>
                             {{ form.username }}
+                            <div class="form-text">
+                                <small class="text-muted">用户名将用于登录，请选择一个独特的用户名</small>
+                            </div>
                         </div>
                         
                         <div class="mb-3">
                             <label for="{{ form.email.id_for_label }}" class="form-label">电子邮箱</label>
                             {{ form.email }}
+                            <div class="form-text">
+                                <small class="text-muted">请输入有效的邮箱地址，用于账户验证和密码重置</small>
+                            </div>
                         </div>
                         
                         <div class="mb-3">
                             <label for="{{ form.password1.id_for_label }}" class="form-label">密码</label>
                             {{ form.password1 }}
+                            <div class="form-text">
+                                <small class="text-muted">
+                                    <strong>密码要求：</strong><br>
+                                    • 至少8个字符<br>
+                                    • 不能与邮箱地址过于相似<br>
+                                    • 不能是常见密码（如123456、password等）<br>
+                                    • 不能全部为数字<br>
+                                    • 建议包含字母、数字和特殊字符
+                                </small>
+                            </div>
                         </div>
                         
                         <div class="mb-3">
                             <label for="{{ form.password2.id_for_label }}" class="form-label">确认密码</label>
                             {{ form.password2 }}
+                            <div class="form-text">
+                                <small class="text-muted">请再次输入密码以确认</small>
+                            </div>
                         </div>
                         
                         <button type="submit" class="btn btn-primary w-100">注册</button>

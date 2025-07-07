@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.utils.translation import gettext as _
 
 from articles.models import Article
+from gallery.views import article_with_images
 # 修改导入的用户模型
 from accounts.models import CustomUser  # 替换原来的 User 导入
 from rest_framework import routers, serializers, viewsets
@@ -53,6 +54,8 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
+    path('gallery/', include('gallery.urls')),
+    path('article/<int:pk>/', article_with_images, name='article_with_images'),
     path('', include("articles.urls")),
 
     path('api/', include(router.urls)),

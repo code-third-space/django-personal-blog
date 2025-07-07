@@ -1,0 +1,153 @@
+/* ===========================================================
+   文章详情页 detail.css - 现代极简风格
+   ========================================================= */
+
+:root {
+  --detail-primary: #667eea;
+  --detail-secondary: #764ba2;
+  --detail-bg: linear-gradient(135deg, #f4faff 0%, #f8f9fa 100%);
+  --detail-card-bg: #fff;
+  --detail-card-radius: 2rem;
+  --detail-card-shadow: 0 8px 32px rgba(102, 126, 234, 0.08);
+  --detail-title-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --detail-muted: #6c757d;
+  --detail-btn: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  --detail-btn-hover: linear-gradient(135deg, #38f9d7 0%, #43e97b 100%);
+}
+
+.blog-detail-container {
+  background: var(--detail-bg);
+}
+
+.blog-detail-container .container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+.blog-detail-container .card {
+  border-radius: var(--detail-card-radius);
+  box-shadow: var(--detail-card-shadow);
+  border: none;
+  background: var(--detail-card-bg);
+  margin-bottom: 2.5rem;
+}
+
+.blog-detail-container .card-header {
+  background: transparent;
+  border-bottom: none;
+  padding: 2rem 2rem 1rem 2rem;
+  border-radius: var(--detail-card-radius) var(--detail-card-radius) 0 0;
+}
+
+.blog-detail-container .card-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: var(--detail-title-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0;
+}
+
+.blog-detail-container .card-body {
+  padding: 2rem;
+}
+
+.blog-detail-container .text-muted {
+  color: var(--detail-muted) !important;
+}
+
+.blog-detail-container .img-fluid.rounded {
+  border-radius: 1.5rem !important;
+  box-shadow: 0 4px 24px rgba(102, 126, 234, 0.08);
+  max-height: 340px;
+  object-fit: cover;
+}
+
+.blog-detail-container .bg-light.rounded.d-flex {
+  border-radius: 1.5rem !important;
+}
+
+.blog-detail-container .blog-content h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--detail-primary);
+}
+
+.blog-detail-container .blog-content .p-3 {
+  background: #f8f9fa;
+  border-radius: 1.2rem;
+  font-size: 1.08rem;
+  color: #444;
+  line-height: 1.8;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.04);
+}
+
+/* 评论区 */
+.blog-detail-container .card .comment {
+  background: #f8f9fa;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.04);
+}
+
+.blog-detail-container .card .comment .text-muted {
+  font-size: 0.95rem;
+}
+
+.blog-detail-container .btn-success,
+.blog-detail-container .btn-outline-danger,
+.blog-detail-container .btn-primary {
+  border-radius: 2rem;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.06);
+  border: none;
+  background: var(--detail-btn);
+  color: #fff;
+  transition: all 0.2s;
+}
+
+.blog-detail-container .btn-success:hover,
+.blog-detail-container .btn-primary:hover {
+  background: var(--detail-btn-hover);
+  color: #fff;
+}
+
+.blog-detail-container .btn-outline-danger {
+  background: #fff;
+  color: #e74c3c;
+  border: 1.5px solid #e74c3c;
+}
+
+.blog-detail-container .btn-outline-danger:hover {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.blog-detail-container .alert {
+  border-radius: 1.2rem;
+  font-size: 1.08rem;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.04);
+}
+
+/* 响应式优化 */
+@media (max-width: 767.98px) {
+  .blog-detail-container .container {
+    padding: 1.2rem 0.5rem;
+  }
+  .blog-detail-container .card-header,
+  .blog-detail-container .card-body {
+    padding: 1.2rem 1rem;
+  }
+  .blog-detail-container .card-title {
+    font-size: 1.3rem;
+  }
+  .blog-detail-container .img-fluid.rounded {
+    max-height: 200px;
+  }
+} 

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'grappelli',
     'articles', 
     'comments',
+    'gallery',
     'rest_framework',
     'accounts',
 

@@ -1,12 +1,13 @@
 from django.urls import path
 from . import views
 from .views import custom_logout
+from gallery.views import article_with_images
 
 app_name = 'articles'
 
 urlpatterns = [
     path("search/", views.search, name='search'),
-    path("blog_detail/<int:blog_id>/", views.blog_detail, name='blog_detail'),
+    path("blog_detail/<int:blog_id>/", article_with_images, name='blog_detail'),
     path("delete_comment/<int:comment_id>/", views.delete_comment, name='delete_comment'),
     path("blog_add/", views.BlogCreateView.as_view(), name='blog_add'),
     path("all/", views.all, name='all'),

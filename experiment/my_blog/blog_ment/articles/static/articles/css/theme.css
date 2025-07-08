@@ -5,6 +5,7 @@
   --card-shadow: 0 4px 16px rgba(102,126,234,0.08);
   --table-bg: #fff;
   --table-header-bg: #f4f6fa;
+  --table-border: #dee2e6;
   --badge-bg: #e9ecef;
   --badge-text: #2c3e50;
   --footer-bg: #f8f9fa;
@@ -12,13 +13,14 @@
   --main-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   --primary-gradient: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
 }
-body.dark-mode {
+body[data-theme="dark"] {
   --bg-main: #181c24;
   --text-main: #7fffa7;
   --card-bg: rgba(30,36,46,0.98);
   --card-shadow: 0 4px 16px rgba(0,0,0,0.4);
   --table-bg: #232a36;
   --table-header-bg: #232a36;
+  --table-border: #232a36;
   --badge-bg: #232a36;
   --badge-text: #7fffa7;
   --footer-bg: #181c24;
@@ -27,60 +29,76 @@ body.dark-mode {
   --primary-gradient: linear-gradient(90deg, #232a36 0%, #181c24 100%);
   --accent-gradient: linear-gradient(135deg, #232a36 0%, #181c24 100%);
 }
-body.dark-mode .main-content-bg,
-body.dark-mode .article-card,
-body.dark-mode .sidebar-card,
-body.dark-mode .footer-wave-bg {
+body[data-theme="dark"] .main-content-bg,
+body[data-theme="dark"] .article-card,
+body[data-theme="dark"] .sidebar-card,
+body[data-theme="dark"] .footer-wave-bg {
   background: var(--card-bg) !important;
   color: var(--text-main) !important;
 }
-body.dark-mode .hero-title,
-body.dark-mode .section-title,
-body.dark-mode .article-title,
-body.dark-mode .sidebar-title,
-body.dark-mode .footer-brand {
+body[data-theme="dark"] .hero-title,
+body[data-theme="dark"] .section-title,
+body[data-theme="dark"] .article-title,
+body[data-theme="dark"] .sidebar-title,
+body[data-theme="dark"] .footer-brand {
   color: var(--text-main) !important;
 }
-body.dark-mode .article-link,
-body.dark-mode .category-tag,
-body.dark-mode .popular-link,
-body.dark-mode .footer-list a {
+body[data-theme="dark"] .article-link,
+body[data-theme="dark"] .category-tag,
+body[data-theme="dark"] .popular-link,
+body[data-theme="dark"] .footer-list a {
   color: var(--text-main) !important;
 }
-body.dark-mode .hero-btn-primary,
-body.dark-mode .hero-btn-secondary {
+body[data-theme="dark"] .hero-btn-primary,
+body[data-theme="dark"] .hero-btn-secondary {
   color: var(--text-main) !important;
   border-color: var(--text-main) !important;
 }
-body.dark-mode .navbar-modern,
-body.dark-mode .navbar-actions,
-body.dark-mode .navbar-brand,
-body.dark-mode .navbar-nav .nav-link,
-body.dark-mode .navbar-brand-modern,
-body.dark-mode .navbar-toggler,
-body.dark-mode .navbar-toggler-icon-modern {
+body[data-theme="dark"] .navbar-modern,
+body[data-theme="dark"] .navbar-actions,
+body[data-theme="dark"] .navbar-brand,
+body[data-theme="dark"] .navbar-nav .nav-link,
+body[data-theme="dark"] .navbar-brand-modern,
+body[data-theme="dark"] .navbar-toggler,
+body[data-theme="dark"] .navbar-toggler-icon-modern {
   background: #223c2c !important; /* 护眼深绿色 */
   color: #7fffa7 !important;
   border-color: #7fffa7 !important;
 }
-body.dark-mode .navbar-nav .nav-link-modern,
-body.dark-mode .navbar-brand-modern,
-body.dark-mode .navbar-brand-icon,
-body.dark-mode .nav-link-icon {
+body[data-theme="dark"] .navbar-nav .nav-link-modern,
+body[data-theme="dark"] .navbar-brand-modern,
+body[data-theme="dark"] .navbar-brand-icon,
+body[data-theme="dark"] .nav-link-icon {
   color: #7fffa7 !important;
 }
-body.dark-mode .navbar-actions .action-btn,
-body.dark-mode .navbar-actions .action-btn i {
+body[data-theme="dark"] .navbar-actions .action-btn,
+body[data-theme="dark"] .navbar-actions .action-btn i {
   color: #7fffa7 !important;
   background: #223c2c !important;
 }
-body.dark-mode .navbar-actions .action-btn:hover {
+body[data-theme="dark"] .navbar-actions .action-btn:hover {
   background: #2e5c3f !important;
   color: #fff !important;
 }
-body.dark-mode .article-content-preview {
+body[data-theme="dark"] .article-content-preview {
   background: #232a36 !important;
   color: #7fffa7 !important;
   border-radius: 1.5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;
+} 
+
+/* === 强制覆盖 Bootstrap 表格样式以支持多主题 === */
+.table,
+.table > :not(caption) > * > * {
+  background-color: var(--table-bg) !important;
+  color: var(--text-main) !important;
+  border-color: var(--table-border) !important;
+}
+
+.table thead,
+.table thead th,
+.table-light th,
+.table-light td {
+  background-color: var(--table-header-bg) !important;
+  color: var(--text-main) !important;
 } 

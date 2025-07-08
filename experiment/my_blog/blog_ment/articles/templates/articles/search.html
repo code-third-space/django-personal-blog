@@ -56,7 +56,7 @@
                             <small class="text-muted"><i class="bi bi-calendar-date me-1"></i>{{ blog.created_at|date:"Y-m-d" }}</small>
                         </div>
                         <h5 class="card-title">
-                            <a href="/blog_detail/{{blog.id}}" class="text-decoration-none stretched-link blog-title">
+                            <a href="{% url 'articles:blog_detail' blog.id %}" class="text-decoration-none stretched-link blog-title">
                                 {{blog.title}}
                             </a>
                         </h5>

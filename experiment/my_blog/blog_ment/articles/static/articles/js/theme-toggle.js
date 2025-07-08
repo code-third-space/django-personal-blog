@@ -5,16 +5,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const darkBtn = document.querySelector('.btn-toggle-dark');
     // 读取本地存储
     if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark-mode');
+        document.body.setAttribute('data-theme', 'dark');
+    } else {
+        document.body.setAttribute('data-theme', 'light');
     }
     if (darkBtn) {
         darkBtn.addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            // 记住用户选择
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
+            const currentTheme = document.body.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
             }
         });
     }

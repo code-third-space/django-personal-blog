@@ -18,9 +18,9 @@ from ..models import Article, Cities, Countries, BlogTypes
 def blog_detail(request, blog_id):
     # 详情页
     blog = get_object_or_404(Article, pk=blog_id) 
-    blog.city_name = Cities[blog.city][1]
-    blog.type_name = BlogTypes[blog.blog_type][1]
-    blog.countries_name = Countries[blog.country][1]
+    blog.city_name = blog.get_city_display()
+    blog.type_name = blog.get_blog_type_display()
+    blog.countries_name = blog.get_country_display()
 
     # 获取博客的ContentType
     content_type = ContentType.objects.get_for_model(Article)

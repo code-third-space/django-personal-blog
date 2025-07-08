@@ -40,9 +40,9 @@ def index(request):
     }
 
     for blog in blog_list:
-        blog.city_name = Cities[blog.city][1]
-        blog.type_name = BlogTypes[blog.blog_type][1]
-        blog.countries_name = Countries[blog.country][1]
+        blog.city_name = blog.get_city_display()
+        blog.type_name = blog.get_blog_type_display()
+        blog.countries_name = blog.get_country_display()
 
         if blog.blog_type==0:
             categorized_blogs['type_a_blogs'].append(blog)

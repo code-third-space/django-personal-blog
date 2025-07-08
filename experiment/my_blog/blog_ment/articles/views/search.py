@@ -4,6 +4,10 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from ..models import Article
 
+# 分页配置常量
+SEARCH_RESULTS_PER_PAGE = 9
+# 搜索配置常量
+MAX_SEARCH_QUERY_LENGTH = 50
 
 def search(request):
     titleName = []
@@ -12,7 +16,7 @@ def search(request):
         q = request.GET['q'].strip()
         if not q:
             errors.append("请输入搜索关键词。")
-        elif len(q) > 50:
+        elif len(q) > MAX_SEARCH_QUERY_LENGTH:
             errors.append("搜索关键词不能超过50个字符。")
         else:
             # 搜索标题和内容，保持原有的变量名
@@ -27,7 +31,7 @@ def search(request):
                 blog.city_name = blog.get_city_display()
             
             # 添加分页
-            paginator = Paginator(titleName, 9)  # 每页显示9篇文章
+            paginator = Paginator(titleName, SEARCH_RESULTS_PER_PAGE)  # 每页显示9篇文章
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
             

@@ -56,7 +56,7 @@
   border-bottom: 1px solid var(--navbar-border);
   box-shadow: var(--navbar-shadow);
   transition: var(--transition-bezier);
-  padding: var(--spacing-lg) 0;
+  padding: var(--spacing-sm) 0;
   position: relative;
   z-index: 1030;
 }
@@ -64,7 +64,7 @@
 .navbar-modern.scrolled {
   background: var(--navbar-bg-scrolled);
   box-shadow: var(--navbar-shadow-scrolled);
-  padding: var(--spacing-md) 0;
+  padding: var(--spacing-xs) 0;
 }
 
 /* ===========================================================
@@ -140,18 +140,19 @@
 .nav-link-modern {
   color: var(--text-primary) !important;
   font-weight: 600;
-  font-size: 0.8rem;
-  padding: var(--spacing-md) var(--spacing-xl) !important;
-  margin: 0 15px !important;
+  font-size: 0.9rem;
+  padding: var(--spacing-sm) var(--spacing-xs) !important;
+  margin: 0 2px !important;
   border-radius: var(--radius-md);
-  margin: 0 var(--spacing-xs);
   transition: var(--transition-bezier);
   position: relative;
   overflow: hidden;
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .nav-link-modern::before {
@@ -231,8 +232,8 @@
 }
 
 .action-btn {
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-md);
   background: rgba(102, 126, 234, 0.1);
   border: none;
@@ -240,7 +241,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   transition: var(--transition-bezier);
   position: relative;
   overflow: hidden;
@@ -342,7 +343,7 @@
 }
 
 /* ===========================================================
-   8. 移动端折叠菜单
+   8. 移动端折叠菜单和导航优化
    ========================================================= */
 
 .navbar-collapse-modern {
@@ -354,6 +355,56 @@
   padding: var(--spacing-2xl);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--navbar-border);
+}
+
+/* 确保导航菜单有足够空间 */
+.navbar-nav {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  max-width: 75%;
+  overflow: hidden;
+}
+
+/* 防止导航菜单在小屏幕上过度压缩 */
+@media (min-width: 992px) {
+  .navbar-nav {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .navbar-nav::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* 特殊处理较长的导航文本 */
+@media (max-width: 1199.98px) and (min-width: 992px) {
+  .nav-link-modern {
+    font-size: 0.85rem;
+    padding: var(--spacing-xs) 2px !important;
+    margin: 0 1px !important;
+  }
+  
+  .nav-link-icon {
+    font-size: 1rem;
+  }
+}
+
+/* 超宽屏幕下的优化 */
+@media (min-width: 1400px) {
+  .nav-link-modern {
+    font-size: 1rem;
+    padding: var(--spacing-sm) var(--spacing-sm) !important;
+    margin: 0 var(--spacing-xs) !important;
+  }
+  
+  .nav-link-icon {
+    font-size: 1.2rem;
+  }
 }
 
 .mobile-nav-link {
@@ -462,7 +513,7 @@
 
 @media (max-width: 991.98px) {
   .navbar-modern {
-    padding: var(--spacing-md) 0;
+    padding: var(--spacing-xs) 0;
   }
   
   .navbar-brand-modern {
@@ -471,9 +522,9 @@
   }
   
   .action-btn {
-    width: 44px;
-    height: 44px;
-    font-size: 1.1rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
   }
   
   .mobile-nav-link {
@@ -483,7 +534,7 @@
 
 @media (max-width: 767.98px) {
   .navbar-modern {
-    padding: var(--spacing-sm) 0;
+    padding: var(--spacing-xs) 0;
   }
   
   .navbar-brand-modern {
@@ -492,9 +543,9 @@
   }
   
   .action-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
   }
   
   .mobile-action-btn {

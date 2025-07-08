@@ -63,12 +63,12 @@ body {
 
 /* 为固定导航栏留出空间 */
 body {
-    padding-top: 10px;
+    padding-top: 6px;
 }
 
 @media (max-width: 991.98px) {
     body {
-        padding-top: 70px;
+        padding-top: 6px;
     }
 }
 

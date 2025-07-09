@@ -28,12 +28,8 @@ DATABASES['default'].update({
 })
 
 # 生产环境允许的主机
-ALLOWED_HOSTS = [
-    "127.0.0.1", 
-    "47.109.32.142", 
-    "www.pepopen.cn", 
-    "localhost"
-]
+raw_hosts = os.getenv('ALLOWED_HOSTS', '')
+ALLOWED_HOSTS = [h.strip() for h in raw_hosts.split(',') if h.strip()]
 
 # CSRF 的配置
 CSRF_TRUSTED_ORIGINS = [
@@ -54,3 +50,7 @@ SECURE_SSL_REDIRECT = True  # 自动将 HTTP 请求重定向到 HTTPS
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
+
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Strict'

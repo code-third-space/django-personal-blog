@@ -34,6 +34,11 @@
   --bg-card: #ffffff;
   --bg-card-dark: #232a36;
   
+  /* ===== 卡片相关 ===== */
+  --card-bg: rgba(255,255,255,0.9);
+  --card-shadow: 0 4px 16px rgba(102,126,234,0.08);
+  --card-hover-shadow: 0 8px 32px rgba(16,163,111,0.10), 0 1.5px 6px 0 rgba(0,0,0,0.04);
+  
   /* ===== 文本颜色 ===== */
   --text-main: #2c3e50;
   --text-secondary: #6c757d;
@@ -46,6 +51,7 @@
   --border-light: rgba(0, 0, 0, 0.08);
   --border-medium: #dee2e6;
   --border-dark: #232a36;
+  --border-color: rgba(0,0,0,0.1);
   
   /* ===== 阴影 ===== */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -120,10 +126,15 @@
   --bg-main: #181c24;
   --bg-secondary: #232a36;
   --bg-card: #232a36;
-  --text-main: #e0e6ed;
-  --text-secondary: #a0aec0;
+  --card-bg: rgba(30,36,46,0.98);
+  --card-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  --card-hover-shadow: 0 8px 32px rgba(127,255,167,0.10), 0 1.5px 6px 0 rgba(255,255,255,0.04);
+  --text-main: #f0f4f8;
+  --text-secondary: #cbd5e0;
+  --text-muted: #a0aec0;
   --border-light: rgba(255, 255, 255, 0.08);
   --border-medium: #232a36;
+  --border-color: rgba(255,255,255,0.1);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
 }

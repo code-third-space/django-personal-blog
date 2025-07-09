@@ -3,368 +3,409 @@
    集中管理所有断点和响应式规则
    ========================================================= */
 
-/* ===== 基础响应式断点 ===== */
-/* xs: < 576px (超小屏幕，手机竖屏) */
-/* sm: ≥ 576px (小屏幕，手机横屏) */
-/* md: ≥ 768px (中等屏幕，平板竖屏) */
-/* lg: ≥ 992px (大屏幕，平板横屏和小桌面) */
-/* xl: ≥ 1200px (超大屏幕，桌面) */
-/* xxl: ≥ 1400px (超超大屏幕，大桌面) */
+/* ===========================================================
+   1. 断点系统
+   ========================================================= */
 
-/* ===== 大屏幕优化 (≥ 1200px) ===== */
+/* 响应式断点定义
+   xs: < 576px (超小屏幕，手机竖屏)
+   sm: ≥ 576px (小屏幕，手机横屏)
+   md: ≥ 768px (中等屏幕，平板竖屏)
+   lg: ≥ 992px (大屏幕，平板横屏和小桌面)
+   xl: ≥ 1200px (超大屏幕，桌面)
+   xxl: ≥ 1400px (超超大屏幕，大桌面)
+ */
+
+/* ===========================================================
+   2. 大屏幕优化 (≥ 1200px)
+   ========================================================= */
+
 @media (min-width: 1200px) {
-  .table th, 
-  .table td {
-    padding: var(--spacing-md) var(--spacing-sm);
-    font-size: var(--font-size-base);
-  }
-  
-  .container {
-    max-width: 1140px;
-  }
+    .table th, 
+    .table td {
+        padding: var(--spacing-md) var(--spacing-sm);
+        font-size: var(--font-size-base);
+    }
+    
+    .container {
+        max-width: 1320px;
+    }
 }
 
-/* ===== 平板设备 (≤ 991.98px) ===== */
+/* ===========================================================
+   3. 平板设备优化 (≤ 991.98px)
+   ========================================================= */
+
 @media (max-width: 991.98px) {
-  /* 头部样式调整 */
-  .blog-header .display-4 {
-    font-size: var(--font-size-4xl);
-  }
-  
-  .blog-header .lead {
-    font-size: var(--font-size-base);
-  }
-  
-  /* 卡片头部布局 */
-  .card-header {
-    flex-direction: column;
-    gap: var(--spacing-md);
-    align-items: stretch !important;
-  }
-  
-  .card-header .d-flex {
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  /* 徽章尺寸 */
-  .badge.fs-6 {
-    font-size: var(--font-size-sm) !important;
-  }
-  
-  /* 表格优化 */
-  .table-responsive {
-    border-radius: 0;
-  }
-  
-  .table th, 
-  .table td {
-    padding: var(--spacing-sm) var(--spacing-xs);
-    font-size: var(--font-size-sm);
-  }
-  
-  .table th {
-    font-size: var(--font-size-xs);
-    white-space: nowrap;
-  }
-  
-  /* 主内容区域间距 */
-  .main-content-bg .container {
-    padding-left: var(--spacing-lg);
-    padding-right: var(--spacing-lg);
-  }
-  
-  /* 英雄区标题 */
-  .hero-title {
-    font-size: var(--font-size-4xl);
-  }
-  
-  .hero-subtitle {
-    font-size: var(--font-size-lg);
-  }
-  
-  /* 区块标题 */
-  .section-title {
-    font-size: var(--font-size-3xl);
-  }
-  
-  /* 卡片内边距 */
-  .article-card,
-  .sidebar-card {
-    padding: var(--spacing-lg);
-  }
+    /* 头部样式调整 */
+    .blog-header .display-4 {
+        font-size: var(--font-size-4xl);
+    }
+    
+    .blog-header .lead {
+        font-size: var(--font-size-base);
+    }
+    
+    /* 卡片头部布局 */
+    .card-header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        align-items: stretch !important;
+    }
+    
+    .card-header .d-flex {
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    /* 徽章尺寸 */
+    .badge.fs-6 {
+        font-size: var(--font-size-sm) !important;
+    }
+    
+    /* 表格优化 */
+    .table-responsive {
+        border-radius: 0;
+    }
+    
+    .table th, 
+    .table td {
+        padding: var(--spacing-sm) var(--spacing-xs);
+        font-size: var(--font-size-sm);
+    }
+    
+    .table th {
+        font-size: var(--font-size-xs);
+        white-space: nowrap;
+    }
+    
+    /* 主内容区域间距 */
+    .main-content-bg .container {
+        padding-left: var(--spacing-lg);
+        padding-right: var(--spacing-lg);
+    }
+    
+    /* 英雄区标题 */
+    .hero-title {
+        font-size: var(--font-size-4xl);
+    }
+    
+    .hero-subtitle {
+        font-size: var(--font-size-lg);
+    }
+    
+    /* 区块标题 */
+    .section-title {
+        font-size: var(--font-size-3xl);
+    }
+    
+    /* 卡片内边距 */
+    .article-card,
+    .sidebar-card {
+        padding: var(--spacing-lg);
+    }
 }
 
-/* ===== 手机设备 (≤ 767.98px) ===== */
+/* ===========================================================
+   4. 手机设备优化 (≤ 767.98px)
+   ========================================================= */
+
 @media (max-width: 767.98px) {
-  /* 页面头部 */
-  .blog-header {
-    padding: var(--spacing-xl) 0 !important;
-  }
-  
-  .blog-header .display-4 {
-    font-size: var(--font-size-3xl);
-  }
-  
-  .blog-header .lead {
-    font-size: var(--font-size-sm);
-  }
-  
-  /* 容器间距 */
-  .container.py-5 {
-    padding: var(--spacing-xl) var(--spacing-md) !important;
-  }
-  
-  /* 头部信息居中 */
-  .card-header {
-    text-align: center;
-  }
-  
-  .card-header .d-flex {
-    flex-direction: column;
-    gap: var(--spacing-sm);
-  }
-  
-  /* 徽章样式 */
-  .badge.fs-6 {
-    font-size: var(--font-size-xs) !important;
-    margin: var(--spacing-xs);
-  }
-  
-  /* 表格滚动优化 */
-  .table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .table {
-    min-width: 600px;
-  }
-  
-  .table th, 
-  .table td {
-    padding: var(--spacing-sm) var(--spacing-xs);
-    font-size: var(--font-size-xs);
-    white-space: nowrap;
-  }
-  
-  .table th {
-    font-size: var(--font-size-xs);
-    font-weight: 600;
-  }
-  
-  /* 隐藏图像列 */
-  .table th:last-child,
-  .table td:last-child {
-    display: none;
-  }
-  
-  /* 调整列宽 */
-  .table th:nth-child(1), 
-  .table td:nth-child(1) { 
-    width: 40%; 
-  }
-  .table th:nth-child(2), 
-  .table td:nth-child(2) { 
-    width: 20%; 
-  }
-  .table th:nth-child(3), 
-  .table td:nth-child(3) { 
-    width: 20%; 
-  }
-  .table th:nth-child(4), 
-  .table td:nth-child(4) { 
-    width: 20%; 
-  }
-  
-  /* 主内容区域 */
-  .main-content-bg .container {
-    padding-left: var(--spacing-md);
-    padding-right: var(--spacing-md);
-  }
-  
-  /* 英雄区标题 */
-  .hero-title {
-    font-size: var(--font-size-3xl);
-  }
-  
-  /* 按钮组 */
-  .hero-buttons {
-    flex-direction: column;
-  }
-  
-  .hero-btn {
-    text-align: center;
-  }
-  
-  /* 区块标题 */
-  .section-title {
-    font-size: var(--font-size-2xl);
-  }
-  
-  /* 卡片样式 */
-  .article-card,
-  .sidebar-card {
-    padding: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-  }
-  
-  /* 页脚 */
-  .footer-content {
-    padding: var(--spacing-xl) var(--spacing-md);
-    text-align: center;
-  }
-  
-  /* 分页优化 */
-  .pagination {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .pagination .page-link {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: var(--font-size-sm);
-    margin: var(--spacing-xs);
-  }
-  
-  /* 徽章优化 */
-  .blog-type-badge, 
-  .city-badge, 
-  .country-badge {
-    padding: var(--spacing-xs);
-    font-size: var(--font-size-xs);
-    border-radius: var(--radius-sm);
-  }
-  
-  /* 按钮组优化 */
-  .btn-group-sm .btn {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: var(--font-size-sm);
-  }
+    /* 页面头部 */
+    .blog-header {
+        padding: var(--spacing-xl) 0 !important;
+    }
+    
+    .blog-header .display-4 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .blog-header .lead {
+        font-size: var(--font-size-sm);
+    }
+    
+    /* 容器间距 */
+    .container.py-5 {
+        padding: var(--spacing-xl) var(--spacing-md) !important;
+    }
+    
+    /* 头部信息居中 */
+    .card-header {
+        text-align: center;
+    }
+    
+    .card-header .d-flex {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    /* 徽章样式 */
+    .badge.fs-6 {
+        font-size: var(--font-size-xs) !important;
+        margin: var(--spacing-xs);
+    }
+    
+    /* 表格滚动优化 */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .table {
+        min-width: 600px;
+    }
+    
+    .table th, 
+    .table td {
+        padding: var(--spacing-sm) var(--spacing-xs);
+        font-size: var(--font-size-xs);
+        white-space: nowrap;
+    }
+    
+    .table th {
+        font-size: var(--font-size-xs);
+        font-weight: 600;
+    }
+    
+    /* 在手机设备上隐藏图像列 */
+    .table th:last-child,
+    .table td:last-child {
+        display: none;
+    }
+    
+    /* 调整列宽 */
+    .table th:nth-child(1), 
+    .table td:nth-child(1) { 
+        width: 40%; 
+    }
+    .table th:nth-child(2), 
+    .table td:nth-child(2) { 
+        width: 20%; 
+    }
+    .table th:nth-child(3), 
+    .table td:nth-child(3) { 
+        width: 20%; 
+    }
+    .table th:nth-child(4), 
+    .table td:nth-child(4) { 
+        width: 20%; 
+    }
+    
+    /* 主内容区域 */
+    .main-content-bg .container {
+        padding-left: var(--spacing-md);
+        padding-right: var(--spacing-md);
+    }
+    
+    /* 英雄区标题 */
+    .hero-title {
+        font-size: var(--font-size-3xl);
+    }
+    
+    /* 按钮组 */
+    .hero-buttons {
+        flex-direction: column;
+    }
+    
+    .hero-btn {
+        text-align: center;
+    }
+    
+    /* 区块标题 */
+    .section-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    /* 卡片样式 */
+    .article-card,
+    .sidebar-card {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    /* 页脚 */
+    .footer-content {
+        padding: var(--spacing-xl) var(--spacing-md);
+        text-align: center;
+    }
+    
+    /* 分页优化 */
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .pagination .page-link {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-sm);
+        margin: var(--spacing-xs);
+    }
+    
+    /* 徽章优化 */
+    .blog-type-badge, 
+    .city-badge, 
+    .country-badge {
+        padding: var(--spacing-xs);
+        font-size: var(--font-size-xs);
+        border-radius: var(--radius-sm);
+    }
+    
+    /* 按钮组优化 */
+    .btn-group-sm .btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-sm);
+    }
 }
 
-/* ===== 超小屏幕设备 (≤ 575.98px) ===== */
+/* ===========================================================
+   5. 超小屏幕优化 (≤ 575.98px)
+   ========================================================= */
+
 @media (max-width: 575.98px) {
-  /* 头部进一步简化 */
-  .blog-header .display-4 {
-    font-size: var(--font-size-2xl);
-  }
-  
-  .blog-header .lead {
-    font-size: var(--font-size-xs);
-  }
-  
-  /* 容器间距 */
-  .container.py-5 {
-    padding: var(--spacing-md) var(--spacing-sm) !important;
-  }
-  
-  /* 表格进一步优化 */
-  .table {
-    min-width: 500px;
-  }
-  
-  .table th, 
-  .table td {
-    padding: var(--spacing-xs);
-    font-size: var(--font-size-xs);
-  }
-  
-  /* 隐藏更多列 */
-  .table th:nth-child(4), 
-  .table td:nth-child(4) {
-    display: none;
-  }
-  
-  /* 调整剩余列宽 */
-  .table th:nth-child(1), 
-  .table td:nth-child(1) { 
-    width: 50%; 
-  }
-  .table th:nth-child(2), 
-  .table td:nth-child(2) { 
-    width: 25%; 
-  }
-  .table th:nth-child(3), 
-  .table td:nth-child(3) { 
-    width: 25%; 
-  }
-  
-  /* 分页进一步优化 */
-  .pagination .page-link {
-    padding: var(--spacing-xs);
-    font-size: var(--font-size-xs);
-    margin: 1px;
-  }
-  
-  /* 隐藏页码，只显示上一页/下一页 */
-  .pagination .page-item:not(.disabled):not(:first-child):not(:last-child) {
-    display: none;
-  }
-  
-  .pagination .page-item:first-child .page-link,
-  .pagination .page-item:last-child .page-link {
-    padding: var(--spacing-sm);
-  }
+    /* 头部进一步简化 */
+    .blog-header .display-4 {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .blog-header .lead {
+        font-size: var(--font-size-xs);
+    }
+    
+    /* 容器间距 */
+    .container.py-5 {
+        padding: var(--spacing-md) var(--spacing-sm) !important;
+    }
+    
+    /* 表格进一步优化 */
+    .table {
+        min-width: 500px;
+    }
+    
+    .table th, 
+    .table td {
+        padding: var(--spacing-xs);
+        font-size: var(--font-size-xs);
+    }
+    
+    /* 在超小屏幕上隐藏更多列 */
+    .table th:nth-child(4), 
+    .table td:nth-child(4) {
+        display: none;
+    }
+    
+    /* 调整剩余列宽 */
+    .table th:nth-child(1), 
+    .table td:nth-child(1) { 
+        width: 50%; 
+    }
+    .table th:nth-child(2), 
+    .table td:nth-child(2) { 
+        width: 25%; 
+    }
+    .table th:nth-child(3), 
+    .table td:nth-child(3) { 
+        width: 25%; 
+    }
+    
+    /* 分页进一步优化 */
+    .pagination .page-link {
+        padding: var(--spacing-xs);
+        font-size: var(--font-size-xs);
+        margin: 1px;
+    }
+    
+    /* 隐藏页码，只显示上一页/下一页 */
+    .pagination .page-item:not(.disabled):not(:first-child):not(:last-child) {
+        display: none;
+    }
+    
+    .pagination .page-item:first-child .page-link,
+    .pagination .page-item:last-child .page-link {
+        padding: var(--spacing-sm);
+    }
 }
 
-/* ===== 横屏手机优化 ===== */
+/* ===========================================================
+   6. 特殊设备优化
+   ========================================================= */
+
+/* 横屏手机优化 */
 @media (max-width: 767.98px) and (orientation: landscape) {
-  .blog-header {
-    padding: var(--spacing-md) 0 !important;
-  }
-  
-  .blog-header .display-4 {
-    font-size: var(--font-size-2xl);
-  }
-  
-  .container.py-5 {
-    padding: var(--spacing-md) var(--spacing-sm) !important;
-  }
+    .blog-header {
+        padding: var(--spacing-md) 0 !important;
+    }
+    
+    .blog-header .display-4 {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .container.py-5 {
+        padding: var(--spacing-md) var(--spacing-sm) !important;
+    }
 }
 
-/* ===== 触摸设备优化 ===== */
+/* 触摸设备优化 */
 @media (hover: none) and (pointer: coarse) {
-  /* 移除悬停效果 */
-  .blog-row:hover {
-    transform: none;
-  }
-  
-  .blog-title:hover {
-    color: inherit;
-  }
-  
-  /* 增加触摸目标大小 */
-  .pagination .page-link {
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .btn-group .btn {
-    min-height: 44px;
-  }
+    /* 移除悬停效果，避免在触摸设备上出现问题 */
+    .blog-row:hover {
+        transform: none;
+    }
+    
+    .blog-title:hover {
+        color: inherit;
+    }
+    
+    /* 增加触摸目标大小，提高可用性 */
+    .pagination .page-link {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .btn-group .btn {
+        min-height: 44px;
+    }
 }
 
-/* ===== 减少动画偏好适配 ===== */
+/* ===========================================================
+   7. 无障碍适配
+   ========================================================= */
+
+/* 减少动画偏好适配 */
 @media (prefers-reduced-motion: reduce) {
-  .blog-row,
-  .blog-title,
-  .blog-type-badge,
-  .pagination .page-link,
-  .card {
-    transition: none !important;
-  }
-  
-  .blog-row:hover {
-    transform: none !important;
-  }
-  
-  /* 禁用所有动画 */
-  .blog-image-placeholder {
-    animation: none;
-  }
+    .blog-row,
+    .blog-title,
+    .blog-type-badge,
+    .pagination .page-link,
+    .card {
+        transition: none !important;
+    }
+    
+    .blog-row:hover {
+        transform: none !important;
+    }
+    
+    /* 禁用所有动画 */
+    .blog-image-placeholder {
+        animation: none;
+    }
+    
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* 高对比度适配 */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #0000ff;
+        --secondary-color: #800080;
+        --dark-color: #000000;
+        --white-color: #ffffff;
+    }
 }
 
 /* ===== 动画关键帧 ===== */

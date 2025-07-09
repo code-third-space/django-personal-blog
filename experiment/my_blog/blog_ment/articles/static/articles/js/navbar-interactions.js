@@ -1,4 +1,4 @@
-/**
+/*
  * 现代化导航栏交互脚本
  * 提供丰富的用户体验和交互功能
  */
@@ -11,7 +11,6 @@ class ModernNavbar {
         this.actionBtns = document.querySelectorAll('.action-btn');
         this.mobileActionBtns = document.querySelectorAll('.mobile-action-btn');
         this.isScrolled = false;
-        this.currentTheme = 'light';
         
         this.init();
     }
@@ -21,7 +20,6 @@ class ModernNavbar {
         this.setupMobileMenu();
         this.setupActionButtons();
         this.setupAccessibility();
-        this.setupThemeToggle();
         this.setupVoiceControl();
         this.setupSearchEnhancement();
         this.setupKeyboardNavigation();
@@ -82,23 +80,14 @@ class ModernNavbar {
             }
         });
     }
-    
+
     /**
      * 功能按钮设置
      */
     setupActionButtons() {
         // 搜索按钮事件处理已移至search.js，避免重复绑定
         
-        // 主题切换按钮
-        const themeBtns = document.querySelectorAll('.action-btn, .mobile-action-btn');
-        themeBtns.forEach(btn => {
-            if (btn.querySelector('.bi-brightness-high') || btn.querySelector('.bi-moon')) {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.toggleTheme();
-                });
-            }
-        });
+        // 主题切换按钮事件已移至theme-toggle.js处理，避免重复绑定
         
         // 语音播报按钮
         const voiceBtns = document.querySelectorAll('.action-btn, .mobile-action-btn');
@@ -154,47 +143,6 @@ class ModernNavbar {
         this.navLinks.forEach(link => {
             const text = link.textContent.trim();
             link.setAttribute('aria-label', `导航到${text}页面`);
-        });
-    }
-    
-    /**
-     * 主题切换功能
-     */
-    setupThemeToggle() {
-        this.currentTheme = localStorage.getItem('theme') || 'light';
-        this.applyTheme(this.currentTheme);
-    }
-    
-    toggleTheme() {
-        this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
-        this.applyTheme(this.currentTheme);
-        localStorage.setItem('theme', this.currentTheme);
-        
-        // 显示主题切换提示
-        this.showNotification(`已切换到${this.currentTheme === 'light' ? '浅色' : '深色'}主题`);
-    }
-    
-    applyTheme(theme) {
-        const root = document.documentElement;
-        
-        if (theme === 'dark') {
-            root.style.setProperty('--primary-color', '#667eea');
-            root.style.setProperty('--secondary-color', '#764ba2');
-            root.style.setProperty('--background-color', '#1a1a1a');
-            root.style.setProperty('--text-color', '#ffffff');
-            root.style.setProperty('--navbar-bg', 'rgba(26, 26, 26, 0.95)');
-        } else {
-            root.style.setProperty('--primary-color', '#667eea');
-            root.style.setProperty('--secondary-color', '#764ba2');
-            root.style.setProperty('--background-color', '#ffffff');
-            root.style.setProperty('--text-color', '#2c3e50');
-            root.style.setProperty('--navbar-bg', 'rgba(255, 255, 255, 0.95)');
-        }
-        
-        // 更新按钮图标
-        const themeBtns = document.querySelectorAll('.bi-brightness-high');
-        themeBtns.forEach(btn => {
-            btn.className = theme === 'light' ? 'bi bi-moon' : 'bi bi-brightness-high';
         });
     }
     
@@ -332,16 +280,19 @@ class ModernNavbar {
         setTimeout(() => {
             notification.style.transform = 'translateX(100%)';
             setTimeout(() => {
-                document.body.removeChild(notification);
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
             }, 300);
-        }, 3000);
+        }, 4000);
     }
 }
 
 // 页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', () => {
-    new ModernNavbar();
-});
-
-// 导出类供其他脚本使用
-window.ModernNavbar = ModernNavbar; 
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        window.modernNavbar = new ModernNavbar();
+    });
+} else {
+    window.modernNavbar = new ModernNavbar();
+} 

@@ -12,15 +12,15 @@
     <div class="row">
       {% for article in articles %}
       <div class="col-md-6 col-lg-6 mb-4">
-        <div class="category-article-card p-4 rounded-4 shadow-sm h-100 bg-white">
+        <div class="category-article-card p-4 rounded-4 shadow-sm h-100">
           <h3 class="fw-bold mb-2" style="font-size:1.2rem;">{{ article.title }}</h3>
           {% if article.subtitle %}
           <div class="text-secondary mb-2" style="font-size:1rem;">{{ article.subtitle }}</div>
           {% endif %}
-          <div class="mb-3" style="color:#444;">
+          <div class="mb-3 article-summary">
             {{ article.summary|default:article.content|truncatechars:100 }}
           </div>
-          <a href="{% url 'articles:blog_detail' article.id %}" class="fw-bold" style="color:#1976d2;text-decoration:underline;">Read more</a>
+          <a href="{% url 'articles:blog_detail' article.id %}" class="fw-bold read-more-link">Read more</a>
         </div>
       </div>
       {% endfor %}

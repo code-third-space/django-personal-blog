@@ -155,8 +155,8 @@
 
 .blog-type-badge, 
 .city-badge {
-  background: var(--gray-200) !important;
-  color: var(--text-main) !important;
+  background: var(--gray-900) !important;
+  color: var(--text-main-dark) !important;
   border: none;
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-md);

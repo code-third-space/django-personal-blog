@@ -433,7 +433,7 @@
 .footer-wave-bg {
   background: var(--gradient-primary) !important;
   position: relative;
-  margin-top: var(--spacing-3xl);
+  /* margin-top: var(--spacing-3xl); */
   overflow: hidden;
 }
 

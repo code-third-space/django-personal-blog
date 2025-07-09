@@ -3,6 +3,198 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'articles/css/search.css' %}">
+<style>
+.search-highlight {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.search-stats {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.performance-info {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-top: 10px;
+}
+
+/* 美化搜索框样式 */
+.search-box-wrapper {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50px;
+    padding: 8px 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.search-input-group:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border-color: rgba(103, 126, 234, 0.3);
+}
+
+.search-input-group:focus-within {
+    box-shadow: 0 12px 40px rgba(103, 126, 234, 0.2);
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+.search-input-group .input-group-text {
+    background: transparent;
+    border: none;
+    color: #667eea;
+    font-size: 1.1rem; /* 稍微减小图标大小 */
+    padding: 0 8px 0 16px; /* 调整图标位置 */
+    flex-shrink: 0;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.search-input-group .form-control {
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 12px 8px 12px 45px; /* 增加更多左侧padding，为绝对定位的图标留出充足空间 */
+    font-size: 1.1rem;
+    color: #2c3e50;
+    flex: 1;
+    margin-left: 0;
+}
+
+.search-input-group .form-control::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+}
+
+.search-input-group .form-control:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.search-input-group .btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.search-input-group .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(103, 126, 234, 0.4);
+}
+
+.search-input-group .btn:active {
+    transform: translateY(0);
+}
+
+/* 搜索框动画效果 */
+@keyframes searchPulse {
+    0% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); }
+    50% { box-shadow: 0 12px 40px rgba(103, 126, 234, 0.15); }
+    100% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); }
+}
+
+.search-input-group.searching {
+    animation: searchPulse 2s infinite;
+}
+
+/* 搜索建议标签美化 */
+.search-suggestion-tag {
+    background: rgba(255, 255, 255, 0.8);
+    color: #667eea;
+    border: 1px solid rgba(103, 126, 234, 0.3);
+    border-radius: 20px;
+    padding: 8px 16px;
+    margin: 4px;
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.search-suggestion-tag:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(103, 126, 234, 0.3);
+}
+
+/* 热门搜索样式 */
+.popular-searches .btn {
+    background: rgba(255, 255, 255, 0.9);
+    color: #667eea;
+    border: 1px solid rgba(103, 126, 234, 0.3);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.popular-searches .btn:hover {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    transform: translateY(-2px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .search-box-wrapper {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+    
+    .search-input-group {
+        padding: 6px 10px;
+    }
+    
+    .search-input-group .input-group-text {
+        padding: 0 6px 0 12px;
+        font-size: 1rem;
+    }
+    
+    .search-input-group .form-control {
+        font-size: 1rem;
+        padding: 10px 6px 10px 40px; /* 移动端也要为图标留出空间 */
+    }
+    
+    .search-input-group .btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        margin-left: 6px;
+    }
+}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -11,36 +203,46 @@
         <!-- 搜索头部区域 -->
         <div class="search-hero text-center mb-5">
             <h2 class="display-4 fw-bold text-primary mb-3">探索知识的海洋</h2>
-            <div class="col-lg-7 mx-auto">
-                <p class="lead mb-4">您搜索的关键词: <span class="search-term">{{ request.GET.q }}</span></p>
+            <div class="col-lg-8 mx-auto">
+                {% if search_query %}
+                <p class="lead mb-4">您搜索的关键词: <span class="search-term">"{{ search_query }}"</span></p>
+                {% endif %}
                 <div class="search-box-wrapper">
                     <form id="search-again" action="{% url 'articles:search' %}" method="get">
-                        <div class="input-group search-input-group">
-                            <span class="input-group-text bg-white border-end-0">
+                        <div class="search-input-group">
+                            <span class="input-group-text">
                                 <i class="bi bi-search"></i>
                             </span>
-                            <input type="text" name="q" value="{{ request.GET.q }}" class="form-control border-start-0 shadow-none" placeholder="输入关键词开始探索...">
-                            <button class="btn btn-primary px-4" type="submit">搜索</button>
+                            <input type="text" name="q" value="{{ search_query }}" class="form-control" placeholder="输入关键词开始探索..." autocomplete="off">
+                            <button class="btn" type="submit">
+                                <i class="bi bi-search me-2"></i>搜索
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
 
-        <!-- 搜索结果计数 -->
+        <!-- 搜索统计信息 -->
         {% if titleName %}
-        <div class="search-results-count mb-4">
-            <div class="d-flex align-items-center">
-                <div class="search-icon-bg me-3">
-                    <i class="bi bi-journal-text"></i>
+        <div class="search-stats mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="d-flex align-items-center">
+                        <div class="search-icon-bg me-3">
+                            <i class="bi bi-journal-text"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-0">找到 {{ total_results }} 条相关结果</h5>
+                            <small class="text-light">按相关度排序，显示最匹配的内容</small>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    {% if titleName.paginator %}
-                    <h5 class="mb-0">找到 {{ titleName.paginator.count }} 条相关结果</h5>
-                    {% else %}
-                    <h5 class="mb-0">找到 {{ titleName|length }} 条相关结果</h5>
-                    {% endif %}
-                    <small class="text-muted">按相关度排序</small>
+                <div class="col-md-4 text-end">
+                    <div class="performance-info text-light">
+                        <i class="bi bi-lightning me-1"></i>
+                        智能搜索已启用
+                    </div>
                 </div>
             </div>
         </div>
@@ -53,14 +255,26 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <span class="badge bg-primary rounded-pill px-3 py-2">{{ blog.type_name }}</span>
-                            <small class="text-muted"><i class="bi bi-calendar-date me-1"></i>{{ blog.created_at|date:"Y-m-d" }}</small>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar-date me-1"></i>{{ blog.created_at|date:"Y-m-d" }}
+                            </small>
                         </div>
                         <h5 class="card-title">
                             <a href="{% url 'articles:blog_detail' blog.id %}" class="text-decoration-none stretched-link blog-title">
-                                {{blog.title}}
+                                {% if blog.highlighted_title %}
+                                    {{ blog.highlighted_title|safe }}
+                                {% else %}
+                                    {{ blog.title }}
+                                {% endif %}
                             </a>
                         </h5>
-                        <p class="card-text text-muted">{{ blog.content|truncatechars:80 }}</p>
+                        <p class="card-text text-muted">
+                            {% if blog.highlighted_content %}
+                                {{ blog.highlighted_content|safe }}...
+                            {% else %}
+                                {{ blog.content|truncatechars:80 }}
+                            {% endif %}
+                        </p>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <div class="location-badge">
                                 <i class="bi bi-geo-alt me-1"></i>{{ blog.city_name }}
@@ -75,16 +289,26 @@
             {% endfor %}
         </div>
         
-        {% else %}
+        {% elif search_query %}
         <!-- 无搜索结果 -->
         <div class="row">
             <div class="col-12 text-center py-5">
                 <div class="empty-state">
                     <div class="empty-icon-wrapper mb-4">
-                        <i class="bi bi-search"></i>
+                        <i class="bi bi-search" style="font-size: 4rem; color: #6c757d;"></i>
                     </div>
                     <h3 class="mb-3">未找到相关结果</h3>
-                    <p class="text-muted mb-4">很抱歉，我们找不到与"{{ request.GET.q }}"相关的内容<br>请尝试使用不同的关键词或浏览我们的博客分类</p>
+                    <p class="text-muted mb-4">
+                        很抱歉，我们找不到与"<strong>{{ search_query }}</strong>"相关的内容<br>
+                        请尝试以下方法：
+                    </p>
+                    <div class="search-suggestions-tips mb-4">
+                        <ul class="list-unstyled text-muted">
+                            <li><i class="bi bi-check2 me-2 text-success"></i>使用更通用的关键词</li>
+                            <li><i class="bi bi-check2 me-2 text-success"></i>检查关键词拼写</li>
+                            <li><i class="bi bi-check2 me-2 text-success"></i>尝试相关的同义词</li>
+                        </ul>
+                    </div>
                     <div class="mt-4">
                         <a href="{% url 'articles:all' %}" class="btn btn-primary me-2">
                             <i class="bi bi-grid me-2"></i>浏览全部博客
@@ -92,6 +316,45 @@
                         <a href="{% url 'articles:home' %}" class="btn btn-outline-secondary">
                             <i class="bi bi-house me-2"></i>返回首页
                         </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% elif errors %}
+        <!-- 搜索错误 -->
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-warning" role="alert">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    {% for error in errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        {% else %}
+        <!-- 初始搜索页面 -->
+        <div class="row">
+            <div class="col-12 text-center py-5">
+                <div class="search-welcome">
+                    <div class="welcome-icon-wrapper mb-4">
+                        <i class="bi bi-search" style="font-size: 4rem; color: #007bff;"></i>
+                    </div>
+                    <h3 class="mb-3">开始您的搜索之旅</h3>
+                    <p class="text-muted mb-4">
+                        在上方输入关键词，探索我们的技术文章和知识库
+                    </p>
+                    <div class="popular-searches mt-4">
+                        <h6 class="text-muted mb-3">热门搜索:</h6>
+                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                            <a href="{% url 'articles:search' %}?q=Python" class="btn btn-outline-primary btn-sm">Python</a>
+                            <a href="{% url 'articles:search' %}?q=Django" class="btn btn-outline-primary btn-sm">Django</a>
+                            <a href="{% url 'articles:search' %}?q=数据库" class="btn btn-outline-primary btn-sm">数据库</a>
+                            <a href="{% url 'articles:search' %}?q=算法" class="btn btn-outline-primary btn-sm">算法</a>
+                            <a href="{% url 'articles:search' %}?q=前端" class="btn btn-outline-primary btn-sm">前端</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -105,7 +368,7 @@
                 <ul class="pagination pagination-rounded justify-content-center">
                     {% if titleName.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="?q={{ request.GET.q }}&page={{ titleName.previous_page_number }}" aria-label="上一页">
+                        <a class="page-link" href="?q={{ search_query }}&page={{ titleName.previous_page_number }}" aria-label="上一页">
                             <i class="bi bi-chevron-left"></i>
                         </a>
                     </li>
@@ -121,13 +384,13 @@
                         {% if titleName.number == i %}
                         <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
                         {% else %}
-                        <li class="page-item"><a class="page-link" href="?q={{ request.GET.q }}&page={{ i }}">{{ i }}</a></li>
+                        <li class="page-item"><a class="page-link" href="?q={{ search_query }}&page={{ i }}">{{ i }}</a></li>
                         {% endif %}
                     {% endfor %}
                     
                     {% if titleName.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="?q={{ request.GET.q }}&page={{ titleName.next_page_number }}" aria-label="下一页">
+                        <a class="page-link" href="?q={{ search_query }}&page={{ titleName.next_page_number }}" aria-label="下一页">
                             <i class="bi bi-chevron-right"></i>
                         </a>
                     </li>
@@ -145,5 +408,37 @@
     </div>
 </div>
 
-<!-- 搜索样式已移至 search.css -->
+<script>
+// 搜索框交互增强
+document.addEventListener('DOMContentLoaded', function() {
+    const searchForm = document.getElementById('search-again');
+    const searchInput = searchForm.querySelector('input[name="q"]');
+    const searchGroup = searchForm.querySelector('.search-input-group');
+    
+    // 搜索时添加动画效果
+    searchForm.addEventListener('submit', function() {
+        searchGroup.classList.add('searching');
+    });
+    
+    // 输入时的实时反馈
+    searchInput.addEventListener('input', function() {
+        if (this.value.trim()) {
+            searchGroup.style.borderColor = '#667eea';
+        } else {
+            searchGroup.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+        }
+    });
+    
+    // 焦点效果
+    searchInput.addEventListener('focus', function() {
+        searchGroup.style.transform = 'translateY(-2px)';
+    });
+    
+    searchInput.addEventListener('blur', function() {
+        if (!this.value.trim()) {
+            searchGroup.style.transform = 'translateY(0)';
+        }
+    });
+});
+</script>
 {% endblock %}

@@ -87,18 +87,7 @@ class ModernNavbar {
      * 功能按钮设置
      */
     setupActionButtons() {
-        // 搜索按钮
-        const searchBtns = document.querySelectorAll('.search-btn, .mobile-action-btn');
-        searchBtns.forEach(btn => {
-            if (btn.querySelector('.bi-search')) {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (window.baseInteractions && window.baseInteractions.openSearchModal) {
-                        window.baseInteractions.openSearchModal();
-                    }
-                });
-            }
-        });
+        // 搜索按钮事件处理已移至search.js，避免重复绑定
         
         // 主题切换按钮
         const themeBtns = document.querySelectorAll('.action-btn, .mobile-action-btn');
@@ -255,8 +244,8 @@ class ModernNavbar {
      * 搜索功能增强
      */
     setupSearchEnhancement() {
-        // 键盘快捷键已移至 base-interactions.js
-        // 搜索建议处理已移至 base-interactions.js
+        // 搜索功能已完全移至search.js处理
+        // 此处保留空方法以维持向后兼容性
     }
     
     /**
@@ -264,14 +253,6 @@ class ModernNavbar {
      */
     setupKeyboardNavigation() {
         document.addEventListener('keydown', (e) => {
-            // ESC键关闭搜索
-            if (e.key === 'Escape') {
-                const searchModal = document.getElementById('fullscreen-search');
-                if (searchModal && searchModal.style.display === 'flex') {
-                    this.closeSearchModal();
-                }
-            }
-            
             // 方向键导航
             if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
                 const activeElement = document.activeElement;
@@ -310,9 +291,9 @@ class ModernNavbar {
      * 关闭搜索模态框
      */
     closeSearchModal() {
-        // 已移至 base-interactions.js
-        if (window.baseInteractions && window.baseInteractions.closeSearchModal) {
-            window.baseInteractions.closeSearchModal();
+        // 搜索功能已移至 search.js
+        if (typeof window.closeSearchModal === 'function') {
+            window.closeSearchModal();
         }
     }
     

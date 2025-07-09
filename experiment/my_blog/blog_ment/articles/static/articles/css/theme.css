@@ -85,6 +85,49 @@ body[data-theme="dark"] .article-content-preview {
   color: #7fffa7 !important;
   border-radius: 1.5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.18) !important;
+}
+
+/* === 博客详情页深色主题支持 === */
+body[data-theme="dark"] .blog-detail-container {
+  background: var(--main-gradient) !important;
+}
+
+body[data-theme="dark"] .blog-detail-container .card {
+  background: var(--card-bg) !important;
+  color: var(--text-main) !important;
+}
+
+body[data-theme="dark"] .blog-detail-container .card-header {
+  background: var(--card-bg) !important;
+  color: var(--text-main) !important;
+}
+
+body[data-theme="dark"] .blog-detail-container .card-title {
+  color: var(--text-main) !important;
+  background: linear-gradient(135deg, #7fffa7 0%, #64dd17 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body[data-theme="dark"] .blog-detail-container .text-muted {
+  color: #9aa5b1 !important;
+}
+
+body[data-theme="dark"] .blog-detail-container .blog-content h3 {
+  color: var(--text-main) !important;
+}
+
+body[data-theme="dark"] .blog-detail-container .blog-content .p-3,
+body[data-theme="dark"] .blog-detail-container .card .comment {
+  background: var(--card-bg) !important;
+  color: var(--text-main) !important;
+}
+
+body[data-theme="dark"] .blog-detail-container .btn-outline-danger {
+  background: var(--card-bg) !important;
+  color: #ff6b6b !important;
+  border-color: #ff6b6b !important;
 } 
 
 /* === 强制覆盖 Bootstrap 表格样式以支持多主题 === */

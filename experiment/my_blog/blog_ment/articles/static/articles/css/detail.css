@@ -5,14 +5,16 @@
 :root {
   --detail-primary: #667eea;
   --detail-secondary: #764ba2;
-  --detail-bg: linear-gradient(135deg, #f4faff 0%, #f8f9fa 100%);
-  --detail-card-bg: #fff;
+  --detail-bg: var(--main-gradient, linear-gradient(135deg, #f4faff 0%, #f8f9fa 100%));
+  --detail-card-bg: var(--card-bg, #fff);
   --detail-card-radius: 2rem;
-  --detail-card-shadow: 0 8px 32px rgba(102, 126, 234, 0.08);
+  --detail-card-shadow: var(--card-shadow, 0 8px 32px rgba(102, 126, 234, 0.08));
   --detail-title-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --detail-muted: #6c757d;
+  --detail-muted: var(--text-main, #6c757d);
   --detail-btn: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
   --detail-btn-hover: linear-gradient(135deg, #38f9d7 0%, #43e97b 100%);
+  --detail-content-bg: var(--card-bg, #f8f9fa);
+  --detail-text-color: var(--text-main, #444);
 }
 
 .blog-detail-container {
@@ -77,17 +79,17 @@
 }
 
 .blog-detail-container .blog-content .p-3 {
-  background: #f8f9fa;
+  background: var(--detail-content-bg);
   border-radius: 1.2rem;
   font-size: 1.08rem;
-  color: #444;
+  color: var(--detail-text-color);
   line-height: 1.8;
   box-shadow: 0 2px 8px rgba(102, 126, 234, 0.04);
 }
 
 /* 评论区 */
 .blog-detail-container .card .comment {
-  background: #f8f9fa;
+  background: var(--detail-content-bg);
   border-radius: 1rem;
   padding: 1rem 1.5rem;
   margin-bottom: 1.2rem;
@@ -119,7 +121,7 @@
 }
 
 .blog-detail-container .btn-outline-danger {
-  background: #fff;
+  background: var(--detail-card-bg);
   color: #e74c3c;
   border: 1.5px solid #e74c3c;
 }
